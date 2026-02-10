@@ -82,6 +82,8 @@ public class SwimLocomotionController : MonoBehaviour
 
         swimVelocity = Vector3.zero;
         smoothedForce = Vector3.zero;
+
+        Debug.Log($"SwimLocomotionController initialized. Debug mode: {debugMode}");
     }
 
     private void Update()
@@ -116,6 +118,11 @@ public class SwimLocomotionController : MonoBehaviour
         Vector3 totalForce = Vector3.zero;
         int activeHands = 0;
 
+        if (debugMode)
+        {
+            Debug.Log($"=== Frame Debug === Left Tracked: {leftHand.IsTracked}, Speed: {leftHand.Speed:F3}, Grip: {leftHand.GripPressed} | Right Tracked: {rightHand.IsTracked}, Speed: {rightHand.Speed:F3}, Grip: {rightHand.GripPressed}");
+        }
+
         // Process left hand
         if (leftHand.ShouldApplyForce(settings.requireGripPress, settings.minimumSpeed))
         {
@@ -125,7 +132,8 @@ public class SwimLocomotionController : MonoBehaviour
 
             if (debugMode)
             {
-                Debug.Log($"Left Hand - Velocity: {leftHand.Velocity}, Speed: {leftHand.Speed:F3}, Force: {handForce}");
+                Vector3 worldVel = originTransform.TransformDirection(leftHand.Velocity);
+                Debug.Log($"LEFT HAND - Local Vel: {leftHand.Velocity:F3}, World Vel: {worldVel:F3}, Force: {handForce:F3}, Origin Yaw: {originTransform.eulerAngles.y:F1}°");
             }
         }
 
@@ -138,7 +146,8 @@ public class SwimLocomotionController : MonoBehaviour
 
             if (debugMode)
             {
-                Debug.Log($"Right Hand - Velocity: {rightHand.Velocity}, Speed: {rightHand.Speed:F3}, Force: {handForce}");
+                Vector3 worldVel = originTransform.TransformDirection(rightHand.Velocity);
+                Debug.Log($"RIGHT HAND - Local Vel: {rightHand.Velocity:F3}, World Vel: {worldVel:F3}, Force: {handForce:F3}, Origin Yaw: {originTransform.eulerAngles.y:F1}°");
             }
         }
 
@@ -167,28 +176,25 @@ public class SwimLocomotionController : MonoBehaviour
     /// <summary>
     /// Calculates the propulsion force from a single hand's movement.
     /// The force is applied in the OPPOSITE direction of hand movement (Newton's third law).
-    /// Forces are calculated in the XR Origin's local space so they're relative to where the player is facing.
     /// </summary>
     private Vector3 CalculateHandForce(HandSwimData hand)
     {
-        // Convert world space velocity to XR Origin local space
-        // This ensures forces are relative to where the player is facing after snap turns
-        Vector3 localVelocity = originTransform.InverseTransformDirection(hand.Velocity);
+        // Transform hand velocity from XR Origin local space to world space
+        // This ensures forces work correctly after snap turns
+        Vector3 worldVelocity = originTransform.TransformDirection(hand.Velocity);
         
-        // Base force is opposite to hand velocity (in local space)
-        Vector3 localForce = -localVelocity * settings.forceMultiplier;
+        // Base force is opposite to world velocity
+        Vector3 force = -worldVelocity * settings.forceMultiplier;
 
         // Apply rotation-based modification if enabled
         if (settings.considerHandRotation)
         {
-            // Also transform palm direction to local space for consistent rotation checking
-            Vector3 localPalmDirection = originTransform.InverseTransformDirection(hand.GetPalmDirection());
-            float rotationFactor = settings.CalculateRotationFactor(localPalmDirection, localVelocity);
-            localForce *= rotationFactor;
+            Vector3 palmDirection = originTransform.TransformDirection(hand.GetPalmDirection());
+            float rotationFactor = settings.CalculateRotationFactor(palmDirection, worldVelocity);
+            force *= rotationFactor;
         }
 
-        // Convert back to world space for applying to swim velocity
-        return originTransform.TransformDirection(localForce);
+        return force;
     }
 
     /// <summary>
