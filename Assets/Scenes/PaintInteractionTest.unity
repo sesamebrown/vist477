@@ -805,6 +805,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1311769807}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_SmoothLines
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_MinPointDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_SmoothingSegments
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_PaintInput.m_InputActionReferenceValue
       value: 
       objectReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
@@ -2237,6 +2249,10 @@ PrefabInstance:
       value: Paint Interactor
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_LineWidth
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_LineColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -2252,6 +2268,18 @@ PrefabInstance:
       propertyPath: m_LinesParent
       value: 
       objectReference: {fileID: 1311769807}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_SmoothLines
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_MinPointDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_SmoothingSegments
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

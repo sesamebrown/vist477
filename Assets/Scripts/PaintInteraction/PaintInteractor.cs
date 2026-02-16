@@ -54,6 +54,33 @@ public class XRPaintInteractor : MonoBehaviour
     }
 
     [SerializeField]
+    [Tooltip("Enable smooth line rendering by interpolating between points. Helps prevent harsh corners and overlaps.")]
+    bool m_SmoothLines = true;
+
+    /// <summary>
+    /// Whether to smooth lines by interpolating between points.
+    /// </summary>
+    public bool smoothLines
+    {
+        get => m_SmoothLines;
+        set => m_SmoothLines = value;
+    }
+
+    [SerializeField]
+    [Tooltip("Number of interpolated points to add between each input point when smoothing is enabled. Higher = smoother but more expensive.")]
+    [Range(1, 10)]
+    int m_SmoothingSegments = 3;
+
+    /// <summary>
+    /// Number of interpolated segments between input points for smoothing.
+    /// </summary>
+    public int smoothingSegments
+    {
+        get => m_SmoothingSegments;
+        set => m_SmoothingSegments = Mathf.Clamp(value, 1, 10);
+    }
+
+    [SerializeField]
     [Tooltip("Width of the painted line.")]
     float m_LineWidth = 0.005f;
 
@@ -197,7 +224,7 @@ public class XRPaintInteractor : MonoBehaviour
             lineObject.transform.SetParent(m_LinesParent, false);
 
         m_CurrentLine = lineObject.AddComponent<PaintLine>();
-        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth);
+        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments);
 
         // Add initial point
         m_CurrentLine.AddPoint(m_LastPaintPosition);
