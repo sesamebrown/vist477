@@ -39,7 +39,53 @@ public class XRPaintInteractor : MonoBehaviour
         set => m_PaintInput = value;
     }
 
+    [SerializeField]
+    [Tooltip("Input to cycle through line size presets. Typically a button like primary button or grip.")]
+    XRInputButtonReader m_CycleSizeInput = new XRInputButtonReader("Cycle Size");
+
+    /// <summary>
+    /// Input reader for cycling through line sizes.
+    /// </summary>
+    public XRInputButtonReader cycleSizeInput
+    {
+        get => m_CycleSizeInput;
+        set => m_CycleSizeInput = value;
+    }
+
     [Header("Paint Settings")]
+    [SerializeField]
+    [Tooltip("Preset line widths to cycle through. User can switch between these using the cycle size button.")]
+    float[] m_LineSizePresets = new float[] { 0.002f, 0.005f, 0.010f, 0.020f, 0.050f };
+
+    /// <summary>
+    /// Array of preset line widths that users can cycle through.
+    /// </summary>
+    public float[] lineSizePresets
+    {
+        get => m_LineSizePresets;
+        set => m_LineSizePresets = value;
+    }
+
+    [SerializeField]
+    [Tooltip("Index of the currently selected size preset.")]
+    int m_CurrentSizeIndex = 1; // Default to 0.005f (second preset)
+
+    /// <summary>
+    /// Index of the currently selected line size preset.
+    /// </summary>
+    public int currentSizeIndex
+    {
+        get => m_CurrentSizeIndex;
+        set
+        {
+            if (m_LineSizePresets == null || m_LineSizePresets.Length == 0)
+                return;
+            m_CurrentSizeIndex = Mathf.Clamp(value, 0, m_LineSizePresets.Length - 1);
+            m_LineWidth = m_LineSizePresets[m_CurrentSizeIndex];
+            UpdatePaintPointIndicatorSize();
+        }
+    }
+
     [SerializeField]
     [Tooltip("Minimum distance the paint point must move before adding a new point to the line.")]
     float m_MinPointDistance = 0.01f;
@@ -137,6 +183,7 @@ public class XRPaintInteractor : MonoBehaviour
     bool m_IsPainting;
     PaintLine m_CurrentLine;
     Vector3 m_LastPaintPosition;
+    bool m_PreviousCycleSizePressed;
 
     /// <summary>
     /// Whether the user is currently painting.
@@ -167,12 +214,20 @@ public class XRPaintInteractor : MonoBehaviour
         {
             m_LineMaterial = CreateDefaultLineMaterial();
         }
+
+        // Initialize line width from preset
+        if (m_LineSizePresets != null && m_LineSizePresets.Length > 0)
+        {
+            m_CurrentSizeIndex = Mathf.Clamp(m_CurrentSizeIndex, 0, m_LineSizePresets.Length - 1);
+            m_LineWidth = m_LineSizePresets[m_CurrentSizeIndex];
+        }
     }
 
     void OnEnable()
     {
-        // Enable the input reader
+        // Enable input readers
         m_PaintInput?.EnableDirectActionIfModeUsed();
+        m_CycleSizeInput?.EnableDirectActionIfModeUsed();
     }
 
     void OnDisable()
@@ -183,14 +238,23 @@ public class XRPaintInteractor : MonoBehaviour
             EndPaintStroke();
         }
 
-        // Disable input reader
+        // Disable input readers
         m_PaintInput?.DisableDirectActionIfModeUsed();
+        m_CycleSizeInput?.DisableDirectActionIfModeUsed();
     }
 
     void Update()
     {
         if (m_PaintPoint == null)
             return;
+
+        // Check for size cycling input (button press)
+        bool cycleSizePressed = m_CycleSizeInput.ReadIsPerformed();
+        if (cycleSizePressed && !m_PreviousCycleSizePressed)
+        {
+            CycleToNextSize();
+        }
+        m_PreviousCycleSizePressed = cycleSizePressed;
 
         // Check paint input state
         bool paintInputActive = m_PaintInput.ReadIsPerformed();
@@ -283,6 +347,37 @@ public class XRPaintInteractor : MonoBehaviour
         // Set the material color to white so LineRenderer vertex colors show through properly
         mat.color = Color.white;
         return mat;
+    }
+
+    /// <summary>
+    /// Cycles to the next line size in the presets array.
+    /// Wraps back to the first size after reaching the last.
+    /// </summary>
+    public void CycleToNextSize()
+    {
+        if (m_LineSizePresets == null || m_LineSizePresets.Length == 0)
+        {
+            Debug.LogWarning("[XRPaintInteractor] Cannot cycle size - no presets defined.");
+            return;
+        }
+
+        m_CurrentSizeIndex = (m_CurrentSizeIndex + 1) % m_LineSizePresets.Length;
+        m_LineWidth = m_LineSizePresets[m_CurrentSizeIndex];
+        UpdatePaintPointIndicatorSize();
+
+        Debug.Log($"[XRPaintInteractor] Cycled to size preset {m_CurrentSizeIndex + 1}/{m_LineSizePresets.Length}: {m_LineWidth:F4}");
+    }
+
+    /// <summary>
+    /// Updates the paint point indicator size to match the current line width.
+    /// Uses 2x the line width as the indicator diameter for good visibility.
+    /// </summary>
+    void UpdatePaintPointIndicatorSize()
+    {
+        if (m_PaintPoint != null)
+        {
+            m_PaintPoint.indicatorSize = m_LineWidth * 2f;
+        }
     }
 
     /// <summary>

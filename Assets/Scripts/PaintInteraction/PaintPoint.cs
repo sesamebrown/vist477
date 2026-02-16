@@ -35,11 +35,12 @@ public class PaintPoint : MonoBehaviour
     float m_IndicatorAlpha = 0.5f;
 
     [SerializeField]
-    [Tooltip("Size of the paint point indicator.")]
+    [Tooltip("Size of the paint point indicator. This should be set programmatically to match the line width.")]
     float m_IndicatorSize = 0.01f;
 
     GameObject m_IndicatorSphere;
     MeshRenderer m_IndicatorRenderer;
+    Vector3 m_BaseScale;
 
     /// <summary>
     /// Whether the paint point indicator is visible.
@@ -67,6 +68,19 @@ public class PaintPoint : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Size of the paint point indicator.
+    /// </summary>
+    public float indicatorSize
+    {
+        get => m_IndicatorSize;
+        set
+        {
+            m_IndicatorSize = value;
+            UpdateIndicatorSize();
+        }
+    }
+
     void Awake()
     {
         CreateIndicator();
@@ -74,10 +88,12 @@ public class PaintPoint : MonoBehaviour
 
     void Start()
     {
-        // Auto-sync color with paint interactor if assigned
+        // Auto-sync with paint interactor if assigned
         if (m_PaintInteractor != null)
         {
             SyncColorWithPaintInteractor();
+            // Update indicator size to match line width (2x for visibility)
+            indicatorSize = m_PaintInteractor.lineWidth * 2f;
         }
     }
 
@@ -98,7 +114,8 @@ public class PaintPoint : MonoBehaviour
         m_IndicatorSphere.name = "PaintPointIndicator";
         m_IndicatorSphere.transform.SetParent(transform, false);
         m_IndicatorSphere.transform.localPosition = Vector3.zero;
-        m_IndicatorSphere.transform.localScale = Vector3.one * m_IndicatorSize;
+        m_BaseScale = Vector3.one * m_IndicatorSize;
+        m_IndicatorSphere.transform.localScale = m_BaseScale;
 
         // Remove collider
         if (m_IndicatorSphere.TryGetComponent<Collider>(out var collider))
@@ -155,6 +172,15 @@ public class PaintPoint : MonoBehaviour
     {
         if (m_IndicatorRenderer != null && m_IndicatorRenderer.material != null)
             m_IndicatorRenderer.material.color = m_IndicatorColor;
+    }
+
+    void UpdateIndicatorSize()
+    {
+        if (m_IndicatorSphere != null)
+        {
+            m_BaseScale = Vector3.one * m_IndicatorSize;
+            m_IndicatorSphere.transform.localScale = m_BaseScale;
+        }
     }
 
     /// <summary>
