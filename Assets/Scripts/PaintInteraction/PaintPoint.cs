@@ -92,8 +92,8 @@ public class PaintPoint : MonoBehaviour
         if (m_PaintInteractor != null)
         {
             SyncColorWithPaintInteractor();
-            // Update indicator size to match line width (2x for visibility)
-            indicatorSize = m_PaintInteractor.lineWidth * 2f;
+            // Update indicator size to match line width
+            indicatorSize = m_PaintInteractor.lineWidth;
         }
     }
 
@@ -123,41 +123,28 @@ public class PaintPoint : MonoBehaviour
 
         m_IndicatorRenderer = m_IndicatorSphere.GetComponent<MeshRenderer>();
         
-        // Create material using Particles/Standard Unlit which works well for 3D objects
-        Shader shader = Shader.Find("Particles/Standard Unlit");
+        // Use UI/Default shader which reliably supports transparency
+        Shader shader = Shader.Find("UI/Default");
         if (shader == null)
         {
-            Debug.LogWarning("[PaintPoint] Particles/Standard Unlit not found, trying Standard shader");
-            shader = Shader.Find("Standard");
+            Debug.LogWarning("[PaintPoint] UI/Default not found, trying Legacy Shaders/Transparent/Diffuse");
+            shader = Shader.Find("Legacy Shaders/Transparent/Diffuse");
         }
         
         if (shader == null)
         {
             Debug.LogError("[PaintPoint] No suitable shader found for indicator!");
+            return;
         }
         
         var mat = new Material(shader);
         mat.color = m_IndicatorColor;
         
-        // For Standard shader, make it unlit by disabling lighting
-        if (shader.name == "Standard")
-        {
-            mat.SetFloat("_Mode", 2); // Fade mode for transparency
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mat.SetInt("_ZWrite", 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.EnableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = 3000;
-            mat.SetFloat("_Glossiness", 0f);
-            mat.SetColor("_EmissionColor", m_IndicatorColor * 0.5f);
-            mat.EnableKeyword("_EMISSION");
-        }
+        // Debug.Log($"[PaintPoint] Created indicator with shader: {shader.name}, initial color: {m_IndicatorColor}");
         
         m_IndicatorRenderer.material = mat;
         
-        Debug.Log($"[PaintPoint] Indicator created with shader: {shader?.name ?? "NULL"}, color: {m_IndicatorColor}, scale: {m_IndicatorSize}");
+        // Debug.Log($"[PaintPoint] Indicator created with shader: {shader?.name ?? "NULL"}, color: {m_IndicatorColor}, scale: {m_IndicatorSize}");
 
         UpdateIndicatorVisibility();
     }
@@ -199,6 +186,22 @@ public class PaintPoint : MonoBehaviour
         lineColor.a = m_IndicatorAlpha;
         indicatorColor = lineColor;
         
-        Debug.Log($"[PaintPoint] Synced color to: {lineColor} from paint interactor's line color: {m_PaintInteractor.lineColor}");
+        // Debug.Log($"[PaintPoint] Synced color to: {lineColor} from paint interactor's line color: {m_PaintInteractor.lineColor}");
     }
-}
+    /// <summary>
+    /// Hides the paint point indicator.
+    /// </summary>
+    public void HideIndicator()
+    {
+        if (m_IndicatorSphere != null)
+            m_IndicatorSphere.SetActive(false);
+    }
+
+    /// <summary>
+    /// Shows the paint point indicator.
+    /// </summary>
+    public void ShowIndicator()
+    {
+        if (m_IndicatorSphere != null && m_ShowIndicator)
+            m_IndicatorSphere.SetActive(true);
+    }}

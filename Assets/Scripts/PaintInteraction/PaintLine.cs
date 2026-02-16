@@ -71,9 +71,9 @@ public class PaintLine : MonoBehaviour
         m_LineRenderer.positionCount = 0;
         m_LineRenderer.useWorldSpace = true;
 
-        // Quality settings - increase corners for smoother curves
-        m_LineRenderer.numCornerVertices = useSmoothing ? 8 : 4;
-        m_LineRenderer.numCapVertices = useSmoothing ? 8 : 4;
+        // Quality settings - keep corner vertices low for flat 2D appearance
+        m_LineRenderer.numCornerVertices = useSmoothing ? 4 : 2;
+        m_LineRenderer.numCapVertices = useSmoothing ? 4 : 2;
         m_LineRenderer.alignment = LineAlignment.View;
 
         m_Points.Clear();

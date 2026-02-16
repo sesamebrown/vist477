@@ -806,7 +806,7 @@ PrefabInstance:
       objectReference: {fileID: 1311769807}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothLines
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_MinPointDistance
@@ -814,16 +814,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothingSegments
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_PaintInput.m_InputActionReferenceValue
       value: 
-      objectReference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+      objectReference: {fileID: -3232296390076566997, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_CycleSizeInput.m_InputActionReferenceValue
+      value: 
+      objectReference: {fileID: -5644303868430947357, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_PaintInput.m_InputActionReferencePerformed
       value: 
-      objectReference: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+      objectReference: {fileID: 4937175653822186286, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_CycleSizeInput.m_InputActionReferencePerformed
+      value: 
+      objectReference: {fileID: -5644303868430947357, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2270,7 +2278,7 @@ PrefabInstance:
       objectReference: {fileID: 1311769807}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothLines
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_MinPointDistance
@@ -2278,8 +2286,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothingSegments
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_PaintInput.m_InputActionReferenceValue
+      value: 
+      objectReference: {fileID: 542210180863260834, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_CycleSizeInput.m_InputActionReferenceValue
+      value: 
+      objectReference: {fileID: -874871804716586658, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_PaintInput.m_InputActionReferencePerformed
+      value: 
+      objectReference: {fileID: 7514648557134172278, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_CycleSizeInput.m_InputActionReferencePerformed
+      value: 
+      objectReference: {fileID: -874871804716586658, guid: c348712bda248c246b8c49b3db54643f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -100,6 +100,32 @@ public class XRPaintInteractor : MonoBehaviour
     }
 
     [SerializeField]
+    [Tooltip("Enable velocity-adaptive sampling. Adds more points when moving fast to prevent jagged edges.")]
+    bool m_AdaptiveSampling = true;
+
+    /// <summary>
+    /// Whether to use velocity-adaptive sampling for smoother lines during fast movements.
+    /// </summary>
+    public bool adaptiveSampling
+    {
+        get => m_AdaptiveSampling;
+        set => m_AdaptiveSampling = value;
+    }
+
+    [SerializeField]
+    [Tooltip("Maximum distance between points. If movement exceeds this, intermediate points are added.")]
+    float m_MaxPointDistance = 0.02f;
+
+    /// <summary>
+    /// Maximum allowed distance between consecutive points. Intermediate points added if exceeded.
+    /// </summary>
+    public float maxPointDistance
+    {
+        get => m_MaxPointDistance;
+        set => m_MaxPointDistance = Mathf.Max(m_MinPointDistance, value);
+    }
+
+    [SerializeField]
     [Tooltip("Enable smooth line rendering by interpolating between points. Helps prevent harsh corners and overlaps.")]
     bool m_SmoothLines = true;
 
@@ -110,6 +136,33 @@ public class XRPaintInteractor : MonoBehaviour
     {
         get => m_SmoothLines;
         set => m_SmoothLines = value;
+    }
+
+    [SerializeField]
+    [Tooltip("Enable input point averaging to reduce sharp corners and crinkles. Averages the last few input positions.")]
+    bool m_AverageInputPoints = true;
+
+    /// <summary>
+    /// Whether to average input points before adding them to the line.
+    /// </summary>
+    public bool averageInputPoints
+    {
+        get => m_AverageInputPoints;
+        set => m_AverageInputPoints = value;
+    }
+
+    [SerializeField]
+    [Tooltip("Number of recent positions to average when smoothing input. Higher values = smoother but more lag.")]
+    [Range(2, 5)]
+    int m_InputAveragingWindow = 3;
+
+    /// <summary>
+    /// Window size for input point averaging.
+    /// </summary>
+    public int inputAveragingWindow
+    {
+        get => m_InputAveragingWindow;
+        set => m_InputAveragingWindow = Mathf.Clamp(value, 2, 5);
     }
 
     [SerializeField]
@@ -184,6 +237,7 @@ public class XRPaintInteractor : MonoBehaviour
     PaintLine m_CurrentLine;
     Vector3 m_LastPaintPosition;
     bool m_PreviousCycleSizePressed;
+    List<Vector3> m_RecentPositions = new List<Vector3>();
 
     /// <summary>
     /// Whether the user is currently painting.
@@ -280,6 +334,11 @@ public class XRPaintInteractor : MonoBehaviour
     {
         m_IsPainting = true;
         m_LastPaintPosition = m_PaintPoint.transform.position;
+        m_RecentPositions.Clear();
+        m_RecentPositions.Add(m_LastPaintPosition);
+
+        // Hide indicator while painting
+        m_PaintPoint.HideIndicator();
 
         // Create new paint line
         GameObject lineObject = new GameObject($"PaintLine_{System.DateTime.Now:HHmmss_fff}");
@@ -305,14 +364,55 @@ public class XRPaintInteractor : MonoBehaviour
         // Only add point if moved minimum distance
         if (distanceMoved >= m_MinPointDistance)
         {
-            m_CurrentLine.AddPoint(currentPosition);
-            m_LastPaintPosition = currentPosition;
+            Vector3 positionToAdd = currentPosition;
+
+            // Apply input averaging if enabled
+            if (m_AverageInputPoints)
+            {
+                m_RecentPositions.Add(currentPosition);
+                
+                // Keep only the last N positions
+                if (m_RecentPositions.Count > m_InputAveragingWindow)
+                {
+                    m_RecentPositions.RemoveAt(0);
+                }
+
+                // Calculate average position
+                Vector3 sum = Vector3.zero;
+                foreach (var pos in m_RecentPositions)
+                {
+                    sum += pos;
+                }
+                positionToAdd = sum / m_RecentPositions.Count;
+            }
+
+            // Adaptive sampling: if moving fast, add intermediate points
+            if (m_AdaptiveSampling && distanceMoved > m_MaxPointDistance)
+            {
+                // Calculate how many intermediate points we need
+                int numIntermediatePoints = Mathf.CeilToInt(distanceMoved / m_MaxPointDistance);
+                
+                // Add interpolated points between last and current position
+                for (int i = 1; i <= numIntermediatePoints; i++)
+                {
+                    float t = i / (float)(numIntermediatePoints + 1);
+                    Vector3 intermediatePoint = Vector3.Lerp(m_LastPaintPosition, positionToAdd, t);
+                    m_CurrentLine.AddPoint(intermediatePoint);
+                }
+            }
+
+            m_CurrentLine.AddPoint(positionToAdd);
+            m_LastPaintPosition = positionToAdd;
         }
     }
 
     void EndPaintStroke()
     {
         m_IsPainting = false;
+        
+        // Show indicator after painting
+        if (m_PaintPoint != null)
+            m_PaintPoint.ShowIndicator();
         
         // Finalize the line
         if (m_CurrentLine != null)
@@ -370,13 +470,13 @@ public class XRPaintInteractor : MonoBehaviour
 
     /// <summary>
     /// Updates the paint point indicator size to match the current line width.
-    /// Uses 2x the line width as the indicator diameter for good visibility.
+    /// Uses the line width directly as the indicator diameter.
     /// </summary>
     void UpdatePaintPointIndicatorSize()
     {
         if (m_PaintPoint != null)
         {
-            m_PaintPoint.indicatorSize = m_LineWidth * 2f;
+            m_PaintPoint.indicatorSize = m_LineWidth;
         }
     }
 
