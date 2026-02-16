@@ -73,8 +73,13 @@ public class PaintLine : MonoBehaviour
 
         // Quality settings - keep corner vertices low for flat 2D appearance
         m_LineRenderer.numCornerVertices = useSmoothing ? 4 : 2;
-        m_LineRenderer.numCapVertices = useSmoothing ? 4 : 2;
-        m_LineRenderer.alignment = LineAlignment.View;
+        // Set cap vertices to 0 for flat ends that respect the transform rotation
+        // Non-zero cap vertices can cause billboarding behavior that ignores rotation
+        m_LineRenderer.numCapVertices = 0;
+        
+        // Use TransformZ alignment so line orientation is controlled by the transform's rotation
+        // This allows the line to orient based on controller rotation rather than camera view
+        m_LineRenderer.alignment = LineAlignment.TransformZ;
 
         m_Points.Clear();
         m_InputPoints.Clear();

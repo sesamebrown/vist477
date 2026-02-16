@@ -206,6 +206,19 @@ public class XRPaintInteractor : MonoBehaviour
     }
 
     [SerializeField]
+    [Tooltip("Rotation offset applied to line orientation relative to controller. Adjust to get desired behavior.")]
+    Vector3 m_LineOrientationOffset = new Vector3(0f, 0f, 90f);
+
+    /// <summary>
+    /// Euler angle offset for line orientation.
+    /// </summary>
+    public Vector3 lineOrientationOffset
+    {
+        get => m_LineOrientationOffset;
+        set => m_LineOrientationOffset = value;
+    }
+
+    [SerializeField]
     [Tooltip("Material to use for painted lines.")]
     Material m_LineMaterial;
 
@@ -345,6 +358,10 @@ public class XRPaintInteractor : MonoBehaviour
         
         if (m_LinesParent != null)
             lineObject.transform.SetParent(m_LinesParent, false);
+        
+        // Set the line's rotation to match the paint point (controller) rotation with adjustable offset
+        // This determines how the 2D line plane is oriented in 3D space
+        lineObject.transform.rotation = m_PaintPoint.transform.rotation * Quaternion.Euler(m_LineOrientationOffset);
 
         m_CurrentLine = lineObject.AddComponent<PaintLine>();
         m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments);
