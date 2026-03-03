@@ -7,7 +7,8 @@ public class LightFlame : MonoBehaviour
         Debug.Log("Flame collided with " + other.gameObject.name);
         if (other.gameObject.TryGetComponent<Star>(out var star))
         {
-            star.Light();
+            // Pass the flame's position as the collision point
+            star.Light(transform.position);
         }
     }
 }

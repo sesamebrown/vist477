@@ -16,6 +16,10 @@ public class Star : MonoBehaviour
     [Tooltip("Number of full rotations during the spin.")]
     float m_SpinRotations = 2f;
     
+    [SerializeField]
+    [Tooltip("Maximum spread radius to cover the mesh.")]
+    float m_MaxSpreadRadius = 10f;
+    
     Material m_LitMaterial;
     bool m_IsLit = false;
     
@@ -27,31 +31,47 @@ public class Star : MonoBehaviour
     
     public void Light()
     {
+        Light(transform.position); // Default to center if no collision point provided
+    }
+    
+    public void Light(Vector3 worldCollisionPoint)
+    {
         if (!m_IsLit)
         {
-            StartCoroutine(LightTransition());
+            Vector3 localCollisionPoint = transform.InverseTransformPoint(worldCollisionPoint);
+            StartCoroutine(LightTransition(localCollisionPoint));
         }
     }
     
-    IEnumerator LightTransition()
+    IEnumerator LightTransition(Vector3 localCollisionPoint)
     {
         m_IsLit = true;
         float elapsed = 0f;
         float startBlend = m_LitMaterial.GetFloat("_Blend");
         Quaternion startRotation = transform.rotation;
         
+        // Set collision point in material
+        m_LitMaterial.SetVector("_CollisionPoint", localCollisionPoint);
+        Debug.Log($"Star lighting from local point: {localCollisionPoint}, max radius: {m_MaxSpreadRadius}");
+        
         while (elapsed < Mathf.Max(m_LightDuration, m_SpinDuration))
         {
             elapsed += Time.deltaTime;
             
-            // Blend material
+            // Animate spread radius
             if (elapsed < m_LightDuration)
             {
-                float blend = Mathf.Lerp(startBlend, 1f, elapsed / m_LightDuration);
+                float spreadProgress = elapsed / m_LightDuration;
+                float radius = Mathf.Lerp(0f, m_MaxSpreadRadius, spreadProgress);
+                m_LitMaterial.SetFloat("_SpreadRadius", radius);
+                
+                // Still update blend for fallback/combination
+                float blend = Mathf.Lerp(startBlend, 1f, spreadProgress);
                 m_LitMaterial.SetFloat("_Blend", blend);
             }
             else
             {
+                m_LitMaterial.SetFloat("_SpreadRadius", m_MaxSpreadRadius);
                 m_LitMaterial.SetFloat("_Blend", 1f);
             }
             
@@ -73,5 +93,6 @@ public class Star : MonoBehaviour
         }
         
         m_LitMaterial.SetFloat("_Blend", 1f);
+        m_LitMaterial.SetFloat("_SpreadRadius", m_MaxSpreadRadius);
     }
 }
