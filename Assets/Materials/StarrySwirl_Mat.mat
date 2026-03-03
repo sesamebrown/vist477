@@ -115,7 +115,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _StretchAmount: 2
     - _Surface: 0
-    - _SwirlSpeed: 0.5
+    - _SwirlSpeed: 0.3
     - _SwirlStrength: 1
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1

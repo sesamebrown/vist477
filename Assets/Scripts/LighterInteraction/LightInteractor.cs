@@ -9,6 +9,10 @@ public class LightInteractor : MonoBehaviour
     [SerializeField]
     [Tooltip("Input to trigger the light. Typically the controller trigger.")]
     XRInputButtonReader m_LightInput = new XRInputButtonReader("Light");
+    [SerializeField]
+    GameObject m_LightCollider;
+    [SerializeField]
+    ParticleSystem m_LightParticleSystem;
 
     /// <summary>
     /// Input reader for the light trigger button.
@@ -44,12 +48,20 @@ public class LightInteractor : MonoBehaviour
     }
     private void Light()
     {
-        transform.GetChild(0).gameObject.SetActive(true);
+        m_LightCollider.SetActive(true);
+        if (m_LightParticleSystem != null)
+        {
+            m_LightParticleSystem.Play();
+        }
         m_IsLit = true;
     }
     private void PutOut()
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        m_LightCollider.SetActive(false);
+        if (m_LightParticleSystem != null)
+        {
+            m_LightParticleSystem.Stop();
+        }
         m_IsLit = false;
     }
 }
