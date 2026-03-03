@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8641557369036020285}
   - component: {fileID: 1055713014814141613}
   - component: {fileID: 5830217357007168281}
+  - component: {fileID: 113160157392925611}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 4ff4bf42ffc12e34a9c53b2f216f5442, type: 3}
+  - {fileID: 2100000, guid: bd1e607ca1e8e044cb4c5e0164621f28, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3254b0ad12af4754e920da0a43295b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Star
-  m_LitMaterial: {fileID: 2100000, guid: 09486763e603c4d419d81d43bbed7754, type: 2}
+  m_LightDuration: 1
 --- !u!54 &1055713014814141613
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,3 +156,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5076798556035486163, guid: 490496a46f5583743be82ed18bb966d6, type: 3}
+--- !u!114 &113160157392925611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6950014141328250899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff2680d82b6f53342b5f4cb6b425095e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TranslateAnimation
