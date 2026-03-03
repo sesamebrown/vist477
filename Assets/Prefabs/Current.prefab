@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1493452691604969055}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Current
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,6 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57c8144fd1134d4fae0fd787c73ef67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
-  currentDirectionSource: {fileID: 390355653108076435}
-  currentDriftSpeed: 0
+  currentDirectionSource: {fileID: 0}
+  currentAcceleration: 1.5
   escapeSpeedAgainstCurrent: 10

@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentDriftSpeed: 1.5
+  currentAcceleration: 0
   escapeSpeedAgainstCurrent: 1.25
 --- !u!4 &38451860
 Transform:
@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentDriftSpeed: 1.5
+  currentAcceleration: 0
   escapeSpeedAgainstCurrent: 1.25
 --- !u!4 &1183386144
 Transform:
@@ -6647,13 +6647,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670432016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c57c8144fd1134d4fae0fd787c73ef67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentDriftSpeed: 1.5
+  currentAcceleration: 0
   escapeSpeedAgainstCurrent: 1.25
 --- !u!1001 &1679615559
 PrefabInstance:
