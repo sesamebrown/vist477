@@ -104,7 +104,11 @@
         }
     ],
     "m_GroupDatas": [],
-    "m_StickyNoteDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "e9ed00abb05f40e09927ab3b817fa399"
+        }
+    ],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -403,8 +407,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 2823.00048828125,
-            "y": 206.50013732910157
+            "x": 3545.0,
+            "y": 118.0
         },
         "m_Blocks": [
             {
@@ -420,8 +424,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 3227.999755859375,
-            "y": 493.4999694824219
+            "x": 3545.0,
+            "y": 493.0
         },
         "m_Blocks": [
             {
@@ -542,7 +546,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Alpha",
     "m_StageCapability": 2,
-    "m_Value": 1.0,
+    "m_Value": 0.4000000059604645,
     "m_DefaultValue": 1.0,
     "m_Labels": [],
     "m_LiteralMode": false
@@ -770,7 +774,7 @@
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
@@ -3135,7 +3139,7 @@
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
-    "m_Value": 1.0,
+    "m_Value": 0.20000000298023225,
     "m_FloatType": 0,
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
@@ -3152,6 +3156,26 @@
     "m_EnumValues": [
         0
     ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "e9ed00abb05f40e09927ab3b817fa399",
+    "m_Title": "hello eden",
+    "m_Content": "hello",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 3042.0,
+        "y": 242.0,
+        "width": 200.0,
+        "height": 160.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
