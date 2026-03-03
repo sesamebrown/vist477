@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1084448262998085304
+--- !u!114 &-371309020725584405
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StarBlendShader
+  m_Name: Shader Graphs_MaterialBlend_Shader
   m_Shader: {fileID: -6465566751694194690, guid: d23f7d86450698d46899f052a867bd6a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -75,16 +75,19 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaA: 0.01
+    - _AlphaB: 0
     - _Blend: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _TextureA_Metallic: 0
+    - _TextureA_Metallic: 8
     - _TextureA_Smoothness: 0
     - _TextureB_Metallic: 0
     - _TextureB_Smoothness: 0
     - _XRMotionVectorsPass: 1
     m_Colors:
+    - _RimColorA: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     - _TextureA_EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TextureB_EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _TextureB_EmissionColor: {r: 1, g: 0.9747956, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
