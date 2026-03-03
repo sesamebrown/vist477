@@ -110,7 +110,7 @@ public class SplineCurrent : MonoBehaviour
 			return;
 		}
 
-		float t = FindNearestSplineT(swimmer.transform.position);
+		float t = FindNearestSplineT(other.bounds.center);
 		Vector3 flowDirection = (Vector3)splineContainer.EvaluateTangent(t);
 		flowDirection = flowDirection.normalized;
 		if (flowDirection.sqrMagnitude < 0.0001f)
@@ -124,9 +124,9 @@ public class SplineCurrent : MonoBehaviour
 			return;
 		}
 
-		float currentSpeedAlongFlow = Vector3.Dot(swimmer.CurrentVelocity, flowDirection);
-		float speedDelta = currentDriftSpeed - currentSpeedAlongFlow;
-		swimmer.AddExternalVelocity(flowDirection * speedDelta);
+		Vector3 desiredVelocity = flowDirection * currentDriftSpeed;
+		Vector3 velocityDelta = desiredVelocity - swimmer.CurrentVelocity;
+		swimmer.AddExternalVelocity(velocityDelta);
 	}
 
 	private float FindNearestSplineT(Vector3 worldPosition)
