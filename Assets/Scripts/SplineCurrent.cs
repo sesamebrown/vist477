@@ -1,9 +1,14 @@
 using UnityEngine;
 using UnityEngine.Splines;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Collider))]
 public class SplineCurrent : MonoBehaviour
 {
+	[Header("Triggers")]
+	[Tooltip("Optional trigger colliders used for detection. If assigned, these are used instead of this object's trigger collider.")]
+	[SerializeField] private Collider[] triggerColliders;
+
 	[Header("Spline")]
 	[Tooltip("Spline path that defines current flow direction.")]
 	[SerializeField] private SplineContainer splineContainer;
@@ -20,11 +25,21 @@ public class SplineCurrent : MonoBehaviour
 	[SerializeField] private float escapeSpeedAgainstCurrent = 1.25f;
 
 	private Collider triggerCollider;
+	private readonly List<SplineCurrentTriggerRelay> relays = new List<SplineCurrentTriggerRelay>();
 
 	private void Awake()
 	{
 		triggerCollider = GetComponent<Collider>();
-		triggerCollider.isTrigger = true;
+
+		bool hasCustomTriggers = triggerColliders != null && triggerColliders.Length > 0;
+		if (hasCustomTriggers)
+		{
+			ConfigureCustomTriggers();
+		}
+		else
+		{
+			triggerCollider.isTrigger = true;
+		}
 
 		if (splineContainer == null)
 		{
@@ -32,7 +47,62 @@ public class SplineCurrent : MonoBehaviour
 		}
 	}
 
+	private void OnDestroy()
+	{
+		for (int i = 0; i < relays.Count; i++)
+		{
+			if (relays[i] != null)
+			{
+				relays[i].ClearOwner(this);
+			}
+		}
+	}
+
+	private void ConfigureCustomTriggers()
+	{
+		if (triggerCollider != null)
+		{
+			triggerCollider.isTrigger = false;
+		}
+
+		relays.Clear();
+
+		for (int i = 0; i < triggerColliders.Length; i++)
+		{
+			Collider customTrigger = triggerColliders[i];
+			if (customTrigger == null)
+			{
+				continue;
+			}
+
+			customTrigger.isTrigger = true;
+			SplineCurrentTriggerRelay relay = customTrigger.GetComponent<SplineCurrentTriggerRelay>();
+			if (relay == null)
+			{
+				relay = customTrigger.gameObject.AddComponent<SplineCurrentTriggerRelay>();
+			}
+
+			relay.SetOwner(this);
+			relays.Add(relay);
+		}
+	}
+
 	private void OnTriggerStay(Collider other)
+	{
+		if (triggerColliders != null && triggerColliders.Length > 0)
+		{
+			return;
+		}
+
+		ApplyCurrent(other);
+	}
+
+	public void HandleExternalTriggerStay(Collider other)
+	{
+		ApplyCurrent(other);
+	}
+
+	private void ApplyCurrent(Collider other)
 	{
 		SwimLocomotionController swimmer = other.GetComponentInParent<SwimLocomotionController>();
 		if (swimmer == null || splineContainer == null)
@@ -110,5 +180,33 @@ public class SplineCurrent : MonoBehaviour
 
 		Gizmos.DrawLine(midPoint, arrowTip);
 		Gizmos.DrawSphere(arrowTip, 0.08f);
+	}
+}
+
+public class SplineCurrentTriggerRelay : MonoBehaviour
+{
+	private SplineCurrent owner;
+
+	public void SetOwner(SplineCurrent splineCurrent)
+	{
+		owner = splineCurrent;
+	}
+
+	public void ClearOwner(SplineCurrent splineCurrent)
+	{
+		if (owner == splineCurrent)
+		{
+			owner = null;
+		}
+	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (owner == null || !owner.isActiveAndEnabled)
+		{
+			return;
+		}
+
+		owner.HandleExternalTriggerStay(other);
 	}
 }
