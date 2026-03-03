@@ -7,8 +7,8 @@ public class CurrentObstacle : MonoBehaviour
     [Tooltip("Direction objects will drift toward. Uses this transform's forward if left empty.")]
     [SerializeField] private Transform currentDirectionSource;
 
-    [Tooltip("How strongly this current accelerates the player (m/s²).")]
-    [SerializeField] private float currentAcceleration = 1.5f;
+    [Tooltip("Constant drift speed this current tries to maintain along its direction (m/s).")]
+    [SerializeField] private float currentDriftSpeed = 1.5f;
 
     [Header("Escape")]
     [Tooltip("Minimum player speed against the current needed to resist drift and swim out.")]
@@ -39,7 +39,9 @@ public class CurrentObstacle : MonoBehaviour
             return;
         }
 
-        swimmer.AddExternalVelocity(currentDirection * (currentAcceleration * Time.deltaTime));
+        float currentSpeedAlongFlow = Vector3.Dot(swimmer.CurrentVelocity, currentDirection);
+        float speedDelta = currentDriftSpeed - currentSpeedAlongFlow;
+        swimmer.AddExternalVelocity(currentDirection * speedDelta);
     }
 
     private void OnDrawGizmosSelected()
@@ -48,7 +50,7 @@ public class CurrentObstacle : MonoBehaviour
         Vector3 direction = directionTransform.forward.normalized;
 
         Vector3 origin = transform.position;
-        float arrowLength = Mathf.Max(0.5f, currentAcceleration);
+        float arrowLength = Mathf.Max(0.5f, currentDriftSpeed);
         Vector3 tip = origin + direction * arrowLength;
 
         Gizmos.color = Color.cyan;

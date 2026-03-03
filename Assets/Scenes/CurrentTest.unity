@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentAcceleration: 1.5
+  currentDriftSpeed: 1.5
   escapeSpeedAgainstCurrent: 1.25
 --- !u!4 &38451860
 Transform:
@@ -6152,7 +6152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentAcceleration: 1.5
+  currentDriftSpeed: 1.5
   escapeSpeedAgainstCurrent: 1.25
 --- !u!4 &1183386144
 Transform:
@@ -6653,7 +6653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
   currentDirectionSource: {fileID: 0}
-  currentAcceleration: 0
+  currentDriftSpeed: 1.5
   escapeSpeedAgainstCurrent: 1.25
 --- !u!1001 &1679615559
 PrefabInstance:

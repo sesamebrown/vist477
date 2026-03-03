@@ -5042,8 +5042,8 @@ Transform:
   m_GameObject: {fileID: 1842634613}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.53, y: 22.64, z: -47.9}
-  m_LocalScale: {x: 36.636845, y: 1, z: 37.570618}
+  m_LocalPosition: {x: -1.53, y: 22.64, z: 1.8}
+  m_LocalScale: {x: 36.636845, y: 1, z: 67.687225}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -5439,6 +5439,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1493452691604969055, guid: 660b92126ca9449bda8771e34f118b7a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 94eebd9d324eddd49be6e843f56d7ec0, type: 2}
     - target: {fileID: 1627899509109884957, guid: 660b92126ca9449bda8771e34f118b7a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.66
@@ -5506,8 +5510,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7074120296882955765, guid: 660b92126ca9449bda8771e34f118b7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2023863074}
   m_SourcePrefab: {fileID: 100100000, guid: 660b92126ca9449bda8771e34f118b7a, type: 3}
+--- !u!1 &2023863073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7074120296882955765, guid: 660b92126ca9449bda8771e34f118b7a, type: 3}
+  m_PrefabInstance: {fileID: 2023863072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2023863074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023863073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57c8144fd1134d4fae0fd787c73ef67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
+  currentDirectionSource: {fileID: 0}
+  currentAcceleration: 1.5
+  escapeSpeedAgainstCurrent: 1.25
 --- !u!1001 &2036868746
 PrefabInstance:
   m_ObjectHideFlags: 0
