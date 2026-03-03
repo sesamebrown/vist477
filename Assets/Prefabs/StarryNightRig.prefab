@@ -11379,7 +11379,6 @@ GameObject:
   - component: {fileID: 402585126797474376}
   - component: {fileID: 1336784563337270302}
   - component: {fileID: 8752806210303250306}
-  - component: {fileID: 4877539133949717772}
   m_Layer: 0
   m_Name: BodyCollider
   m_TagString: Untagged
@@ -11452,21 +11451,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4877539133949717772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9078052988595284149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57c8144fd1134d4fae0fd787c73ef67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CurrentObstacle
-  currentDirectionSource: {fileID: 0}
-  currentAcceleration: 0
-  escapeSpeedAgainstCurrent: 1.25
 --- !u!1001 &1251780973205037958
 PrefabInstance:
   m_ObjectHideFlags: 0
