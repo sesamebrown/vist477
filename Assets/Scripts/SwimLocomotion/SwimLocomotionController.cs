@@ -284,6 +284,15 @@ public class SwimLocomotionController : MonoBehaviour
     }
 
     /// <summary>
+    /// Adds an external velocity change (e.g. environmental currents).
+    /// </summary>
+    /// <param name="deltaVelocity">Velocity delta to apply in world space.</param>
+    public void AddExternalVelocity(Vector3 deltaVelocity)
+    {
+        swimVelocity += deltaVelocity;
+    }
+
+    /// <summary>
     /// Gets the tracking data for the left hand (for advanced usage).
     /// </summary>
     public HandSwimData GetLeftHandData() => leftHand;
