@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3254b0ad12af4754e920da0a43295b40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Star
-  m_LitMaterial: {fileID: 2100000, guid: f5ccd52dc494e054fbe7d7161dcabe25, type: 2}
+  m_LitMaterial: {fileID: 2100000, guid: 09486763e603c4d419d81d43bbed7754, type: 2}
 --- !u!54 &1055713014814141613
 Rigidbody:
   m_ObjectHideFlags: 0
