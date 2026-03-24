@@ -11,6 +11,9 @@ public class ChiselController : MonoBehaviour
     private bool insideSculptureShattered;
     private bool warnedMissingSculpture;
     private bool warnedMissingHaptics;
+    private Vector3 lastHammerSamplePosition;
+    private float lastHammerSampleTime;
+    private bool hasHammerSample;
 
     [SerializeField]
     private float hapticDuration = 0.1f;
@@ -61,9 +64,6 @@ public class ChiselController : MonoBehaviour
         ResolveInsideSculptureReference();
     }
 
-
-    // calculate the force vector of the hammer hit and use that to scale the haptic feedback intensity
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Hammer"))
@@ -86,15 +86,57 @@ public class ChiselController : MonoBehaviour
         HandleHammerHit(hammerSpeed);
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (!collision.collider.CompareTag("Hammer"))
+        {
+            return;
+        }
+
+        // Keep sampling hammer motion while in contact so transform-driven tools still report speed.
+        GetHammerSpeed(collision.collider, collision.relativeVelocity.magnitude);
+    }
+
     private float GetHammerSpeed(Collider hammerCollider, float fallbackSpeed)
     {
         Rigidbody hammerBody = hammerCollider != null ? hammerCollider.attachedRigidbody : null;
         if (hammerBody != null)
         {
-            return hammerBody.linearVelocity.magnitude;
+            float rbSpeed = hammerBody.linearVelocity.magnitude;
+            if (rbSpeed > 0.01f)
+            {
+                return rbSpeed;
+            }
         }
 
-        return fallbackSpeed;
+        if (fallbackSpeed > 0.01f)
+        {
+            return fallbackSpeed;
+        }
+
+        if (hammerCollider == null)
+        {
+            return 0f;
+        }
+
+        float now = Time.time;
+        Vector3 currentPosition = hammerCollider.transform.position;
+        float estimatedSpeed = 0f;
+
+        if (hasHammerSample)
+        {
+            float deltaTime = now - lastHammerSampleTime;
+            if (deltaTime > 0.0001f)
+            {
+                estimatedSpeed = (currentPosition - lastHammerSamplePosition).magnitude / deltaTime;
+            }
+        }
+
+        lastHammerSamplePosition = currentPosition;
+        lastHammerSampleTime = now;
+        hasHammerSample = true;
+
+        return estimatedSpeed;
     }
 
     private void HandleHammerHit(float hammerSpeed)
