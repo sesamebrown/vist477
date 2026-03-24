@@ -5,8 +5,9 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics;
 
 public class ChiselController : MonoBehaviour
 {
-    private SphereCollider chiselTip;
+    private SphereCollider chiselHit;
     private SimpleHapticFeedback hapticFeedback;
+    private readonly Collider[] tipOverlapBuffer = new Collider[8];
 
     [SerializeField]
     private float maxImpactForce = 5f;
@@ -17,9 +18,14 @@ public class ChiselController : MonoBehaviour
     [SerializeField]
     private float hapticFrequency = 0f;
 
+    [SerializeField]
+    private float tipCheckRadius = 0.02f;
+
+    public Transform chiselTip;
+
     void Start()
     {
-        chiselTip = GetComponent<SphereCollider>();
+        chiselHit = GetComponent<SphereCollider>();
         hapticFeedback = GetComponent<SimpleHapticFeedback>();
     }
 
@@ -32,6 +38,8 @@ public class ChiselController : MonoBehaviour
         {
             // Handle the interaction with the hammer object here
             Debug.Log("Hit chisel");
+
+            Vector3 hitPoint = chiselTip.position;
 
             var hammerBody = other.attachedRigidbody;
             var hammerVelocity = hammerBody != null ? hammerBody.linearVelocity : Vector3.zero;
@@ -47,6 +55,9 @@ public class ChiselController : MonoBehaviour
                 player.SendHapticImpulse(intensity, hapticDuration, hapticFrequency);
                 Debug.Log($"Haptic feedback sent with intensity: {intensity}, duration: {hapticDuration}, frequency: {hapticFrequency}");
             }
+
+            // TryBreakRockAtTip(hitPoint);
         }
     }
+
 }
