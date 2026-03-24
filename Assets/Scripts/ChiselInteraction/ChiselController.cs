@@ -20,6 +20,9 @@ public class ChiselController : MonoBehaviour
     private float hapticFrequency = 0f;
 
     [SerializeField]
+    private float maxHitVelocityForFullHaptics = 5f;
+
+    [SerializeField]
     private float terminalHitVelocity = 4.5f;
 
     [SerializeField]
@@ -66,8 +69,7 @@ public class ChiselController : MonoBehaviour
             var hammerBody = other.attachedRigidbody;
             var hammerVelocity = hammerBody != null ? hammerBody.linearVelocity : Vector3.zero;
             var hammerSpeed = hammerVelocity.magnitude;
-            var forceVector = hammerBody != null ? hammerVelocity * hammerBody.mass : hammerVelocity;
-            var intensity = Mathf.Clamp01(forceVector.magnitude / Mathf.Max(0.01f, maxImpactForce));
+            var intensity = Mathf.Clamp01(hammerSpeed / Mathf.Max(0.01f, maxHitVelocityForFullHaptics));
 
             TryShatterInsideSculpture(hammerSpeed);
 
