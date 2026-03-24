@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Transformers;
@@ -5,10 +6,11 @@ using UnityEngine.XR.Interaction.Toolkit.Transformers;
 public class ShatterController : MonoBehaviour
 {
     private bool hasShattered;
-    private int fragmentHitCount;
+    private int fallenShardCount;
+    private readonly List<TrackedShard> trackedShards = new List<TrackedShard>();
 
     [SerializeField]
-    private string hitTag = "Chisel";
+    private float movementThreshold = 0.001f;
 
     public int thresholdFragments;
 
@@ -19,52 +21,92 @@ public class ShatterController : MonoBehaviour
     [SerializeField]
     private XRGeneralGrabTransformer grabTransformer;
 
+    private class TrackedShard
+    {
+        public Rigidbody body;
+        public Vector3 startWorldPosition;
+        public bool counted;
+    }
+
     void Start()
     {
-        fragmentHitCount = 0;
+        fallenShardCount = 0;
+        trackedShards.Clear();
 
-        Collider[] fragmentColliders = GetComponentsInChildren<Collider>(true);
-        int notifierCount = 0;
-
-        foreach (Collider fragmentCollider in fragmentColliders)
+        Rigidbody[] shardBodies = GetComponentsInChildren<Rigidbody>(true);
+        foreach (Rigidbody shardBody in shardBodies)
         {
-            if (fragmentCollider == null || fragmentCollider.transform == transform)
+            if (shardBody == null || shardBody.transform == transform)
             {
                 continue;
             }
 
-            ShardCollisionNotifier notifier = fragmentCollider.GetComponent<ShardCollisionNotifier>();
-            if (notifier == null)
+            trackedShards.Add(new TrackedShard
             {
-                notifier = fragmentCollider.gameObject.AddComponent<ShardCollisionNotifier>();
-            }
-
-            notifier.owner = this;
-            notifier.hitTag = hitTag;
-            notifierCount++;
+                body = shardBody,
+                startWorldPosition = shardBody.worldCenterOfMass,
+                counted = false,
+            });
         }
 
-        Debug.Log($"Configured {notifierCount} shard collision notifiers.");
+        Debug.Log($"Tracking {trackedShards.Count} shards for movement detection.");
     }
 
     public void OnShardHit()
     {
-        fragmentHitCount++;
-        Debug.Log($"Fragment hits: {fragmentHitCount}");
-
-        if (fragmentHitCount > thresholdFragments)
-        {
-            hasShattered = true;
-            Debug.Log("ShatterController: Shattered!");
-        }
+        // Kept for compatibility with existing ShardCollisionNotifier references.
     }
 
     void Update()
     {
+        UpdateFallenShardCount();
+
         if (hasShattered)
         {
-            grabInteractable.enabled = true;
-            grabTransformer.enabled = true;
+            if (grabInteractable != null)
+            {
+                grabInteractable.enabled = true;
+            }
+
+            if (grabTransformer != null)
+            {
+                grabTransformer.enabled = true;
+            }
+        }
+    }
+
+    private void UpdateFallenShardCount()
+    {
+        if (hasShattered)
+        {
+            return;
+        }
+
+        for (int i = 0; i < trackedShards.Count; i++)
+        {
+            TrackedShard shard = trackedShards[i];
+            if (shard == null || shard.counted || shard.body == null)
+            {
+                continue;
+            }
+
+            float movement = (shard.body.worldCenterOfMass - shard.startWorldPosition).sqrMagnitude;
+            float threshold = movementThreshold * movementThreshold;
+            if (movement < threshold)
+            {
+                continue;
+            }
+
+            shard.counted = true;
+            fallenShardCount++;
+            Debug.Log($"Fallen shards: {fallenShardCount}");
+
+            if (fallenShardCount >= thresholdFragments)
+            {
+                hasShattered = true;
+                Debug.Log("ShatterController: Shattered by fallen shard threshold.");
+                return;
+            }
         }
     }
 
