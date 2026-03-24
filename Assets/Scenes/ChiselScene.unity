@@ -5531,7 +5531,7 @@ GameObject:
   - component: {fileID: 628760662}
   m_Layer: 0
   m_Name: wall (3)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7805,7 +7805,7 @@ GameObject:
   - component: {fileID: 851585004}
   m_Layer: 0
   m_Name: wall (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10443,7 +10443,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097053313}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0a1302d0d134fa8a2a5b3bf4aec3c20, type: 3}
   m_Name: 
@@ -10466,7 +10466,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097053313}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 
@@ -11046,7 +11046,7 @@ GameObject:
   - component: {fileID: 1159338357}
   m_Layer: 0
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19177,7 +19177,7 @@ GameObject:
   - component: {fileID: 2016634781}
   m_Layer: 0
   m_Name: wall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21603,6 +21603,26 @@ PrefabInstance:
     - target: {fileID: 7838220585245542818, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
       propertyPath: m_TagString
       value: Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893481589510143551, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+      propertyPath: head
+      value: 
+      objectReference: {fileID: 1097053313}
+    - target: {fileID: 7893481589510143551, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7893481589510143551, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+      propertyPath: grabTransformer
+      value: 
+      objectReference: {fileID: 1097053321}
+    - target: {fileID: 7893481589510143551, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+      propertyPath: grabInteractable
+      value: 
+      objectReference: {fileID: 1097053322}
+    - target: {fileID: 7893481589510143551, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+      propertyPath: thresholdFragments
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7928571808389263949, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
       propertyPath: m_Name

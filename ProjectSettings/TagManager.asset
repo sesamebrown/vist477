@@ -10,6 +10,7 @@ TagManager:
   - Sculpture
   - Rock
   - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX

@@ -1,77 +1,71 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
 public class ShatterController : MonoBehaviour
 {
     private bool hasShattered;
+    private int fragmentHitCount;
+
+    [SerializeField]
+    private string hitTag = "Chisel";
+
+    public int thresholdFragments;
+
+    public GameObject head;
+
+    [SerializeField]
+    private XRGrabInteractable grabInteractable;
+    [SerializeField]
+    private XRGeneralGrabTransformer grabTransformer;
 
     void Start()
     {
-        Collider[] shardColliders = GetComponentsInChildren<Collider>();
+        fragmentHitCount = 0;
 
-        foreach (Transform child in transform)
+        Collider[] fragmentColliders = GetComponentsInChildren<Collider>(true);
+        int notifierCount = 0;
+
+        foreach (Collider fragmentCollider in fragmentColliders)
         {
-            if (!child.CompareTag("Sculpture"))
+            if (fragmentCollider == null || fragmentCollider.transform == transform)
             {
-                GameObject childObject = child.gameObject;
-                Rigidbody rb = childObject.GetComponent<Rigidbody>();
-                Collider shardCollider = childObject.GetComponent<Collider>();
-                MeshCollider meshCollider = childObject.GetComponent<MeshCollider>();
-
-                rb.useGravity = false;
-                rb.isKinematic = true;
-
-                if (meshCollider != null)
-                {
-                    meshCollider.convex = true;
-                }
-
-                if (shardCollider != null)
-                {
-                    shardCollider.isTrigger = true;
-                }
-
-                var notifier = childObject.AddComponent<ShardCollisionNotifier>();
-                notifier.owner = this;
+                continue;
             }
+
+            ShardCollisionNotifier notifier = fragmentCollider.GetComponent<ShardCollisionNotifier>();
+            if (notifier == null)
+            {
+                notifier = fragmentCollider.gameObject.AddComponent<ShardCollisionNotifier>();
+            }
+
+            notifier.owner = this;
+            notifier.hitTag = hitTag;
+            notifierCount++;
         }
 
-        for (int i = 0; i < shardColliders.Length; i++)
-        {
-            for (int j = i + 1; j < shardColliders.Length; j++)
-            {
-                if (shardColliders[i].transform.parent == transform && shardColliders[j].transform.parent == transform)
-                {
-                    Physics.IgnoreCollision(shardColliders[i], shardColliders[j], true);
-                }
-            }
-        }
+        Debug.Log($"Configured {notifierCount} shard collision notifiers.");
     }
 
     public void OnShardHit()
     {
-        if (hasShattered)
+        fragmentHitCount++;
+        Debug.Log($"Fragment hits: {fragmentHitCount}");
+
+        if (fragmentHitCount > thresholdFragments)
         {
-            return;
-        }
-
-        hasShattered = true;
-
-        foreach (Transform child in transform)
-        {
-            if (!child.CompareTag("Sculpture"))
-            {
-                GameObject childObject = child.gameObject;
-                Rigidbody rb = childObject.GetComponent<Rigidbody>();
-                Collider shardCollider = childObject.GetComponent<Collider>();
-
-                rb.useGravity = true;
-                rb.isKinematic = false;
-
-                if (shardCollider != null)
-                {
-                    shardCollider.isTrigger = false;
-                }
-            }
+            hasShattered = true;
+            Debug.Log("ShatterController: Shattered!");
         }
     }
+
+    void Update()
+    {
+        if (hasShattered)
+        {
+            grabInteractable.enabled = true;
+            grabTransformer.enabled = true;
+        }
+    }
+
 }
