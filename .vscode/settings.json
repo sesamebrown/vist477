@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "VR_Museum.slnx"
+    "dotnet.defaultSolution": "vist477.slnx"
 }
