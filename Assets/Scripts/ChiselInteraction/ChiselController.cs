@@ -7,11 +7,10 @@ public class ChiselController : MonoBehaviour
 {
     private SphereCollider chiselHit;
     private SimpleHapticFeedback hapticFeedback;
-    private readonly Collider[] tipOverlapBuffer = new Collider[8];
+    private HapticImpulsePlayer hapticPlayer;
     private bool insideSculptureShattered;
-
-    [SerializeField]
-    private float maxImpactForce = 5f;
+    private bool warnedMissingSculpture;
+    private bool warnedMissingHaptics;
 
     [SerializeField]
     private float hapticDuration = 0.1f;
@@ -35,7 +34,7 @@ public class ChiselController : MonoBehaviour
     private Transform shatteredSpawnParent;
 
     [SerializeField]
-    private float tipCheckRadius = 0.02f;
+    private string insideSculptureTag = "Sculpture";
 
     public Transform chiselTip;
 
@@ -44,14 +43,22 @@ public class ChiselController : MonoBehaviour
         chiselHit = GetComponent<SphereCollider>();
         hapticFeedback = GetComponent<SimpleHapticFeedback>();
 
-        if (insideSculptureObject == null)
+        if (hapticFeedback != null)
         {
-            var foundInside = GameObject.FindWithTag("Sculpture");
-            if (foundInside != null)
-            {
-                insideSculptureObject = foundInside;
-            }
+            hapticPlayer = hapticFeedback.hapticImpulsePlayer;
         }
+
+        if (hapticPlayer == null)
+        {
+            hapticPlayer = GetComponentInParent<HapticImpulsePlayer>();
+        }
+
+        if (hapticPlayer == null)
+        {
+            hapticPlayer = GetComponentInChildren<HapticImpulsePlayer>(true);
+        }
+
+        ResolveInsideSculptureReference();
     }
 
 
@@ -59,32 +66,79 @@ public class ChiselController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hammer"))
+        if (!other.CompareTag("Hammer"))
         {
-            // Handle the interaction with the hammer object here
-            Debug.Log("Hit chisel");
+            return;
+        }
 
-            Vector3 hitPoint = chiselTip.position;
+        float hammerSpeed = GetHammerSpeed(other, 0f);
+        HandleHammerHit(hammerSpeed);
+    }
 
-            var hammerBody = other.attachedRigidbody;
-            var hammerVelocity = hammerBody != null ? hammerBody.linearVelocity : Vector3.zero;
-            var hammerSpeed = hammerVelocity.magnitude;
-            var intensity = Mathf.Clamp01(hammerSpeed / Mathf.Max(0.01f, maxHitVelocityForFullHaptics));
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!collision.collider.CompareTag("Hammer"))
+        {
+            return;
+        }
 
-            TryShatterInsideSculpture(hammerSpeed);
+        float hammerSpeed = GetHammerSpeed(collision.collider, collision.relativeVelocity.magnitude);
+        HandleHammerHit(hammerSpeed);
+    }
 
+    private float GetHammerSpeed(Collider hammerCollider, float fallbackSpeed)
+    {
+        Rigidbody hammerBody = hammerCollider != null ? hammerCollider.attachedRigidbody : null;
+        if (hammerBody != null)
+        {
+            return hammerBody.linearVelocity.magnitude;
+        }
+
+        return fallbackSpeed;
+    }
+
+    private void HandleHammerHit(float hammerSpeed)
+    {
+        Debug.Log($"Hit chisel. Hammer speed: {hammerSpeed:0.00}");
+
+        TryShatterInsideSculpture(hammerSpeed);
+        SendScaledHaptics(hammerSpeed);
+    }
+
+    private void SendScaledHaptics(float hammerSpeed)
+    {
+        if (hapticPlayer == null)
+        {
             if (hapticFeedback != null)
             {
-                var player = hapticFeedback.hapticImpulsePlayer;
-                // if (player == null)
-                //     player = HapticImpulsePlayer.GetOrCreateInHierarchy(gameObject);
+                hapticPlayer = hapticFeedback.hapticImpulsePlayer;
+            }
+        }
 
-                player.SendHapticImpulse(intensity, hapticDuration, hapticFrequency);
-                Debug.Log($"Haptic feedback sent with intensity: {intensity}, duration: {hapticDuration}, frequency: {hapticFrequency}");
+        if (hapticPlayer == null)
+        {
+            hapticPlayer = GetComponentInParent<HapticImpulsePlayer>();
+        }
+
+        if (hapticPlayer == null)
+        {
+            hapticPlayer = GetComponentInChildren<HapticImpulsePlayer>(true);
+        }
+
+        if (hapticPlayer == null)
+        {
+            if (!warnedMissingHaptics)
+            {
+                Debug.LogWarning("No HapticImpulsePlayer found for ChiselController. Haptics will not play.");
+                warnedMissingHaptics = true;
             }
 
-            // TryBreakRockAtTip(hitPoint);
+            return;
         }
+
+        float intensity = Mathf.Clamp01(hammerSpeed / Mathf.Max(0.01f, maxHitVelocityForFullHaptics));
+        hapticPlayer.SendHapticImpulse(intensity, hapticDuration, hapticFrequency);
+        Debug.Log($"Haptic feedback sent with intensity: {intensity:0.00}, duration: {hapticDuration}, frequency: {hapticFrequency}");
     }
 
     private void TryShatterInsideSculpture(float hammerSpeed)
@@ -102,7 +156,17 @@ public class ChiselController : MonoBehaviour
 
         if (insideSculptureObject == null)
         {
-            Debug.LogWarning("Terminal hit reached, but insideSculptureObject is not assigned.");
+            ResolveInsideSculptureReference();
+        }
+
+        if (insideSculptureObject == null)
+        {
+            if (!warnedMissingSculpture)
+            {
+                Debug.LogWarning("Terminal hit reached, but insideSculptureObject is not assigned and could not be auto-found.");
+                warnedMissingSculpture = true;
+            }
+
             return;
         }
 
@@ -124,6 +188,23 @@ public class ChiselController : MonoBehaviour
         insideSculptureShattered = true;
 
         Debug.Log($"Terminal hit velocity reached ({hammerSpeed:0.00} >= {terminalHitVelocity:0.00}). Inside sculpture shattered.");
+    }
+
+    private void ResolveInsideSculptureReference()
+    {
+        if (insideSculptureObject != null)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(insideSculptureTag))
+        {
+            GameObject foundInside = GameObject.FindWithTag(insideSculptureTag);
+            if (foundInside != null)
+            {
+                insideSculptureObject = foundInside;
+            }
+        }
     }
 
 }
