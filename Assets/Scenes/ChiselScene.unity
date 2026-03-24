@@ -136,11 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2417881
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -207,11 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &10570953
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -278,11 +280,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &21251881
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -461,11 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &34762292
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -644,11 +648,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &105114487
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -715,11 +720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &110600694
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -899,11 +905,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &126428977
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -970,11 +977,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &144749144
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1041,11 +1049,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &153015516
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1112,11 +1121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &160953184
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1295,11 +1305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &164282810
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1366,11 +1377,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &164830057
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1437,11 +1449,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &165555160
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1508,11 +1521,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &165847693
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1579,11 +1593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &166801419
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1650,11 +1665,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &167965566
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1721,11 +1737,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &180766968
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1792,11 +1809,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &208878963
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1863,11 +1881,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &209230778
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1934,11 +1953,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &222422081
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2005,11 +2025,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &233983392
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2076,11 +2097,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &240055832
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2147,11 +2169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &244010643
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2218,11 +2241,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &248580921
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2289,11 +2313,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &255501041
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2360,11 +2385,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &255544750
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2431,11 +2457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &273329998
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2502,11 +2529,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &278300049
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2573,11 +2601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &302779149
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2756,11 +2785,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &321962622
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2827,11 +2857,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &322493999
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2898,11 +2929,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &334516816
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2969,11 +3001,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &341549774
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3040,11 +3073,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &366156761
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3111,11 +3145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &370614229
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3187,11 +3222,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &375193287
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3258,11 +3294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &392588343
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3329,11 +3366,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &394326995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3400,11 +3438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &403455654
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3471,11 +3510,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &406834387
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3542,11 +3582,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &407435408
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3613,11 +3654,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &411563165
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3684,11 +3726,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &418736922
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3755,11 +3798,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &430920685
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3826,11 +3870,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &432141334
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3897,11 +3942,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &436061524
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3968,11 +4014,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &453478846
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4039,11 +4086,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &468507836
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4110,11 +4158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &476582816
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4181,11 +4230,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &477268844
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4252,11 +4302,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &502577576
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4323,11 +4374,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &503355125
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4413,11 +4465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &517538991
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4484,11 +4537,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &522018282
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4648,11 +4702,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &548178030
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4719,11 +4774,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &548718586
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4790,11 +4846,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &566656755
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4861,11 +4918,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &581611651
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -4932,11 +4990,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &588527218
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5003,11 +5062,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &593724342
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5074,11 +5134,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &596176688
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5257,11 +5318,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &610337748
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5328,11 +5390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &616817142
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5399,11 +5462,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &618267025
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5582,11 +5646,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &631653395
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5653,11 +5718,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &633263432
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5724,11 +5790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &636331160
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5795,11 +5862,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &641025013
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5866,11 +5934,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &666364789
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5942,11 +6011,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &682565995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6013,11 +6083,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &693447956
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6211,11 +6282,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &709207033
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6287,11 +6359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &715726547
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6358,11 +6431,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &718873854
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6429,11 +6503,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &726911416
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6500,11 +6575,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &746854815
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6571,11 +6647,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &747594402
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6642,11 +6719,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &769590719
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6713,11 +6791,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &776150561
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6784,11 +6863,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &780689879
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6855,11 +6935,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &781037042
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7076,11 +7157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &787971118
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7147,11 +7229,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &796375738
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7218,11 +7301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &801049169
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7289,11 +7373,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &822897220
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7584,11 +7669,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &826342860
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7655,11 +7741,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &844535613
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -7838,11 +7925,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &854583164
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8021,11 +8109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &890553969
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8092,11 +8181,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &891737303
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8163,11 +8253,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &896387670
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8234,11 +8325,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &904085351
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8305,11 +8397,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &907920746
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8376,11 +8469,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &910149872
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8447,11 +8541,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &913633732
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8518,11 +8613,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &923049499
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8589,11 +8685,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &932663324
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8660,11 +8757,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &933427375
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8731,11 +8829,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &938871267
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8802,11 +8901,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &944952615
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8873,11 +8973,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &948996572
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8944,11 +9045,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &961560994
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9015,11 +9117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &967432288
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9086,11 +9189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &974658073
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9157,11 +9261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1008741594
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9228,11 +9333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1040039905
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9299,11 +9405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1043897677
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9370,11 +9477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1043912778
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9441,11 +9549,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1044746695
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9512,11 +9621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1056619923
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9583,11 +9693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1058421569
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9654,11 +9765,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1059881647
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9725,11 +9837,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1060422044
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9796,11 +9909,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1061362262
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9867,11 +9981,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1062701723
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9938,11 +10053,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1064676463
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10009,11 +10125,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1068032264
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10080,11 +10197,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1074133822
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10151,11 +10269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1086174705
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10222,11 +10341,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1091848943
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10298,11 +10418,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1108398458
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10369,11 +10490,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1114641405
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10440,11 +10562,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1133354486
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10511,11 +10634,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1140950866
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10582,11 +10706,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1152865102
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10653,11 +10778,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1157943365
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10836,11 +10962,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1159927384
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10907,11 +11034,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1165212047
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -10978,11 +11106,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1169591924
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11049,11 +11178,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1176202328
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11120,11 +11250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1185962342
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11191,11 +11322,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1186975436
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11262,11 +11394,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1192180620
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11333,11 +11466,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1193862574
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11404,11 +11538,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1194478401
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11475,11 +11610,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1203237525
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11546,11 +11682,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1208611911
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11622,11 +11759,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1243633616
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11693,11 +11831,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1296243028
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11764,11 +11903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1299170894
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11835,11 +11975,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1315198156
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11906,11 +12047,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1324325995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11977,11 +12119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1337255975
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12048,11 +12191,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1353274291
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12119,11 +12263,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1360919609
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12190,11 +12335,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1382217591
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12261,11 +12407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1382627987
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12332,11 +12479,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1385528031
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12403,11 +12551,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1387287451
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12474,11 +12623,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1390518770
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12545,11 +12695,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1393986803
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12616,11 +12767,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1405450544
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12687,11 +12839,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1412159094
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12758,11 +12911,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1425786344
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12829,11 +12983,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1443408222
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12900,11 +13055,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1448735293
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12971,11 +13127,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1448969980
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13154,11 +13311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1450985742
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13225,11 +13383,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1454177599
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13296,11 +13455,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1455427071
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13367,11 +13527,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1459869800
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13438,11 +13599,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1478800414
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13509,11 +13671,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1495964809
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13580,11 +13743,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1510171985
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13651,11 +13815,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1514377818
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13722,11 +13887,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1544280353
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13793,11 +13959,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1549880396
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13847,6 +14014,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &1555416927 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8881378372576227760, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
+  m_PrefabInstance: {fileID: 4015985942255054256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1563786803 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6516666391012202753, guid: 4ea70cd40331647b2aad8c232c951dca, type: 3}
@@ -13864,11 +14036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1563786808
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -13935,11 +14108,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1566642497
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14006,11 +14180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1567907703
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14077,11 +14252,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1575393299
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14148,11 +14324,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1584889903
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14219,11 +14396,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1586979042
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14290,11 +14468,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1587349163
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14361,11 +14540,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1595288097
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14432,11 +14612,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1627183075
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14503,11 +14684,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1637280809
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14574,11 +14756,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1648426976
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14757,11 +14940,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1661236069
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14828,11 +15012,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1667335675
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14899,11 +15084,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1667515440
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14970,11 +15156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1677699518
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15153,11 +15340,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1687951743
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15224,11 +15412,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1692080540
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15295,11 +15484,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1704630945
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15366,11 +15556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1705847735
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15549,11 +15740,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1712738203
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15620,11 +15812,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1713045366
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15914,11 +16107,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1725095656
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15985,11 +16179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1735051191
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16056,11 +16251,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1746007101
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16127,11 +16323,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1753741487
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16198,11 +16395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1761425884
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16269,11 +16467,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1764293643
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16340,11 +16539,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1772628836
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16411,11 +16611,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1774279575
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16482,11 +16683,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1775633273
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16553,11 +16755,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1786897482
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16624,11 +16827,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1792243985
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16695,11 +16899,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1796677267
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16766,11 +16971,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1817308989
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16837,11 +17043,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1819188908
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16908,11 +17115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1836691130
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16979,11 +17187,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1860592281
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17050,11 +17259,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1866953010
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17121,11 +17331,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1877272256
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17229,11 +17440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1893743332
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17300,11 +17512,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1900558500
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17483,11 +17696,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1910269227
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17554,11 +17768,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1913415876
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17625,11 +17840,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1917325087
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17693,7 +17909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8135023674665499069, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8518324294302271954, guid: 58d0a4ac86f2348deb02f3880c71378e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17757,11 +17973,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1936212428
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17828,11 +18045,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1941955262
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17899,11 +18117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1951662072
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17970,11 +18189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1969508090
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18041,11 +18261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1971979129
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18112,11 +18333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1986493023
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18183,11 +18405,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1988093149
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18254,11 +18477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1989800384
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18325,11 +18549,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1997124301
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18396,11 +18621,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &1997599289
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18467,11 +18693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2000662995
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18538,11 +18765,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2002780844
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18609,11 +18837,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2003670797
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18680,11 +18909,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2008128049
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18975,11 +19205,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2030476567
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19046,11 +19277,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2047540300
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19117,11 +19349,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2050147491
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19300,11 +19533,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2057650395
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19371,11 +19605,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2061314555
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19442,11 +19677,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2073844821
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19513,11 +19749,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2076447072
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19584,11 +19821,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2084284926
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -19932,11 +20170,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2099302569
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20003,11 +20242,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2102895713
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20074,11 +20314,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2127861662
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20145,11 +20386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2135691834
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20216,11 +20458,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e028a754dfd849aa8ff379e87b7d2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RockBreaker
-  fragmentsParent: {fileID: 0}
+  fragmentsParent: {fileID: 1555416927}
   breakRadius: 1
   force: 10
   maxChunksPerHit: 6
   minImpulseScale: 0.2
+  clearConstraintsOnBreak: 1
 --- !u!64 &2135998192
 MeshCollider:
   m_ObjectHideFlags: 0

@@ -13,34 +13,39 @@ public class RockBreaker : MonoBehaviour
     [SerializeField]
     private float minImpulseScale = 0.2f;
 
+    [SerializeField]
+    private bool clearConstraintsOnBreak = true;
+
     public void BreakAtPoint(Vector3 hitPoint)
     {
         Debug.Log($"Breaking rock at point: {hitPoint} with radius: {breakRadius} and force: {force}");
 
         Transform parent = fragmentsParent != null ? fragmentsParent : transform;
-        if (parent.childCount == 0)
+        Rigidbody[] fragmentBodies = parent.GetComponentsInChildren<Rigidbody>(true);
+
+        if (fragmentBodies.Length == 0)
         {
-            Debug.LogWarning("No fragment children found to break.");
+            Debug.LogWarning("No fragment rigidbodies found under fragmentsParent/rock object.");
             return;
         }
 
         int chunksInRadius = 0;
         int chunksActivated = 0;
-        var candidates = new List<(Transform chunk, Rigidbody rb, float dist)>();
+        var candidates = new List<(Rigidbody rb, float dist)>();
 
-        foreach (Transform chunk in parent)
+        foreach (Rigidbody rb in fragmentBodies)
         {
-            float dist = Vector3.Distance(chunk.position, hitPoint);
+            if (rb == null)
+            {
+                continue;
+            }
+
+            float dist = Vector3.Distance(rb.worldCenterOfMass, hitPoint);
 
             if (dist < breakRadius)
             {
                 chunksInRadius++;
-                Rigidbody rb = chunk.GetComponent<Rigidbody>();
-
-                if (rb != null)
-                {
-                    candidates.Add((chunk, rb, dist));
-                }
+                candidates.Add((rb, dist));
             }
         }
 
@@ -59,10 +64,16 @@ public class RockBreaker : MonoBehaviour
             }
 
             Rigidbody rb = candidate.rb;
+            if (clearConstraintsOnBreak)
+            {
+                rb.constraints = RigidbodyConstraints.None;
+            }
+
             rb.isKinematic = false;
             rb.useGravity = true;
+            rb.WakeUp();
 
-            Vector3 dir = candidate.chunk.position - hitPoint;
+            Vector3 dir = rb.worldCenterOfMass - hitPoint;
             if (dir.sqrMagnitude < 0.0001f)
             {
                 dir = Random.onUnitSphere;
@@ -84,7 +95,11 @@ public class RockBreaker : MonoBehaviour
         }
         else if (chunksActivated == 0)
         {
-            Debug.LogWarning("Chunks were in range, but no Rigidbody components were found on those chunks.");
+            Debug.LogWarning("Chunks were in range, but none were activated. Check minImpulseScale, force, or rigidbody constraints.");
+        }
+        else
+        {
+            Debug.Log($"Activated {chunksActivated}/{chunksInRadius} chunks within radius.");
         }
     }
 }
