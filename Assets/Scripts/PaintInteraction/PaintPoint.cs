@@ -63,6 +63,8 @@ public class PaintPoint : MonoBehaviour
         get => m_IndicatorColor;
         set
         {
+            // Preserve the configured alpha value when setting color
+            value.a = m_IndicatorAlpha;
             m_IndicatorColor = value;
             UpdateIndicatorColor();
         }
