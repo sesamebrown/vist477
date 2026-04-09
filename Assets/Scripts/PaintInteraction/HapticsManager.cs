@@ -11,9 +11,18 @@ public class HapticsManager : MonoBehaviour
     public int totalNumColors = 7;
 
     [SerializeField]
-    [Tooltip("Impulse intensity sent for color haptics (0-1).")]
+    [Tooltip("Curve that maps normalized color index to overall haptic strength.")]
+    AnimationCurve m_HapticStrengthCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
+    [SerializeField]
+    [Tooltip("Minimum impulse intensity sent for color haptics (0-1).")]
     [Range(0f, 1f)]
-    float m_HapticIntensity = 0.5f;
+    float m_MinHapticIntensity = 0.2f;
+
+    [SerializeField]
+    [Tooltip("Maximum impulse intensity sent for the highest color index (0-1).")]
+    [Range(0f, 1f)]
+    float m_MaxHapticIntensity = 0.8f;
 
     [SerializeField]
     [Tooltip("Duration of each color haptic impulse in seconds.")]
@@ -26,9 +35,14 @@ public class HapticsManager : MonoBehaviour
     float m_TotalPlayDuration = 2f;
 
     [SerializeField]
-    [Tooltip("Gap between pulse starts while sustaining haptics.")]
+    [Tooltip("Minimum impulses per second used for the lowest color index.")]
     [Min(0.01f)]
-    float m_PulseInterval = 0.08f;
+    float m_MinImpulsesPerSecond = 3f;
+
+    [SerializeField]
+    [Tooltip("Maximum impulses per second used for the highest color index.")]
+    [Min(0.01f)]
+    float m_MaxImpulsesPerSecond = 15f;
 
     [SerializeField]
     [Tooltip("Lowest haptic frequency used for color index 0.")]
@@ -70,29 +84,32 @@ public class HapticsManager : MonoBehaviour
 
         float minFrequency = Mathf.Min(m_MinFrequency, m_MaxFrequency);
         float maxFrequency = Mathf.Max(m_MinFrequency, m_MaxFrequency);
-        float frequency = Mathf.Lerp(minFrequency, maxFrequency, normalized);
+        float strength = Mathf.Clamp01(m_HapticStrengthCurve.Evaluate(normalized));
+        float frequency = Mathf.Lerp(minFrequency, maxFrequency, strength);
+        float intensity = Mathf.Lerp(Mathf.Min(m_MinHapticIntensity, m_MaxHapticIntensity), Mathf.Max(m_MinHapticIntensity, m_MaxHapticIntensity), strength);
+        float impulsesPerSecond = Mathf.Lerp(Mathf.Min(m_MinImpulsesPerSecond, m_MaxImpulsesPerSecond), Mathf.Max(m_MinImpulsesPerSecond, m_MaxImpulsesPerSecond), strength);
 
         if (m_ColorHapticRoutine != null)
             StopCoroutine(m_ColorHapticRoutine);
 
-        m_ColorHapticRoutine = StartCoroutine(PlayColorHapticRoutine(frequency));
+        m_ColorHapticRoutine = StartCoroutine(PlayColorHapticRoutine(frequency, intensity, impulsesPerSecond));
     }
 
-    IEnumerator PlayColorHapticRoutine(float frequency)
+    IEnumerator PlayColorHapticRoutine(float frequency, float intensity, float impulsesPerSecond)
     {
         if (m_TotalPlayDuration <= 0f)
         {
-            m_HapticPlayer.SendHapticImpulse(m_HapticIntensity, m_PulseDuration, frequency);
+            m_HapticPlayer.SendHapticImpulse(intensity, m_PulseDuration, frequency);
             m_ColorHapticRoutine = null;
             yield break;
         }
 
         float elapsed = 0f;
-        float pulseInterval = Mathf.Max(0.01f, m_PulseInterval);
+        float pulseInterval = 1f / Mathf.Max(0.01f, impulsesPerSecond);
 
         while (elapsed < m_TotalPlayDuration)
         {
-            m_HapticPlayer.SendHapticImpulse(m_HapticIntensity, m_PulseDuration, frequency);
+            m_HapticPlayer.SendHapticImpulse(intensity, m_PulseDuration, frequency);
             yield return new WaitForSeconds(pulseInterval);
             elapsed += pulseInterval;
         }
