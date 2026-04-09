@@ -563,6 +563,9 @@ public class PaintZone : MonoBehaviour
         m_OnCompleted?.Invoke();
 
         Debug.Log($"[PaintZone] Zone {gameObject.name} completed! Coverage: {m_CompletionAmount:P1}");
+
+        // Deactivate this game object after completion to prevent further interactions
+        gameObject.SetActive(false);
     }
 
     /// <summary>
