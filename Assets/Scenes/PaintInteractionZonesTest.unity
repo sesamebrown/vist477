@@ -264,7 +264,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1755179227}
 --- !u!33 &81359101
@@ -727,8 +727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -799,7 +799,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1768390129}
 --- !u!33 &87558863
@@ -1376,8 +1376,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -1448,7 +1448,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1818375754}
 --- !u!33 &104226417
@@ -2709,8 +2709,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.92941177, g: 0.7921569, b: 0.5294118, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -2819,7 +2819,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 269403399}
 --- !u!33 &134881670
@@ -4346,8 +4346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.30980393, g: 0.54509807, b: 0.6901961, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -4774,7 +4774,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1176835174}
 --- !u!33 &219542213
@@ -5503,8 +5503,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.81960785, g: 0.6392157, b: 0.40784314, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -5936,7 +5936,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 172133922}
 --- !u!33 &278895659
@@ -6665,8 +6665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -7296,7 +7296,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 228484225}
 --- !u!33 &482917819
@@ -7835,8 +7835,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -8108,7 +8108,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1948321343}
 --- !u!33 &575197223
@@ -8647,8 +8647,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -8907,7 +8907,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1664206779}
 --- !u!33 &683397486
@@ -10092,8 +10092,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.84705883, g: 0.7372549, b: 0.67058825, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -10361,7 +10361,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 652993960}
 --- !u!33 &1117910904
@@ -10748,8 +10748,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.07058824, g: 0.05882353, b: 0.047058824, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -11094,7 +11094,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 202067678}
 --- !u!33 &1178284284
@@ -11633,8 +11633,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -12055,7 +12055,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1957796977}
 --- !u!33 &1415560537
@@ -12442,8 +12442,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.07058824, g: 0.05882353, b: 0.047058824, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -12995,7 +12995,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 304538339}
 --- !u!33 &1646253708
@@ -14104,8 +14104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.73333335, g: 0.32941177, b: 0.23529412, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -14445,7 +14445,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1728258500}
 --- !u!33 &1726967648
@@ -15060,8 +15060,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
-  m_ColorTolerance: 0.15
-  m_CompletionThreshold: 0.3
+  m_ColorTolerance: 0.054
+  m_CompletionThreshold: 0.2
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -15286,7 +15286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18efe4d8504391141bb5391239bb1f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  m_CorrectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_ColorTolerance: 0.054
   m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
@@ -17851,7 +17851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_LineWidth
-      value: 0.01
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_LineColor.b

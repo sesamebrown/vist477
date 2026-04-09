@@ -273,17 +273,18 @@ public class PaintZone : MonoBehaviour
         }
         else
         {
-            // Correct color - add to tracking if not already there
-            if (!m_TrackedLines.Contains(paintLine))
-            {
-                m_TrackedLines.Add(paintLine);
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Added line to tracking. Total tracked: {m_TrackedLines.Count}");
-            }
-            
+            // Correct color
             // Only recalculate coverage on finalization, not on initial detection (performance optimization)
             if (!isInitialCheck)
             {
+                // Add to tracking on finalization only
+                if (!m_TrackedLines.Contains(paintLine))
+                {
+                    m_TrackedLines.Add(paintLine);
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Added line to tracking. Total tracked: {m_TrackedLines.Count}");
+                }
+                
                 if (m_EnableDebugLogs)
                     Debug.Log($"[PaintZone] Recalculating coverage (line finalized)");
                 RecalculateCoverage();
@@ -291,7 +292,7 @@ public class PaintZone : MonoBehaviour
             else
             {
                 if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Skipping coverage calculation (initial check - will calc on finalization)");
+                    Debug.Log($"[PaintZone] Correct color on initial check - will track and calculate coverage on finalization");
             }
         }
     }
@@ -325,8 +326,8 @@ public class PaintZone : MonoBehaviour
 
         // Use voxel grid sampling to estimate coverage
         int samplesPerAxis = m_CoverageResolution;
-        int totalSamples = samplesPerAxis * samplesPerAxis * samplesPerAxis;
         int coveredSamples = 0;
+        int validSamples = 0; // Only count samples actually inside the collider
 
         Vector3 boundsMin = m_ZoneBounds.min;
         Vector3 boundsSize = m_ZoneBounds.size;
@@ -346,6 +347,13 @@ public class PaintZone : MonoBehaviour
                         (z + 0.5f) * stepSize * boundsSize.z
                     );
 
+                    // Check if sample point is actually inside the collider
+                    // (Important for complex mesh colliders where bounds != actual volume)
+                    if (!IsPointInsideCollider(samplePoint))
+                        continue;
+
+                    validSamples++;
+
                     // Check if any tracked line has a point near this sample
                     if (IsPointCoveredByPaint(samplePoint))
                     {
@@ -355,11 +363,17 @@ public class PaintZone : MonoBehaviour
             }
         }
 
-        // Calculate completion percentage
-        m_CompletionAmount = (float)coveredSamples / totalSamples;
+        // Calculate completion percentage based on valid samples only
+        m_CompletionAmount = validSamples > 0 ? (float)coveredSamples / validSamples : 0f;
 
         if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] Coverage calculated: {coveredSamples}/{totalSamples} samples covered = {m_CompletionAmount:P1} | Threshold: {m_CompletionThreshold:P1} | Tracked lines: {m_TrackedLines.Count}");
+        {
+            int totalSamples = samplesPerAxis * samplesPerAxis * samplesPerAxis;
+            float samplingEfficiency = totalSamples > 0 ? (float)validSamples / totalSamples : 0f;
+            Debug.Log($"[PaintZone] Coverage calculated: {coveredSamples}/{validSamples} valid samples covered = {m_CompletionAmount:P1} | Threshold: {m_CompletionThreshold:P1} | Tracked lines: {m_TrackedLines.Count}");
+            if (samplingEfficiency < 0.9f)
+                Debug.Log($"[PaintZone] Complex mesh detected: {validSamples}/{totalSamples} samples inside collider ({samplingEfficiency:P0})");
+        }
 
         // Check if threshold reached
         if (m_CompletionAmount >= m_CompletionThreshold && !m_Completed)
@@ -408,6 +422,23 @@ public class PaintZone : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Checks if a point is inside the trigger collider.
+    /// This is crucial for complex mesh colliders where bounds != actual volume.
+    /// </summary>
+    bool IsPointInsideCollider(Vector3 point)
+    {
+        if (m_Collider == null)
+            return false;
+
+        // Use ClosestPoint to determine if point is inside collider
+        // If the closest point on the collider equals the sample point, the point is inside
+        Vector3 closestPoint = m_Collider.ClosestPoint(point);
+        
+        // Small epsilon for floating point comparison
+        return Vector3.Distance(closestPoint, point) < 0.001f;
     }
 
     /// <summary>
