@@ -14,6 +14,9 @@ public class XRPaintInteractor : MonoBehaviour
     [SerializeField]
     [Tooltip("Paint point component that represents where paint will spawn. Should be a child object positioned by another system.")]
     PaintPoint m_PaintPoint;
+    [SerializeField]
+    [Tooltip("Haptics manager component that handles vibration feedback. Should be a child object positioned by another system.")]
+    HapticsManager m_HapticsManager;
 
     /// <summary>
     /// Paint point component that represents where paint will spawn.
@@ -563,6 +566,8 @@ public class XRPaintInteractor : MonoBehaviour
         m_CurrentColorIndex = (m_CurrentColorIndex + 1) % m_LineColorPresets.Length;
         m_LineColor = m_LineColorPresets[m_CurrentColorIndex];
         UpdatePaintPointIndicatorColor();
+
+        m_HapticsManager.PlayColorHaptic(m_CurrentColorIndex);
 
         Debug.Log($"[XRPaintInteractor] Cycled to color preset {m_CurrentColorIndex + 1}/{m_LineColorPresets.Length}: {m_LineColor}");
     }
