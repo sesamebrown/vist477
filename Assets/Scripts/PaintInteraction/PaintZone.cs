@@ -24,12 +24,12 @@ public class PaintZone : MonoBehaviour
     [SerializeField]
     [Tooltip("Percentage of zone volume that must be filled to complete (0-1).")]
     [Range(0f, 1f)]
-    float m_CompletionThreshold = 0.8f;
+    float m_CompletionThreshold = 0.3f;
 
     [SerializeField]
     [Tooltip("Resolution for coverage calculation. Higher = more accurate but slower.")]
     [Range(5, 50)]
-    int m_CoverageResolution = 20;
+    int m_CoverageResolution = 10;
 
     [Header("Visual Feedback")]
     [SerializeField]
@@ -538,7 +538,7 @@ public class PaintZone : MonoBehaviour
             // Show completion percentage as text
             #if UNITY_EDITOR
             var style = new UnityEngine.GUIStyle();
-            style.normal.textColor = m_Completed ? Color.green : Color.yellow;
+            style.normal.textColor = m_Completed ? Color.green : Color.white;
             style.fontSize = 14;
             string label = m_Completed ? "COMPLETED" : $"Coverage: {m_CompletionAmount:P1}\nThreshold: {m_CompletionThreshold:P1}\nLines: {m_TrackedLines.Count}";
             UnityEditor.Handles.Label(col.bounds.center + Vector3.up * (col.bounds.size.y * 0.5f + 0.1f), label, style);
