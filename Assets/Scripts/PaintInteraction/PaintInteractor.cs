@@ -431,7 +431,7 @@ public class XRPaintInteractor : MonoBehaviour
         lineObject.transform.rotation = m_PaintPoint.transform.rotation * Quaternion.Euler(m_LineOrientationOffset);
 
         m_CurrentLine = lineObject.AddComponent<PaintLine>();
-        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments);
+        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments, this);
 
         // Add initial point
         m_CurrentLine.AddPoint(m_LastPaintPosition);

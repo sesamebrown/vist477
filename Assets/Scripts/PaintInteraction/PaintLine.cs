@@ -17,6 +17,7 @@ public class PaintLine : MonoBehaviour
     Color m_LineColor;
     bool m_GenerateCollider = true;
     GameObject m_ColliderContainer;
+    XRPaintInteractor m_Creator; // The interactor (controller) that created this line
 
     /// <summary>
     /// The LineRenderer component used to visualize this paint line.
@@ -38,6 +39,11 @@ public class PaintLine : MonoBehaviour
     /// </summary>
     public Color lineColor => m_LineColor;
 
+    /// <summary>
+    /// The XRPaintInteractor (controller) that created this paint line.
+    /// </summary>
+    public XRPaintInteractor creator => m_Creator;
+
     void Awake()
     {
         m_LineRenderer = GetComponent<LineRenderer>();
@@ -51,7 +57,19 @@ public class PaintLine : MonoBehaviour
     /// <param name="width">Width of the line.</param>
     public void Initialize(Material material, Color color, float width)
     {
-        Initialize(material, color, width, false, 0);
+        Initialize(material, color, width, false, 0, null);
+    }
+
+    /// <summary>
+    /// Initializes the paint line with specified visual properties and creator reference.
+    /// </summary>
+    /// <param name="material">Material to use for the line.</param>
+    /// <param name="color">Color of the line.</param>
+    /// <param name="width">Width of the line.</param>
+    /// <param name="creator">The XRPaintInteractor that created this line.</param>
+    public void Initialize(Material material, Color color, float width, XRPaintInteractor creator)
+    {
+        Initialize(material, color, width, false, 0, creator);
     }
 
     /// <summary>
@@ -62,7 +80,8 @@ public class PaintLine : MonoBehaviour
     /// <param name="width">Width of the line.</param>
     /// <param name="useSmoothing">Whether to interpolate between points for smoother curves.</param>
     /// <param name="smoothingSegments">Number of interpolated points between input points.</param>
-    public void Initialize(Material material, Color color, float width, bool useSmoothing, int smoothingSegments)
+    /// <param name="creator">The XRPaintInteractor that created this line.</param>
+    public void Initialize(Material material, Color color, float width, bool useSmoothing, int smoothingSegments, XRPaintInteractor creator = null)
     {
         if (m_LineRenderer == null)
             m_LineRenderer = GetComponent<LineRenderer>();
@@ -70,6 +89,7 @@ public class PaintLine : MonoBehaviour
         m_UseSmoothing = useSmoothing;
         m_SmoothingSegments = smoothingSegments;
         m_LineColor = color;
+        m_Creator = creator;
 
         Debug.Log($"[PaintLine] Initialized {gameObject.name} with color: {m_LineColor}, width: {width}");
 

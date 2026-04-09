@@ -11,6 +11,10 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MeshRenderer))]
 public class PaintZone : MonoBehaviour
 {
+    [SerializeField]
+    PaintGameManager m_GameManager;
+    HapticsManager m_HapticsManager;
+
     [Header("Zone Configuration")]
     [SerializeField]
     [Tooltip("The correct color required to fill this zone.")]
@@ -268,7 +272,7 @@ public class PaintZone : MonoBehaviour
             // Only flash on initial check, not on finalization
             if (isInitialCheck)
             {
-                OnPaintWithIncorrectColor();
+                OnPaintWithIncorrectColor(paintLine);
             }
         }
         else
@@ -480,7 +484,8 @@ public class PaintZone : MonoBehaviour
     /// <summary>
     /// Called when painting with incorrect color is detected.
     /// </summary>
-    void OnPaintWithIncorrectColor()
+    /// <param name="paintLine">The paint line with incorrect color (used to determine which controller to send haptics to).</param>
+    void OnPaintWithIncorrectColor(PaintLine paintLine = null)
     {
         if (m_EnableDebugLogs)
             Debug.Log($"[PaintZone] OnPaintWithIncorrectColor called for zone {gameObject.name}");
@@ -504,6 +509,37 @@ public class PaintZone : MonoBehaviour
         // Invoke event
         m_OnIncorrectColorDetected?.Invoke();
 
+        // Trigger haptics on the specific controller that painted
+        if (paintLine != null && paintLine.creator != null)
+        {
+            // Get the HapticsManager from the controller that created this paint line
+            HapticsManager controllerHaptics = paintLine.creator.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>();
+            if (controllerHaptics != null)
+            {
+                controllerHaptics.WrongColorHaptic();
+                if (m_EnableDebugLogs)
+                    Debug.Log($"[PaintZone] Triggered wrong color haptics on controller: {paintLine.creator.gameObject.name}");
+            }
+            else if (m_EnableDebugLogs)
+            {
+                Debug.LogWarning($"[PaintZone] No HapticsManager found on controller {paintLine.creator.gameObject.name}");
+            }
+        }
+        else
+        {
+            // Fallback to zone's HapticsManager if paint line doesn't have creator info
+            if (m_HapticsManager != null)
+            {
+                m_HapticsManager.WrongColorHaptic();
+                if (m_EnableDebugLogs)
+                    Debug.Log($"[PaintZone] Using fallback HapticsManager (paint line had no creator reference)");
+            }
+            else if (m_EnableDebugLogs)
+            {
+                Debug.LogWarning($"[PaintZone] No HapticsManager available for haptic feedback");
+            }
+        }
+
         Debug.Log($"[PaintZone] Incorrect color detected in zone {gameObject.name}");
     }
 
@@ -519,6 +555,9 @@ public class PaintZone : MonoBehaviour
         {
             m_MeshRenderer.enabled = false;
         }
+
+        // Activate next zone
+        m_GameManager.AddNextPaintZone();
 
         // Invoke event
         m_OnCompleted?.Invoke();
