@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - Ground
   - Wall
+  - Controller
   layers:
   - Default
   - TransparentFX

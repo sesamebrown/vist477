@@ -76,9 +76,90 @@ MonoBehaviour:
     m_ManualQueueWasCompletedThisFrame: 0
     m_ManualQueueValue: 0
     m_ManualQueueTargetFrame: 0
+  m_CycleSizeInput:
+    m_InputSourceMode: 2
+    m_InputActionPerformed:
+      m_Name: Cycle Size
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: cb11e047-9afc-4d4c-a9b6-016729e60c78
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionValue:
+      m_Name: Cycle Size Value
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: af07d653-b094-4d51-be1c-b87d31d1ecad
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReferencePerformed: {fileID: 0}
+    m_InputActionReferenceValue: {fileID: 0}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualPerformed: 0
+    m_ManualValue: 0
+    m_ManualQueuePerformed: 0
+    m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
+    m_ManualQueueValue: 0
+    m_ManualQueueTargetFrame: 0
+  m_CycleColorInput:
+    m_InputSourceMode: 2
+    m_InputActionPerformed:
+      m_Name: Cycle Color
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 091c76b4-9382-4d45-9237-c9a92dfd4864
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionValue:
+      m_Name: Cycle Color Value
+      m_Type: 0
+      m_ExpectedControlType: Axis
+      m_Id: b0172b46-ddd7-411b-9d17-97ba08f1641d
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_InputActionReferencePerformed: {fileID: 0}
+    m_InputActionReferenceValue: {fileID: 0}
+    m_ObjectReferenceObject: {fileID: 0}
+    m_ManualPerformed: 0
+    m_ManualValue: 0
+    m_ManualQueuePerformed: 0
+    m_ManualQueueWasPerformedThisFrame: 0
+    m_ManualQueueWasCompletedThisFrame: 0
+    m_ManualQueueValue: 0
+    m_ManualQueueTargetFrame: 0
+  m_LineSizePresets:
+  - 0.002
+  - 0.005
+  - 0.01
+  - 0.02
+  - 0.05
+  m_LineColorPresets:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  - {r: 1, g: 0, b: 1, a: 1}
+  m_CurrentSizeIndex: 1
+  m_CurrentColorIndex: 0
   m_MinPointDistance: 0.01
+  m_AdaptiveSampling: 1
+  m_MaxPointDistance: 0.02
+  m_SmoothLines: 1
+  m_AverageInputPoints: 1
+  m_InputAveragingWindow: 3
+  m_SmoothingSegments: 3
   m_LineWidth: 0.005
   m_LineColor: {r: 0, g: 0, b: 0, a: 1}
+  m_LineOrientationOffset: {x: 0, y: 0, z: 90}
   m_LineMaterial: {fileID: 0}
   m_LinesParent: {fileID: 0}
 --- !u!1 &4291606901891571094
