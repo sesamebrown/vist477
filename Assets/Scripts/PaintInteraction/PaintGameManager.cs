@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class PaintGameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    PaintZone[] m_PaintZones;
+    int m_CurrentZoneIndex = 0;
+    private void Start()
     {
-        
+        // Deactivate all paint zones at the start
+        foreach (var zone in m_PaintZones)
+        {
+            zone.gameObject.SetActive(false);
+        }
+        AddNextPaintZone(); // Activate the first zone
     }
-
-    // Update is called once per frame
-    void Update()
+    public void AddNextPaintZone()
     {
-        
+        if (m_CurrentZoneIndex < m_PaintZones.Length)
+        {
+            m_PaintZones[m_CurrentZoneIndex].gameObject.SetActive(true);
+            m_CurrentZoneIndex++;
+        }
     }
 }

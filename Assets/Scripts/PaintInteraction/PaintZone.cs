@@ -12,6 +12,7 @@ using UnityEngine.Events;
 public class PaintZone : MonoBehaviour
 {
     [SerializeField]
+    PaintGameManager m_GameManager;
     HapticsManager m_HapticsManager;
 
     [Header("Zone Configuration")]
@@ -554,6 +555,9 @@ public class PaintZone : MonoBehaviour
         {
             m_MeshRenderer.enabled = false;
         }
+
+        // Activate next zone
+        m_GameManager.AddNextPaintZone();
 
         // Invoke event
         m_OnCompleted?.Invoke();
