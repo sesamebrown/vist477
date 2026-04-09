@@ -190,7 +190,7 @@ public class PaintZone : MonoBehaviour
             if (m_EnableDebugLogs)
                 Debug.Log($"[PaintZone] Controller detected entering zone: {other.gameObject.name}");
             
-            gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
+            other.gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
 
             m_OnControllerEntered?.Invoke();
         }
