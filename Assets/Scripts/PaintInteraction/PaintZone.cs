@@ -39,6 +39,21 @@ public class PaintZone : MonoBehaviour
     [Range(5, 50)]
     int m_CoverageResolution = 10;
 
+    [Header("Plane Constraint")]
+    [SerializeField]
+    [Tooltip("If true, paint lines created in this zone will be constrained to a specific plane.")]
+    bool m_ConstrainToPlane = false;
+
+    [SerializeField]
+    [Tooltip("The axis of the zone's transform to use as the plane normal (Forward=Z, Up=Y, Right=X).")]
+    PlaneAxis m_PlaneNormalAxis = PlaneAxis.Forward;
+
+    [SerializeField]
+    [Tooltip("Offset distance along the plane normal from the zone's center.")]
+    float m_PlaneOffset = 0f;
+
+    public enum PlaneAxis { Forward, Up, Right }
+
     [Header("Visual Feedback")]
     [SerializeField]
     [Tooltip("Hide the zone's mesh renderer when completed.")]
@@ -73,6 +88,7 @@ public class PaintZone : MonoBehaviour
     bool m_Completed = false;
     HashSet<PaintLine> m_TrackedLines = new();
     HashSet<PaintLine> m_AllDetectedLines = new(); // Track all lines to prevent duplicate processing
+    HashSet<XRPaintInteractor> m_ControllersInZone = new(); // Track controllers currently in the zone
     Collider m_Collider;
     MeshRenderer m_MeshRenderer;
     Bounds m_ZoneBounds;
@@ -123,6 +139,30 @@ public class PaintZone : MonoBehaviour
     /// Event invoked when a controller enters the zone (for haptics).
     /// </summary>
     public UnityEvent onControllerEntered => m_OnControllerEntered;
+
+    /// <summary>
+    /// Whether painting should be constrained to a plane in this zone.
+    /// </summary>
+    public bool constrainToPlane => m_ConstrainToPlane;
+
+    /// <summary>
+    /// Gets the constraint plane for this zone.
+    /// Uses local transform axes (respects object rotation).
+    /// </summary>
+    public Plane GetConstraintPlane()
+    {
+        // Get the normal in world space based on local transform axis
+        Vector3 normal = m_PlaneNormalAxis switch
+        {
+            PlaneAxis.Forward => transform.forward,  // Local Z axis in world space
+            PlaneAxis.Up => transform.up,            // Local Y axis in world space
+            PlaneAxis.Right => transform.right,      // Local X axis in world space
+            _ => transform.forward
+        };
+
+        Vector3 pointOnPlane = transform.position + normal * m_PlaneOffset;
+        return new Plane(normal, pointOnPlane);
+    }
 
     void Awake()
     {
@@ -184,13 +224,29 @@ public class PaintZone : MonoBehaviour
         if (m_EnableDebugLogs)
             Debug.Log($"[PaintZone] OnTriggerEnter triggered by {other.gameObject.name} | Layer: {LayerMask.LayerToName(other.gameObject.layer)} ({other.gameObject.layer}) | Tag: {other.gameObject.tag}");
 
-        // Check for controller entry (for haptics)
+        // Check for controller entry (for haptics and plane constraint)
         if ( other.gameObject.CompareTag("Controller") )
         {
             if (m_EnableDebugLogs)
                 Debug.Log($"[PaintZone] Controller detected entering zone: {other.gameObject.name}");
             
             other.gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
+
+            // Get the interactor and track it
+            XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
+            if (interactor != null)
+            {
+                // Add to tracking set
+                m_ControllersInZone.Add(interactor);
+
+                // Set plane constraint if enabled
+                if (m_ConstrainToPlane)
+                {
+                    interactor.SetActivePaintZone(this);
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Set plane constraint for controller: {other.gameObject.name}");
+                }
+            }
 
             m_OnControllerEntered?.Invoke();
         }
@@ -208,6 +264,39 @@ public class PaintZone : MonoBehaviour
 
         // Process the paint line
         ProcessPaintLine(paintLine);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (m_EnableDebugLogs)
+            Debug.Log($"[PaintZone] OnTriggerExit triggered by {other.gameObject.name}");
+
+        // Handle controller exiting the zone
+        if (other.gameObject.CompareTag("PaintNib"))
+        {
+            XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
+            if (interactor != null)
+            {
+                // Remove from tracking set
+                m_ControllersInZone.Remove(interactor);
+
+                // End any active paint stroke - prevents painting outside zones when all zones not yet complete
+                if (interactor.isPainting)
+                {
+                    interactor.EndPaintStroke();
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Force-ended paint stroke as controller exited zone: {other.gameObject.name}");
+                }
+
+                // Clear plane constraint
+                if (m_ConstrainToPlane)
+                {
+                    interactor.ClearActivePaintZone(this);
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Cleared plane constraint for controller: {other.gameObject.name}");
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -471,6 +560,15 @@ public class PaintZone : MonoBehaviour
     }
 
     /// <summary>
+    /// Checks if the provided color matches the zone's required color within tolerance.
+    /// Public method for external validation (e.g., paint interactor checking before creating lines).
+    /// </summary>
+    public bool IsColorCorrect(Color color)
+    {
+        return ColorsMatch(color, m_CorrectColor, m_ColorTolerance);
+    }
+
+    /// <summary>
     /// Compares two colors with a tolerance value.
     /// </summary>
     bool ColorsMatch(Color a, Color b, float tolerance)
@@ -557,6 +655,17 @@ public class PaintZone : MonoBehaviour
     {
         m_Completed = true;
 
+        // End all active paint strokes in this zone
+        foreach (var interactor in m_ControllersInZone)
+        {
+            if (interactor != null && interactor.isPainting)
+            {
+                interactor.EndPaintStroke();
+                if (m_EnableDebugLogs)
+                    Debug.Log($"[PaintZone] Ended paint stroke on zone completion for: {interactor.gameObject.name}");
+            }
+        }
+
         // Hide mesh if configured
         if (m_HideWhenComplete && m_MeshRenderer != null)
         {
@@ -592,6 +701,7 @@ public class PaintZone : MonoBehaviour
         m_CompletionAmount = 0f;
         m_TrackedLines.Clear();
         m_AllDetectedLines.Clear();
+        m_ControllersInZone.Clear();
 
         if (m_MeshRenderer != null)
         {
@@ -604,6 +714,15 @@ public class PaintZone : MonoBehaviour
         }
 
         m_IsFlashing = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Always visualize the constraint plane if enabled (even when not selected)
+        if (m_ConstrainToPlane)
+        {
+            DrawConstraintPlaneGizmo();
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -624,5 +743,63 @@ public class PaintZone : MonoBehaviour
             UnityEditor.Handles.Label(col.bounds.center + Vector3.up * (col.bounds.size.y * 0.5f + 0.1f), label, style);
             #endif
         }
+    }
+
+    void DrawConstraintPlaneGizmo()
+    {
+        #if UNITY_EDITOR
+        Collider col = GetComponent<Collider>();
+        Plane plane = GetConstraintPlane();
+        Vector3 center = plane.ClosestPointOnPlane(transform.position);
+        
+        // Draw a grid on the plane
+        Gizmos.color = new Color(0f, 1f, 1f, 0.8f); // Cyan, more opaque for visibility
+        
+        // Get normal based on local axis (in world space)
+        Vector3 normal = m_PlaneNormalAxis switch
+        {
+            PlaneAxis.Forward => transform.forward,  // Local Z
+            PlaneAxis.Up => transform.up,            // Local Y
+            PlaneAxis.Right => transform.right,      // Local X
+            _ => transform.forward
+        };
+        
+        // Get two perpendicular axes on the plane
+        Vector3 right = Vector3.Cross(normal, Vector3.up);
+        if (right.sqrMagnitude < 0.001f) // If normal is parallel to up, use forward instead
+            right = Vector3.Cross(normal, Vector3.forward);
+        right = right.normalized;
+        
+        Vector3 up = Vector3.Cross(normal, right).normalized;
+        
+        // Use bounds size for plane visualization size
+        float size = col != null ? Mathf.Max(col.bounds.size.x, col.bounds.size.y, col.bounds.size.z) : 1f;
+        
+        // Draw plane grid
+        int gridLines = 8;
+        float step = size / gridLines;
+        for (int i = -gridLines; i <= gridLines; i++)
+        {
+            // Lines along 'right' direction
+            Vector3 start = center + up * (i * step) - right * size;
+            Vector3 end = center + up * (i * step) + right * size;
+            Gizmos.DrawLine(start, end);
+            
+            // Lines along 'up' direction
+            start = center + right * (i * step) - up * size;
+            end = center + right * (i * step) + up * size;
+            Gizmos.DrawLine(start, end);
+        }
+        
+        // Draw normal arrow
+        UnityEditor.Handles.color = Color.cyan;
+        UnityEditor.Handles.ArrowHandleCap(0, center, Quaternion.LookRotation(normal), size * 0.3f, EventType.Repaint);
+        
+        // Draw label for plane
+        var planeStyle = new UnityEngine.GUIStyle();
+        planeStyle.normal.textColor = Color.cyan;
+        planeStyle.fontSize = 12;
+        UnityEditor.Handles.Label(center + normal * (size * 0.35f), $"Constraint Plane\n{m_PlaneNormalAxis} axis (Local)", planeStyle);
+        #endif
     }
 }
