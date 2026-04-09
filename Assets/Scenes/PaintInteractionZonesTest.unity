@@ -728,7 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -2710,7 +2710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.92941177, g: 0.7921569, b: 0.5294118, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -4347,7 +4347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.30980393, g: 0.54509807, b: 0.6901961, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -5504,7 +5504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.81960785, g: 0.6392157, b: 0.40784314, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -6666,7 +6666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -7836,7 +7836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -8648,7 +8648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -10093,7 +10093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.84705883, g: 0.7372549, b: 0.67058825, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -10749,7 +10749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.07058824, g: 0.05882353, b: 0.047058824, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -11634,7 +11634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -12443,7 +12443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.07058824, g: 0.05882353, b: 0.047058824, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -14105,7 +14105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.73333335, g: 0.32941177, b: 0.23529412, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
@@ -15061,7 +15061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PaintZone
   m_CorrectColor: {r: 0.6745098, g: 0.54509807, b: 0.4392157, a: 1}
   m_ColorTolerance: 0.054
-  m_CompletionThreshold: 0.2
+  m_CompletionThreshold: 0.3
   m_CoverageResolution: 10
   m_HideWhenComplete: 1
   m_IncorrectColorFlashColor: {r: 1, g: 0, b: 0, a: 0.5}
