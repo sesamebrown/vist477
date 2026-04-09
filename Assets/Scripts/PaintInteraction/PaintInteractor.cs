@@ -301,6 +301,7 @@ public class XRPaintInteractor : MonoBehaviour
     bool m_PreviousCycleSizePressed;
     bool m_PreviousCycleColorPressed;
     List<Vector3> m_RecentPositions = new List<Vector3>();
+    PaintZone m_ActivePaintZone; // The paint zone this controller is currently inside
 
     /// <summary>
     /// Whether the user is currently painting.
@@ -311,6 +312,38 @@ public class XRPaintInteractor : MonoBehaviour
     /// The current active paint line being drawn, or null if not painting.
     /// </summary>
     public PaintLine currentLine => m_CurrentLine;
+
+    /// <summary>
+    /// Sets the active paint zone for plane constraint.
+    /// </summary>
+    public void SetActivePaintZone(PaintZone zone)
+    {
+        m_ActivePaintZone = zone;
+    }
+
+    /// <summary>
+    /// Clears the active paint zone if it matches the provided zone.
+    /// </summary>
+    public void ClearActivePaintZone(PaintZone zone)
+    {
+        if (m_ActivePaintZone == zone)
+        {
+            m_ActivePaintZone = null;
+        }
+    }
+
+    /// <summary>
+    /// Projects a point onto the active paint zone's constraint plane if one is set.
+    /// </summary>
+    Vector3 ApplyPlaneConstraint(Vector3 point)
+    {
+        if (m_ActivePaintZone != null && m_ActivePaintZone.constrainToPlane)
+        {
+            Plane constraintPlane = m_ActivePaintZone.GetConstraintPlane();
+            return constraintPlane.ClosestPointOnPlane(point);
+        }
+        return point;
+    }
 
     void Awake()
     {
@@ -433,8 +466,9 @@ public class XRPaintInteractor : MonoBehaviour
         m_CurrentLine = lineObject.AddComponent<PaintLine>();
         m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments, this);
 
-        // Add initial point
-        m_CurrentLine.AddPoint(m_LastPaintPosition);
+        // Add initial point (with plane constraint if in a zone)
+        Vector3 constrainedPosition = ApplyPlaneConstraint(m_LastPaintPosition);
+        m_CurrentLine.AddPoint(constrainedPosition);
     }
 
     void ContinuePaintStroke()
@@ -470,6 +504,9 @@ public class XRPaintInteractor : MonoBehaviour
                 positionToAdd = sum / m_RecentPositions.Count;
             }
 
+            // Apply plane constraint to the position if in a zone
+            positionToAdd = ApplyPlaneConstraint(positionToAdd);
+
             // Adaptive sampling: if moving fast, add intermediate points
             if (m_AdaptiveSampling && distanceMoved > m_MaxPointDistance)
             {
@@ -479,8 +516,10 @@ public class XRPaintInteractor : MonoBehaviour
                 // Add interpolated points between last and current position
                 for (int i = 1; i <= numIntermediatePoints; i++)
                 {
-                    float t = i / (float)(numIntermediatePoints + 1);
+                    float t = (float)i / numIntermediatePoints;
                     Vector3 intermediatePoint = Vector3.Lerp(m_LastPaintPosition, positionToAdd, t);
+                    // Intermediate points also get constrained
+                    intermediatePoint = ApplyPlaneConstraint(intermediatePoint);
                     m_CurrentLine.AddPoint(intermediatePoint);
                 }
             }

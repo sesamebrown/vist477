@@ -3418,6 +3418,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587131158}
     - target: {fileID: 453787718919162365, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453787718919162365, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453787718919162365, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 2
       objectReference: {fileID: 0}
@@ -3447,11 +3455,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.012874603
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.051048823
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3463,15 +3471,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9919456
+      value: 0.99408823
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.12666446
+      value: -0.108576104
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 14.554
+      value: 12.466
       objectReference: {fileID: 0}
     - target: {fileID: 539699701644016912, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -3517,6 +3525,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 2001409753445756121, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2001409753445756121, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2062451102235487078, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3529,6 +3545,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 2133087694210578798, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133087694210578798, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2190648546789880341, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3537,6 +3561,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 2373073641384576583, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373073641384576583, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2373073641384576583, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 5
@@ -3570,6 +3602,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587131158}
     - target: {fileID: 3528224157262865801, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528224157262865801, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528224157262865801, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 3
       objectReference: {fileID: 0}
@@ -3585,6 +3625,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 3709295787363281073, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3709295787363281073, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3709295787363281073, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 6
@@ -3621,10 +3669,26 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 4451136976353466675, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451136976353466675, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4467095311165287448, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 4467095311165287448, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4467095311165287448, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4467095311165287448, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 4
@@ -3650,6 +3714,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587131158}
     - target: {fileID: 5041008581818719806, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041008581818719806, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5041008581818719806, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 7
       objectReference: {fileID: 0}
@@ -3673,6 +3745,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 5349886216517835865, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349886216517835865, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5396838408665984800, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_Name
       value: PaintablePearlGirl
@@ -3702,6 +3782,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587131158}
     - target: {fileID: 5925547563651145841, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925547563651145841, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925547563651145841, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 5
       objectReference: {fileID: 0}
@@ -3709,6 +3797,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 6575964514302932101, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6575964514302932101, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6575964514302932101, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 5
@@ -3758,6 +3854,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 587131158}
     - target: {fileID: 7978877084001830322, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978877084001830322, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7978877084001830322, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 7
       objectReference: {fileID: 0}
@@ -3773,6 +3877,14 @@ PrefabInstance:
       propertyPath: m_GameManager
       value: 
       objectReference: {fileID: 587131158}
+    - target: {fileID: 8739570140022789117, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_PlaneNormalAxis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739570140022789117, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
+      propertyPath: m_ConstrainToPlane
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8739570140022789117, guid: e840b952d4c6c6042af2233d0ecdff0c, type: 3}
       propertyPath: m_HapticsColorIndex
       value: 1
