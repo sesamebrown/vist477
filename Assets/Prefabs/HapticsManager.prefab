@@ -44,10 +44,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9cf4467db0a4d708121dea2c22809e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  totalNumColors: 7
-  m_HapticIntensity: 0.5
+  totalNumColors: 8
+  m_HapticStrengthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_MinHapticIntensity: 0.2
+  m_MaxHapticIntensity: 0.8
   m_PulseDuration: 0.08
   m_TotalPlayDuration: 2
-  m_PulseInterval: 0.08
+  m_MinImpulsesPerSecond: 3
+  m_MaxImpulsesPerSecond: 15
   m_MinFrequency: 0.2
   m_MaxFrequency: 1
