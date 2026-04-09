@@ -30,9 +30,14 @@ public class HapticsManager : MonoBehaviour
     float m_PulseDuration = 0.08f;
 
     [SerializeField]
-    [Tooltip("Total time in seconds to sustain the color haptic.")]
+    [Tooltip("Minimum total time in seconds for sustained color haptics at the lowest index.")]
     [Min(0f)]
-    float m_TotalPlayDuration = 2f;
+    float m_MinPlayDuration = 0.8f;
+
+    [SerializeField]
+    [Tooltip("Maximum total time in seconds for sustained color haptics at the highest index.")]
+    [Min(0f)]
+    float m_MaxPlayDuration = 2f;
 
     [SerializeField]
     [Tooltip("Minimum impulses per second used for the lowest color index.")]
@@ -54,10 +59,32 @@ public class HapticsManager : MonoBehaviour
     [Range(0f, 1f)]
     float m_MaxFrequency = 1f;
 
+    [Header("Wrong Color Haptics")]
+    [SerializeField]
+    [Tooltip("Total buzz time when WrongColorHaptic is triggered.")]
+    [Min(0f)]
+    float m_WrongColorDuration = 3f;
+
+    [SerializeField]
+    [Tooltip("Pulse duration for wrong color buzz.")]
+    [Min(0f)]
+    float m_WrongColorPulseDuration = 0.08f;
+
+    [SerializeField]
+    [Tooltip("Pulse rate for wrong color buzz.")]
+    [Min(0.01f)]
+    float m_WrongColorImpulsesPerSecond = 20f;
+
+    [SerializeField]
+    [Tooltip("Frequency used for wrong color buzz.")]
+    [Range(0f, 1f)]
+    float m_WrongColorFrequency = 1f;
+
     SimpleHapticFeedback m_HapticFeedback;
     HapticImpulsePlayer m_HapticPlayer;
     bool m_WarnedMissingHaptics;
     Coroutine m_ColorHapticRoutine;
+    Coroutine m_WrongColorHapticRoutine;
 
     void Awake()
     {
@@ -88,16 +115,43 @@ public class HapticsManager : MonoBehaviour
         float frequency = Mathf.Lerp(minFrequency, maxFrequency, strength);
         float intensity = Mathf.Lerp(Mathf.Min(m_MinHapticIntensity, m_MaxHapticIntensity), Mathf.Max(m_MinHapticIntensity, m_MaxHapticIntensity), strength);
         float impulsesPerSecond = Mathf.Lerp(Mathf.Min(m_MinImpulsesPerSecond, m_MaxImpulsesPerSecond), Mathf.Max(m_MinImpulsesPerSecond, m_MaxImpulsesPerSecond), strength);
+        float playDuration = Mathf.Lerp(Mathf.Min(m_MinPlayDuration, m_MaxPlayDuration), Mathf.Max(m_MinPlayDuration, m_MaxPlayDuration), strength);
+
+        if (m_WrongColorHapticRoutine != null)
+        {
+            StopCoroutine(m_WrongColorHapticRoutine);
+            m_WrongColorHapticRoutine = null;
+        }
 
         if (m_ColorHapticRoutine != null)
             StopCoroutine(m_ColorHapticRoutine);
 
-        m_ColorHapticRoutine = StartCoroutine(PlayColorHapticRoutine(frequency, intensity, impulsesPerSecond));
+        m_ColorHapticRoutine = StartCoroutine(PlayColorHapticRoutine(frequency, intensity, impulsesPerSecond, playDuration));
     }
 
-    IEnumerator PlayColorHapticRoutine(float frequency, float intensity, float impulsesPerSecond)
+    /// <summary>
+    /// Plays a strong buzzing haptic intended for wrong color feedback.
+    /// </summary>
+    public void WrongColorHaptic()
     {
-        if (m_TotalPlayDuration <= 0f)
+        if (!ResolveHapticPlayer())
+            return;
+
+        if (m_ColorHapticRoutine != null)
+        {
+            StopCoroutine(m_ColorHapticRoutine);
+            m_ColorHapticRoutine = null;
+        }
+
+        if (m_WrongColorHapticRoutine != null)
+            StopCoroutine(m_WrongColorHapticRoutine);
+
+        m_WrongColorHapticRoutine = StartCoroutine(PlayWrongColorHapticRoutine());
+    }
+
+    IEnumerator PlayColorHapticRoutine(float frequency, float intensity, float impulsesPerSecond, float totalPlayDuration)
+    {
+        if (totalPlayDuration <= 0f)
         {
             m_HapticPlayer.SendHapticImpulse(intensity, m_PulseDuration, frequency);
             m_ColorHapticRoutine = null;
@@ -107,7 +161,7 @@ public class HapticsManager : MonoBehaviour
         float elapsed = 0f;
         float pulseInterval = 1f / Mathf.Max(0.01f, impulsesPerSecond);
 
-        while (elapsed < m_TotalPlayDuration)
+        while (elapsed < totalPlayDuration)
         {
             m_HapticPlayer.SendHapticImpulse(intensity, m_PulseDuration, frequency);
             yield return new WaitForSeconds(pulseInterval);
@@ -115,6 +169,32 @@ public class HapticsManager : MonoBehaviour
         }
 
         m_ColorHapticRoutine = null;
+    }
+
+    IEnumerator PlayWrongColorHapticRoutine()
+    {
+        float intensity = 1f;
+        float frequency = Mathf.Clamp01(m_WrongColorFrequency);
+        float totalDuration = Mathf.Max(0f, m_WrongColorDuration);
+        float pulseDuration = Mathf.Max(0f, m_WrongColorPulseDuration);
+        float pulseInterval = 1f / Mathf.Max(0.01f, m_WrongColorImpulsesPerSecond);
+
+        if (totalDuration <= 0f)
+        {
+            m_HapticPlayer.SendHapticImpulse(intensity, pulseDuration, frequency);
+            m_WrongColorHapticRoutine = null;
+            yield break;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < totalDuration)
+        {
+            m_HapticPlayer.SendHapticImpulse(intensity, pulseDuration, frequency);
+            yield return new WaitForSeconds(pulseInterval);
+            elapsed += pulseInterval;
+        }
+
+        m_WrongColorHapticRoutine = null;
     }
 
     bool ResolveHapticPlayer()
