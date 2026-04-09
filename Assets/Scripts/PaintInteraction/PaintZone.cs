@@ -88,6 +88,7 @@ public class PaintZone : MonoBehaviour
     bool m_Completed = false;
     HashSet<PaintLine> m_TrackedLines = new();
     HashSet<PaintLine> m_AllDetectedLines = new(); // Track all lines to prevent duplicate processing
+    HashSet<XRPaintInteractor> m_ControllersInZone = new(); // Track controllers currently in the zone
     Collider m_Collider;
     MeshRenderer m_MeshRenderer;
     Bounds m_ZoneBounds;
@@ -231,11 +232,15 @@ public class PaintZone : MonoBehaviour
             
             other.gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
 
-            // Set plane constraint if enabled
-            if (m_ConstrainToPlane)
+            // Get the interactor and track it
+            XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
+            if (interactor != null)
             {
-                XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
-                if (interactor != null)
+                // Add to tracking set
+                m_ControllersInZone.Add(interactor);
+
+                // Set plane constraint if enabled
+                if (m_ConstrainToPlane)
                 {
                     interactor.SetActivePaintZone(this);
                     if (m_EnableDebugLogs)
@@ -266,15 +271,30 @@ public class PaintZone : MonoBehaviour
         if (m_EnableDebugLogs)
             Debug.Log($"[PaintZone] OnTriggerExit triggered by {other.gameObject.name}");
 
-        // Clear plane constraint when controller exits
-        if (other.gameObject.CompareTag("Controller") && m_ConstrainToPlane)
+        // Handle controller exiting the zone
+        if (other.gameObject.CompareTag("PaintNib"))
         {
             XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
             if (interactor != null)
             {
-                interactor.ClearActivePaintZone(this);
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Cleared plane constraint for controller: {other.gameObject.name}");
+                // Remove from tracking set
+                m_ControllersInZone.Remove(interactor);
+
+                // End any active paint stroke - prevents painting outside zones when all zones not yet complete
+                if (interactor.isPainting)
+                {
+                    interactor.EndPaintStroke();
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Force-ended paint stroke as controller exited zone: {other.gameObject.name}");
+                }
+
+                // Clear plane constraint
+                if (m_ConstrainToPlane)
+                {
+                    interactor.ClearActivePaintZone(this);
+                    if (m_EnableDebugLogs)
+                        Debug.Log($"[PaintZone] Cleared plane constraint for controller: {other.gameObject.name}");
+                }
             }
         }
     }
@@ -540,6 +560,15 @@ public class PaintZone : MonoBehaviour
     }
 
     /// <summary>
+    /// Checks if the provided color matches the zone's required color within tolerance.
+    /// Public method for external validation (e.g., paint interactor checking before creating lines).
+    /// </summary>
+    public bool IsColorCorrect(Color color)
+    {
+        return ColorsMatch(color, m_CorrectColor, m_ColorTolerance);
+    }
+
+    /// <summary>
     /// Compares two colors with a tolerance value.
     /// </summary>
     bool ColorsMatch(Color a, Color b, float tolerance)
@@ -626,6 +655,17 @@ public class PaintZone : MonoBehaviour
     {
         m_Completed = true;
 
+        // End all active paint strokes in this zone
+        foreach (var interactor in m_ControllersInZone)
+        {
+            if (interactor != null && interactor.isPainting)
+            {
+                interactor.EndPaintStroke();
+                if (m_EnableDebugLogs)
+                    Debug.Log($"[PaintZone] Ended paint stroke on zone completion for: {interactor.gameObject.name}");
+            }
+        }
+
         // Hide mesh if configured
         if (m_HideWhenComplete && m_MeshRenderer != null)
         {
@@ -661,6 +701,7 @@ public class PaintZone : MonoBehaviour
         m_CompletionAmount = 0f;
         m_TrackedLines.Clear();
         m_AllDetectedLines.Clear();
+        m_ControllersInZone.Clear();
 
         if (m_MeshRenderer != null)
         {

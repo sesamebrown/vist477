@@ -18,6 +18,10 @@ public class XRPaintInteractor : MonoBehaviour
     [Tooltip("Haptics manager component that handles vibration feedback. Should be a child object positioned by another system.")]
     HapticsManager m_HapticsManager;
 
+    [SerializeField]
+    [Tooltip("Reference to the paint game manager to check if all zones are completed. If null, painting is always allowed.")]
+    PaintGameManager m_PaintGameManager;
+
     /// <summary>
     /// Paint point component that represents where paint will spawn.
     /// This should be positioned by external systems (e.g., controller tracking, hand tracking).
@@ -445,6 +449,20 @@ public class XRPaintInteractor : MonoBehaviour
 
     void StartPaintStroke()
     {
+        // Check if painting is allowed based on game state
+        if (!IsPaintingAllowed())
+        {
+            // Not allowed to paint here - trigger haptic feedback if wrong color in zone
+            if (m_ActivePaintZone != null && !m_ActivePaintZone.IsColorCorrect(m_LineColor))
+            {
+                if (m_HapticsManager != null)
+                {
+                    m_HapticsManager.WrongColorHaptic();
+                }
+            }
+            return;
+        }
+
         m_IsPainting = true;
         m_LastPaintPosition = m_PaintPoint.transform.position;
         m_RecentPositions.Clear();
@@ -529,8 +547,15 @@ public class XRPaintInteractor : MonoBehaviour
         }
     }
 
-    void EndPaintStroke()
+    /// <summary>
+    /// Ends the current paint stroke. Can be called externally (e.g., when controller exits zone).
+    /// Safe to call even if not currently painting.
+    /// </summary>
+    public void EndPaintStroke()
     {
+        if (!m_IsPainting)
+            return;
+
         m_IsPainting = false;
         
         // Show indicator after painting
@@ -631,6 +656,27 @@ public class XRPaintInteractor : MonoBehaviour
         {
             m_PaintPoint.indicatorColor = m_LineColor;
         }
+    }
+
+    /// <summary>
+    /// Checks if painting is currently allowed based on game state and zone restrictions.
+    /// </summary>
+    bool IsPaintingAllowed()
+    {
+        // If no game manager, always allow painting (backward compatibility)
+        if (m_PaintGameManager == null)
+            return true;
+
+        // If all zones are completed, allow free painting anywhere
+        if (m_PaintGameManager.allZonesCompleted)
+            return true;
+
+        // Zones are still active - must be inside a zone to paint
+        if (m_ActivePaintZone == null)
+            return false;
+
+        // Inside a zone - check if color is correct
+        return m_ActivePaintZone.IsColorCorrect(m_LineColor);
     }
 
     /// <summary>

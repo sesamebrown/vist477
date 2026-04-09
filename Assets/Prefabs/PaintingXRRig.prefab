@@ -2940,6 +2940,10 @@ PrefabInstance:
       value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_PaintGameManager
+      value: 
+      objectReference: {fileID: 3090624681753369028}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothingSegments
       value: 6
       objectReference: {fileID: 0}
@@ -3344,6 +3348,10 @@ PrefabInstance:
       propertyPath: m_MinPointDistance
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
+      propertyPath: m_PaintGameManager
+      value: 
+      objectReference: {fileID: 3090624681753369028}
     - target: {fileID: 4354719028002955434, guid: 6cdbcb021129efc4788a107529f7432f, type: 3}
       propertyPath: m_SmoothingSegments
       value: 6
