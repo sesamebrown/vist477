@@ -14,6 +14,9 @@ public class PaintLine : MonoBehaviour
     bool m_IsFinalized;
     bool m_UseSmoothing;
     int m_SmoothingSegments;
+    Color m_LineColor;
+    bool m_GenerateCollider = true;
+    GameObject m_ColliderContainer;
 
     /// <summary>
     /// The LineRenderer component used to visualize this paint line.
@@ -29,6 +32,11 @@ public class PaintLine : MonoBehaviour
     /// Whether this paint line has been finalized and is no longer accepting new points.
     /// </summary>
     public bool isFinalized => m_IsFinalized;
+
+    /// <summary>
+    /// The color of this paint line.
+    /// </summary>
+    public Color lineColor => m_LineColor;
 
     void Awake()
     {
@@ -61,6 +69,9 @@ public class PaintLine : MonoBehaviour
 
         m_UseSmoothing = useSmoothing;
         m_SmoothingSegments = smoothingSegments;
+        m_LineColor = color;
+
+        Debug.Log($"[PaintLine] Initialized {gameObject.name} with color: {m_LineColor}, width: {width}");
 
         // Configure line renderer
         m_LineRenderer.material = material;
@@ -108,6 +119,12 @@ public class PaintLine : MonoBehaviour
         {
             m_Points.Add(position);
             UpdateLineRenderer();
+        }
+
+        // Check for zone overlap on first point (for immediate feedback)
+        if (m_InputPoints.Count == 1)
+        {
+            CheckInitialZoneOverlap(position);
         }
     }
 
@@ -180,6 +197,28 @@ public class PaintLine : MonoBehaviour
         {
             Debug.Log($"[PaintLine] Destroying line with insufficient points: {m_Points.Count}");
             Destroy(gameObject);
+            return;
+        }
+
+        // Generate colliders for zone detection
+        if (m_GenerateCollider)
+        {
+            GenerateColliders();
+            
+            // Verify colliders were created
+            if (m_ColliderContainer != null)
+            {
+                int actualColliderCount = m_ColliderContainer.GetComponentsInChildren<SphereCollider>().Length;
+                Debug.Log($"[PaintLine] Finalized {gameObject.name} | Collider container has {actualColliderCount} sphere colliders");
+            }
+            else
+            {
+                Debug.LogWarning($"[PaintLine] Finalized {gameObject.name} but collider container is null!");
+            }
+        }
+        else
+        {
+            Debug.Log($"[PaintLine] Finalized {gameObject.name} without generating colliders (m_GenerateCollider = false)");
         }
     }
 
@@ -201,5 +240,173 @@ public class PaintLine : MonoBehaviour
     public Vector3[] GetPoints()
     {
         return m_Points.ToArray();
+    }
+
+    /// <summary>
+    /// Generates sphere colliders along the line for zone detection.
+    /// Creates a container GameObject and adds sphere colliders at intervals.
+    /// </summary>
+    void GenerateColliders()
+    {
+        if (m_Points.Count < 2)
+        {
+            Debug.LogWarning($"[PaintLine] Cannot generate colliders - too few points: {m_Points.Count}");
+            return;
+        }
+
+        // Create container for colliders
+        m_ColliderContainer = new GameObject("LineColliders");
+        m_ColliderContainer.transform.SetParent(transform, false);
+        m_ColliderContainer.transform.localPosition = Vector3.zero;
+        m_ColliderContainer.transform.localRotation = Quaternion.identity;
+
+        // Get line width for collider size
+        float lineWidth = m_LineRenderer != null ? m_LineRenderer.startWidth : 0.01f;
+        float colliderRadius = lineWidth * 0.75f; // Slightly smaller than line width
+
+        // Add sphere colliders at regular intervals
+        // Skip some points to reduce collider count for performance
+        int step = Mathf.Max(1, m_Points.Count / 20); // Aim for ~20 colliders max
+
+        int colliderCount = 0;
+        for (int i = 0; i < m_Points.Count; i += step)
+        {
+            CreateSphereColliderAt(m_Points[i], colliderRadius);
+            colliderCount++;
+        }
+
+        // Always add collider at the last point
+        if ((m_Points.Count - 1) % step != 0)
+        {
+            CreateSphereColliderAt(m_Points[m_Points.Count - 1], colliderRadius);
+            colliderCount++;
+        }
+
+        Debug.Log($"[PaintLine] Generated {colliderCount} colliders for {gameObject.name} (color: {m_LineColor})");
+
+        // Manually check for overlapping PaintZones since OnTriggerEnter
+        // only fires when colliders MOVE into triggers, not when spawned inside
+        NotifyOverlappingPaintZones();
+    }
+
+    /// <summary>
+    /// Creates a sphere collider at the specified world position.
+    /// </summary>
+    void CreateSphereColliderAt(Vector3 worldPosition, float radius)
+    {
+        GameObject colliderObj = new GameObject("LineColliderPoint");
+        colliderObj.transform.SetParent(m_ColliderContainer.transform, false);
+        colliderObj.transform.position = worldPosition;
+        colliderObj.layer = gameObject.layer;
+
+        SphereCollider sphereCollider = colliderObj.AddComponent<SphereCollider>();
+        sphereCollider.radius = radius;
+        sphereCollider.isTrigger = true;
+
+        // Add reference to this PaintLine so the zone can identify the line
+        // The zone will check the parent hierarchy for the PaintLine component
+        PaintLineColliderReference reference = colliderObj.AddComponent<PaintLineColliderReference>();
+        reference.paintLine = this;
+
+        Debug.Log($"[PaintLine] Created collider at {worldPosition} | Radius: {radius} | Layer: {LayerMask.LayerToName(colliderObj.layer)} ({colliderObj.layer}) | IsTrigger: {sphereCollider.isTrigger} | Reference set: {reference.paintLine != null}");
+    }
+
+    /// <summary>
+    /// Manually checks for PaintZones that this line's colliders overlap with.
+    /// Called after colliders are generated since OnTriggerEnter doesn't fire for colliders spawned inside triggers.
+    /// Note: May notify zones already notified in CheckInitialZoneOverlap, but duplicate checking in PaintZone prevents issues.
+    /// </summary>
+    void NotifyOverlappingPaintZones()
+    {
+        if (m_ColliderContainer == null)
+            return;
+
+        SphereCollider[] lineColliders = m_ColliderContainer.GetComponentsInChildren<SphereCollider>();
+        if (lineColliders.Length == 0)
+        {
+            Debug.LogWarning($"[PaintLine] NotifyOverlappingPaintZones found no colliders!");
+            return;
+        }
+
+        // Find all PaintZones in the scene
+        PaintZone[] paintZones = FindObjectsByType<PaintZone>(FindObjectsSortMode.None);
+        Debug.Log($"[PaintLine] Checking {lineColliders.Length} colliders against {paintZones.Length} paint zones");
+
+        foreach (var zone in paintZones)
+        {
+            if (zone == null || !zone.enabled)
+                continue;
+
+            Collider zoneCollider = zone.GetComponent<Collider>();
+            if (zoneCollider == null || !zoneCollider.isTrigger)
+                continue;
+
+            // Check if any of our line colliders overlap this zone
+            bool overlaps = false;
+            foreach (var lineCol in lineColliders)
+            {
+                if (lineCol == null)
+                    continue;
+
+                // Check if line collider bounds intersect zone bounds
+                if (zoneCollider.bounds.Intersects(lineCol.bounds))
+                {
+                    overlaps = true;
+                    Debug.Log($"[PaintLine] Detected overlap between {gameObject.name} and PaintZone {zone.gameObject.name}");
+                    break;
+                }
+            }
+
+            // If we overlap, manually notify the zone
+            if (overlaps)
+            {
+                zone.OnPaintLineCreated(this, isInitialCheck: false); // Line is finalized
+            }
+        }
+    }
+
+    /// <summary>
+    /// Checks if the initial point position is inside any PaintZone and notifies them immediately.
+    /// This provides instant feedback when starting to paint with the wrong color.
+    /// </summary>
+    void CheckInitialZoneOverlap(Vector3 position)
+    {
+        // Find all PaintZones in the scene
+        PaintZone[] paintZones = FindObjectsByType<PaintZone>(FindObjectsSortMode.None);
+        Debug.Log($"[PaintLine] Checking initial point against {paintZones.Length} paint zones");
+
+        foreach (var zone in paintZones)
+        {
+            if (zone == null || !zone.enabled)
+                continue;
+
+            Collider zoneCollider = zone.GetComponent<Collider>();
+            if (zoneCollider == null || !zoneCollider.isTrigger)
+                continue;
+
+            // Check if the point is inside the zone's bounds
+            if (zoneCollider.bounds.Contains(position))
+            {
+                Debug.Log($"[PaintLine] Initial point inside PaintZone {zone.gameObject.name}, notifying for immediate color check");
+                zone.OnPaintLineCreated(this, isInitialCheck: true); // First point - immediate feedback
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Visualize colliders in the scene view for debugging
+        if (m_ColliderContainer != null)
+        {
+            Gizmos.color = new Color(m_LineColor.r, m_LineColor.g, m_LineColor.b, 0.3f);
+            SphereCollider[] colliders = m_ColliderContainer.GetComponentsInChildren<SphereCollider>();
+            foreach (var col in colliders)
+            {
+                if (col != null && col.enabled)
+                {
+                    Gizmos.DrawWireSphere(col.transform.position, col.radius);
+                }
+            }
+        }
     }
 }

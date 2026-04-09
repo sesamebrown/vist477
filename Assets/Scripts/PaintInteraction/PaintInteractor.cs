@@ -52,10 +52,27 @@ public class XRPaintInteractor : MonoBehaviour
         set => m_CycleSizeInput = value;
     }
 
+
+    [SerializeField]
+    [Tooltip("Input to cycle through line color presets. Typically a button like primary button or grip.")]
+    XRInputButtonReader m_CycleColorInput = new XRInputButtonReader("Cycle Color");
+
+    /// <summary>
+    /// Input reader for cycling through line colors.
+    /// </summary>
+    public XRInputButtonReader cycleColorInput
+    {
+        get => m_CycleColorInput;
+        set => m_CycleColorInput = value;
+    }
+
     [Header("Paint Settings")]
     [SerializeField]
     [Tooltip("Preset line widths to cycle through. User can switch between these using the cycle size button.")]
     float[] m_LineSizePresets = new float[] { 0.002f, 0.005f, 0.010f, 0.020f, 0.050f };
+    [SerializeField]
+    [Tooltip("Preset line colors to cycle through. User can switch between these using the cycle color button.")]
+    Color[] m_LineColorPresets = new Color[] { Color.red, Color.green, Color.blue, Color.yellow, Color.magenta };
 
     /// <summary>
     /// Array of preset line widths that users can cycle through.
@@ -64,6 +81,15 @@ public class XRPaintInteractor : MonoBehaviour
     {
         get => m_LineSizePresets;
         set => m_LineSizePresets = value;
+    }
+
+    /// <summary>
+    /// Array of preset line colors that users can cycle through.
+    /// </summary>
+    public Color[] lineColorPresets
+    {
+        get => m_LineColorPresets;
+        set => m_LineColorPresets = value;
     }
 
     [SerializeField]
@@ -83,6 +109,26 @@ public class XRPaintInteractor : MonoBehaviour
             m_CurrentSizeIndex = Mathf.Clamp(value, 0, m_LineSizePresets.Length - 1);
             m_LineWidth = m_LineSizePresets[m_CurrentSizeIndex];
             UpdatePaintPointIndicatorSize();
+        }
+    }
+    
+    [SerializeField]
+    [Tooltip("Index of the currently selected color preset.")]
+    int m_CurrentColorIndex = 0; // Default to first color preset
+
+    /// <summary>
+    /// Index of the currently selected line color preset.
+    /// </summary>
+    public int currentColorIndex
+    {
+        get => m_CurrentColorIndex;
+        set
+        {
+            if (m_LineColorPresets == null || m_LineColorPresets.Length == 0)
+                return;
+            m_CurrentColorIndex = Mathf.Clamp(value, 0, m_LineColorPresets.Length - 1);
+            m_LineColor = m_LineColorPresets[m_CurrentColorIndex];
+            UpdatePaintPointIndicatorColor();
         }
     }
 
@@ -250,6 +296,7 @@ public class XRPaintInteractor : MonoBehaviour
     PaintLine m_CurrentLine;
     Vector3 m_LastPaintPosition;
     bool m_PreviousCycleSizePressed;
+    bool m_PreviousCycleColorPressed;
     List<Vector3> m_RecentPositions = new List<Vector3>();
 
     /// <summary>
@@ -288,6 +335,13 @@ public class XRPaintInteractor : MonoBehaviour
             m_CurrentSizeIndex = Mathf.Clamp(m_CurrentSizeIndex, 0, m_LineSizePresets.Length - 1);
             m_LineWidth = m_LineSizePresets[m_CurrentSizeIndex];
         }
+
+        // Initialize line color from preset
+        if (m_LineColorPresets != null && m_LineColorPresets.Length > 0)
+        {
+            m_CurrentColorIndex = Mathf.Clamp(m_CurrentColorIndex, 0, m_LineColorPresets.Length - 1);
+            m_LineColor = m_LineColorPresets[m_CurrentColorIndex];
+        }
     }
 
     void OnEnable()
@@ -295,6 +349,7 @@ public class XRPaintInteractor : MonoBehaviour
         // Enable input readers
         m_PaintInput?.EnableDirectActionIfModeUsed();
         m_CycleSizeInput?.EnableDirectActionIfModeUsed();
+        m_CycleColorInput?.EnableDirectActionIfModeUsed();
     }
 
     void OnDisable()
@@ -308,6 +363,7 @@ public class XRPaintInteractor : MonoBehaviour
         // Disable input readers
         m_PaintInput?.DisableDirectActionIfModeUsed();
         m_CycleSizeInput?.DisableDirectActionIfModeUsed();
+        m_CycleColorInput?.DisableDirectActionIfModeUsed();
     }
 
     void Update()
@@ -322,6 +378,14 @@ public class XRPaintInteractor : MonoBehaviour
             CycleToNextSize();
         }
         m_PreviousCycleSizePressed = cycleSizePressed;
+
+        // Check for color cycling input (button press)
+        bool cycleColorPressed = m_CycleColorInput.ReadIsPerformed();
+        if (cycleColorPressed && !m_PreviousCycleColorPressed)
+        {
+            CycleToNextColor();
+        }
+        m_PreviousCycleColorPressed = cycleColorPressed;
 
         // Check paint input state
         bool paintInputActive = m_PaintInput.ReadIsPerformed();
@@ -484,6 +548,24 @@ public class XRPaintInteractor : MonoBehaviour
 
         Debug.Log($"[XRPaintInteractor] Cycled to size preset {m_CurrentSizeIndex + 1}/{m_LineSizePresets.Length}: {m_LineWidth:F4}");
     }
+    /// <summary>
+    /// Cycles to the next line size in the presets array.
+    /// Wraps back to the first size after reaching the last.
+    /// </summary>
+    public void CycleToNextColor()
+    {
+        if (m_LineColorPresets == null || m_LineColorPresets.Length == 0)
+        {
+            Debug.LogWarning("[XRPaintInteractor] Cannot cycle color - no presets defined.");
+            return;
+        }
+
+        m_CurrentColorIndex = (m_CurrentColorIndex + 1) % m_LineColorPresets.Length;
+        m_LineColor = m_LineColorPresets[m_CurrentColorIndex];
+        UpdatePaintPointIndicatorColor();
+
+        Debug.Log($"[XRPaintInteractor] Cycled to color preset {m_CurrentColorIndex + 1}/{m_LineColorPresets.Length}: {m_LineColor}");
+    }
 
     /// <summary>
     /// Updates the paint point indicator size to match the current line width.
@@ -494,6 +576,16 @@ public class XRPaintInteractor : MonoBehaviour
         if (m_PaintPoint != null)
         {
             m_PaintPoint.indicatorSize = m_LineWidth;
+        }
+    }
+    /// <summary>
+    /// Updates the paint point indicator color to match the current line color.
+    /// </summary>
+    void UpdatePaintPointIndicatorColor()
+    {
+        if (m_PaintPoint != null)
+        {
+            m_PaintPoint.indicatorColor = m_LineColor;
         }
     }
 
