@@ -37,7 +37,7 @@ public class PaintZone : MonoBehaviour
     [SerializeField]
     [Tooltip("Resolution for coverage calculation. Higher = more accurate but slower.")]
     [Range(5, 50)]
-    int m_CoverageResolution = 10;
+    int m_CoverageResolution = 6;
 
     [Header("Plane Constraint")]
     [SerializeField]
@@ -70,7 +70,7 @@ public class PaintZone : MonoBehaviour
     [Header("Debug")]
     [SerializeField]
     [Tooltip("Enable detailed debug logging for paint zone activity.")] 
-    bool m_EnableDebugLogs = true;
+    bool m_EnableDebugLogs = false;
 
     [Header("Events")]
     [SerializeField]
@@ -89,6 +89,7 @@ public class PaintZone : MonoBehaviour
     HashSet<PaintLine> m_TrackedLines = new();
     HashSet<PaintLine> m_AllDetectedLines = new(); // Track all lines to prevent duplicate processing
     HashSet<XRPaintInteractor> m_ControllersInZone = new(); // Track controllers currently in the zone
+    Dictionary<GameObject, (XRPaintInteractor interactor, HapticsManager haptics)> m_ControllerCache = new(); // Cache controller components
     Collider m_Collider;
     MeshRenderer m_MeshRenderer;
     Bounds m_ZoneBounds;
@@ -96,6 +97,18 @@ public class PaintZone : MonoBehaviour
     float m_FlashTimer;
     Color m_OriginalColor;
     Material m_ZoneMaterial;
+    bool m_CoverageDirty = false;
+    Coroutine m_CoverageCalculationCoroutine;
+    float m_LastCoverageCalculationTime = 0f;
+    int m_LineCountAtLastCalculation = 0;
+
+    // Cached line data for performance
+    struct CachedLineData
+    {
+        public Vector3[] points;
+        public float width;
+    }
+    List<CachedLineData> m_CachedLineData = new();
 
     /// <summary>
     /// The correct color required to complete this zone.
@@ -221,30 +234,30 @@ public class PaintZone : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] OnTriggerEnter triggered by {other.gameObject.name} | Layer: {LayerMask.LayerToName(other.gameObject.layer)} ({other.gameObject.layer}) | Tag: {other.gameObject.tag}");
-
-        // Check for controller entry (for haptics and plane constraint)
-        if ( other.gameObject.CompareTag("Controller") )
+        // Check for paint nib entry (for haptics and plane constraint)
+        if (other.gameObject.CompareTag("PaintNib"))
         {
-            if (m_EnableDebugLogs)
-                Debug.Log($"[PaintZone] Controller detected entering zone: {other.gameObject.name}");
-            
-            other.gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
-
-            // Get the interactor and track it
-            XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
-            if (interactor != null)
+            // Get or cache controller components
+            if (!m_ControllerCache.TryGetValue(other.gameObject, out var controllerData))
             {
-                // Add to tracking set
-                m_ControllersInZone.Add(interactor);
+                var interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
+                var haptics = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>();
+                controllerData = (interactor, haptics);
+                m_ControllerCache[other.gameObject] = controllerData;
+            }
+
+            // Play haptic feedback
+            controllerData.haptics?.PlayColorHaptic(m_HapticsColorIndex);
+
+            // Track interactor
+            if (controllerData.interactor != null)
+            {
+                m_ControllersInZone.Add(controllerData.interactor);
 
                 // Set plane constraint if enabled
                 if (m_ConstrainToPlane)
                 {
-                    interactor.SetActivePaintZone(this);
-                    if (m_EnableDebugLogs)
-                        Debug.Log($"[PaintZone] Set plane constraint for controller: {other.gameObject.name}");
+                    controllerData.interactor.SetActivePaintZone(this);
                 }
             }
 
@@ -253,47 +266,33 @@ public class PaintZone : MonoBehaviour
 
         // Check if the colliding object has a paint line reference
         PaintLineColliderReference reference = other.GetComponent<PaintLineColliderReference>();
-        PaintLine paintLine = reference != null ? reference.paintLine : other.GetComponent<PaintLine>();
-        
-        if (paintLine == null)
+        if (reference != null && reference.paintLine != null)
         {
-            if (m_EnableDebugLogs)
-                Debug.Log($"[PaintZone] No PaintLine found on {other.gameObject.name} | Has reference component: {reference != null}");
-            return;
+            ProcessPaintLine(reference.paintLine);
         }
-
-        // Process the paint line
-        ProcessPaintLine(paintLine);
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] OnTriggerExit triggered by {other.gameObject.name}");
-
-        // Handle controller exiting the zone
+        // Handle paint nib exiting the zone - must match the tag checked in OnTriggerEnter
         if (other.gameObject.CompareTag("PaintNib"))
         {
-            XRPaintInteractor interactor = other.gameObject.transform.parent.transform.parent.GetComponentInChildren<XRPaintInteractor>();
-            if (interactor != null)
+            // Use cached components if available
+            if (m_ControllerCache.TryGetValue(other.gameObject, out var controllerData) && controllerData.interactor != null)
             {
                 // Remove from tracking set
-                m_ControllersInZone.Remove(interactor);
+                m_ControllersInZone.Remove(controllerData.interactor);
 
-                // End any active paint stroke - prevents painting outside zones when all zones not yet complete
-                if (interactor.isPainting)
+                // End any active paint stroke
+                if (controllerData.interactor.isPainting)
                 {
-                    interactor.EndPaintStroke();
-                    if (m_EnableDebugLogs)
-                        Debug.Log($"[PaintZone] Force-ended paint stroke as controller exited zone: {other.gameObject.name}");
+                    controllerData.interactor.EndPaintStroke();
                 }
 
                 // Clear plane constraint
                 if (m_ConstrainToPlane)
                 {
-                    interactor.ClearActivePaintZone(this);
-                    if (m_EnableDebugLogs)
-                        Debug.Log($"[PaintZone] Cleared plane constraint for controller: {other.gameObject.name}");
+                    controllerData.interactor.ClearActivePaintZone(this);
                 }
             }
         }
@@ -326,20 +325,13 @@ public class PaintZone : MonoBehaviour
         if (paintLine == null)
             return;
 
-        if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] ProcessPaintLine: {paintLine.gameObject.name}, Color: {paintLine.lineColor} | IsInitialCheck: {isInitialCheck}");
-
         // For initial checks, prevent duplicate flashing by checking if already detected
         // For finalization, prevent duplicate coverage calculations
         if (isInitialCheck)
         {
             // Check if we've already done the initial check (prevents duplicate flashing)
             if (m_AllDetectedLines.Contains(paintLine))
-            {
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Already did initial check for this line, skipping");
                 return;
-            }
             
             // Mark as detected for initial check
             m_AllDetectedLines.Add(paintLine);
@@ -347,25 +339,16 @@ public class PaintZone : MonoBehaviour
         else
         {
             // For finalization, check if this line is already being tracked
-            // If it's in m_TrackedLines, we've already finalized it
             if (m_TrackedLines.Contains(paintLine))
-            {
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Line already finalized, skipping coverage recalculation");
                 return;
-            }
         }
 
         // Check if the line color matches the correct color
         bool isCorrectColor = ColorsMatch(paintLine.lineColor, m_CorrectColor, m_ColorTolerance);
 
-        if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] Color match result: {isCorrectColor} | Line: {paintLine.lineColor} | Required: {m_CorrectColor} | Tolerance: {m_ColorTolerance}");
-
         if (!isCorrectColor)
         {
             // Incorrect color detected - flash but don't track for coverage
-            // Only flash on initial check, not on finalization
             if (isInitialCheck)
             {
                 OnPaintWithIncorrectColor(paintLine);
@@ -373,33 +356,148 @@ public class PaintZone : MonoBehaviour
         }
         else
         {
-            // Correct color
-            // Only recalculate coverage on finalization, not on initial detection (performance optimization)
+            // Correct color - only recalculate coverage on finalization
             if (!isInitialCheck)
             {
                 // Add to tracking on finalization only
-                if (!m_TrackedLines.Contains(paintLine))
-                {
-                    m_TrackedLines.Add(paintLine);
-                    if (m_EnableDebugLogs)
-                        Debug.Log($"[PaintZone] Added line to tracking. Total tracked: {m_TrackedLines.Count}");
-                }
+                m_TrackedLines.Add(paintLine);
                 
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Recalculating coverage (line finalized)");
-                RecalculateCoverage();
+                // Mark coverage as dirty and schedule deferred recalculation
+                // Only recalculate if we've added 3+ lines or 1 second has passed
+                m_CoverageDirty = true;
+                int linesSinceLastCalc = m_TrackedLines.Count - m_LineCountAtLastCalculation;
+                float timeSinceLastCalc = Time.time - m_LastCoverageCalculationTime;
+                
+                if (linesSinceLastCalc >= 3 || timeSinceLastCalc >= 1f)
+                {
+                    ScheduleCoverageCalculation();
+                }
             }
-            else
+        }
+    }
+
+    /// <summary>
+    /// Schedules a deferred coverage calculation to avoid blocking the main thread.
+    /// </summary>
+    void ScheduleCoverageCalculation()
+    {
+        // Cancel any existing calculation
+        if (m_CoverageCalculationCoroutine != null)
+        {
+            StopCoroutine(m_CoverageCalculationCoroutine);
+        }
+
+        // Start new deferred calculation
+        m_CoverageCalculationCoroutine = StartCoroutine(DeferredCoverageCalculation());
+    }
+
+    /// <summary>
+    /// Coroutine that defers coverage calculation to the next frame to avoid lag spikes.
+    /// </summary>
+    System.Collections.IEnumerator DeferredCoverageCalculation()
+    {
+        // Wait one frame to allow multiple lines to be added before recalculating
+        yield return null;
+
+        if (m_CoverageDirty)
+        {
+            yield return StartCoroutine(RecalculateCoverageAsync());
+            m_CoverageDirty = false;
+            m_LastCoverageCalculationTime = Time.time;
+            m_LineCountAtLastCalculation = m_TrackedLines.Count;
+        }
+
+        m_CoverageCalculationCoroutine = null;
+    }
+
+    /// <summary>
+    /// Recalculates the coverage amount based on all tracked paint lines.
+    /// Uses a voxel-based sampling approach to estimate volume coverage.
+    /// Async version spreads work over multiple frames.
+    /// </summary>
+    System.Collections.IEnumerator RecalculateCoverageAsync()
+    {
+        if (m_Completed)
+            yield break;
+
+        // Cache line data once at the start
+        m_CachedLineData.Clear();
+        foreach (var paintLine in m_TrackedLines)
+        {
+            if (paintLine == null)
+                continue;
+
+            Vector3[] points = paintLine.GetPoints();
+            if (points == null || points.Length == 0)
+                continue;
+
+            float width = paintLine.lineRenderer != null ? paintLine.lineRenderer.startWidth : 0.01f;
+            m_CachedLineData.Add(new CachedLineData { points = points, width = width });
+        }
+
+        // Use voxel grid sampling to estimate coverage
+        int samplesPerAxis = m_CoverageResolution;
+        int coveredSamples = 0;
+        int validSamples = 0;
+
+        Vector3 boundsMin = m_ZoneBounds.min;
+        Vector3 boundsSize = m_ZoneBounds.size;
+        float stepSize = 1f / samplesPerAxis;
+
+        int sampleCount = 0;
+        const int samplesPerFrame = 100; // Process 100 samples per frame
+
+        // Sample points throughout the volume
+        for (int x = 0; x < samplesPerAxis; x++)
+        {
+            for (int y = 0; y < samplesPerAxis; y++)
             {
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Correct color on initial check - will track and calculate coverage on finalization");
+                for (int z = 0; z < samplesPerAxis; z++)
+                {
+                    // Calculate sample point position
+                    Vector3 samplePoint = boundsMin + new Vector3(
+                        (x + 0.5f) * stepSize * boundsSize.x,
+                        (y + 0.5f) * stepSize * boundsSize.y,
+                        (z + 0.5f) * stepSize * boundsSize.z
+                    );
+
+                    // Check if sample point is actually inside the collider
+                    if (!IsPointInsideCollider(samplePoint))
+                        continue;
+
+                    validSamples++;
+
+                    // Check if any tracked line has a point near this sample
+                    if (IsPointCoveredByPaintCached(samplePoint))
+                    {
+                        coveredSamples++;
+                    }
+
+                    // Yield every N samples to spread work across frames
+                    sampleCount++;
+                    if (sampleCount >= samplesPerFrame)
+                    {
+                        sampleCount = 0;
+                        yield return null;
+                    }
+                }
             }
+        }
+
+        // Calculate completion percentage
+        m_CompletionAmount = validSamples > 0 ? (float)coveredSamples / validSamples : 0f;
+
+        // Check if threshold reached
+        if (m_CompletionAmount >= m_CompletionThreshold && !m_Completed)
+        {
+            OnZoneCompleted();
         }
     }
 
     /// <summary>
     /// Recalculates the coverage amount based on all tracked paint lines.
     /// Uses a voxel-based sampling approach to estimate volume coverage.
+    /// Legacy synchronous version - prefer RecalculateCoverageAsync.
     /// </summary>
     void RecalculateCoverage()
     {
@@ -490,6 +588,37 @@ public class PaintZone : MonoBehaviour
 
     /// <summary>
     /// Checks if a point in space is covered by any tracked paint line.
+    /// Uses cached line data for better performance.
+    /// </summary>
+    bool IsPointCoveredByPaintCached(Vector3 point)
+    {
+        foreach (var lineData in m_CachedLineData)
+        {
+            float widthSquared = lineData.width * lineData.width;
+
+            // Check distance to any line segment
+            for (int i = 0; i < lineData.points.Length - 1; i++)
+            {
+                Vector3 segmentStart = lineData.points[i];
+                Vector3 segmentEnd = lineData.points[i + 1];
+
+                // Calculate closest point on line segment (squared distance)
+                float distanceSquared = DistanceToLineSegmentSquared(point, segmentStart, segmentEnd);
+
+                // If within the line width, consider it covered
+                if (distanceSquared < widthSquared)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Checks if a point in space is covered by any tracked paint line.
+    /// Legacy version - prefer IsPointCoveredByPaintCached.
     /// </summary>
     bool IsPointCoveredByPaint(Vector3 point)
     {
@@ -542,7 +671,27 @@ public class PaintZone : MonoBehaviour
     }
 
     /// <summary>
+    /// Calculates the shortest SQUARED distance from a point to a line segment.
+    /// Avoids expensive sqrt operation.
+    /// </summary>
+    float DistanceToLineSegmentSquared(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        Vector3 line = lineEnd - lineStart;
+        float lineLengthSquared = line.sqrMagnitude;
+
+        if (lineLengthSquared < 0.00000001f)
+            return (point - lineStart).sqrMagnitude;
+
+        // Project point onto line
+        float t = Mathf.Clamp01(Vector3.Dot(point - lineStart, line) / lineLengthSquared);
+        Vector3 projection = lineStart + t * line;
+
+        return (point - projection).sqrMagnitude;
+    }
+
+    /// <summary>
     /// Calculates the shortest distance from a point to a line segment.
+    /// Legacy version - prefer DistanceToLineSegmentSquared for better performance.
     /// </summary>
     float DistanceToLineSegment(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
     {
@@ -580,9 +729,6 @@ public class PaintZone : MonoBehaviour
         // Average difference across channels
         float averageDiff = (rDiff + gDiff + bDiff) / 3f;
 
-        if (m_EnableDebugLogs)
-            Debug.Log($"[PaintZone] ColorMatch | R:{rDiff:F3} G:{gDiff:F3} B:{bDiff:F3} | Avg:{averageDiff:F3} | Tolerance:{tolerance:F3} | Match:{averageDiff <= tolerance}");
-
         return averageDiff <= tolerance;
     }
 
@@ -614,38 +760,24 @@ public class PaintZone : MonoBehaviour
         // Invoke event
         m_OnIncorrectColorDetected?.Invoke();
 
-        // Trigger haptics on the specific controller that painted
+        // Trigger haptics - use cached data if available
+        HapticsManager hapticsToUse = null;
+        
         if (paintLine != null && paintLine.creator != null)
         {
-            // Get the HapticsManager from the controller that created this paint line
-            HapticsManager controllerHaptics = paintLine.creator.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>();
-            if (controllerHaptics != null)
+            // Try to find cached haptics manager for this controller
+            foreach (var cached in m_ControllerCache.Values)
             {
-                controllerHaptics.WrongColorHaptic();
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Triggered wrong color haptics on controller: {paintLine.creator.gameObject.name}");
-            }
-            else if (m_EnableDebugLogs)
-            {
-                Debug.LogWarning($"[PaintZone] No HapticsManager found on controller {paintLine.creator.gameObject.name}");
-            }
-        }
-        else
-        {
-            // Fallback to zone's HapticsManager if paint line doesn't have creator info
-            if (m_HapticsManager != null)
-            {
-                m_HapticsManager.WrongColorHaptic();
-                if (m_EnableDebugLogs)
-                    Debug.Log($"[PaintZone] Using fallback HapticsManager (paint line had no creator reference)");
-            }
-            else if (m_EnableDebugLogs)
-            {
-                Debug.LogWarning($"[PaintZone] No HapticsManager available for haptic feedback");
+                if (cached.interactor == paintLine.creator)
+                {
+                    hapticsToUse = cached.haptics;
+                    break;
+                }
             }
         }
 
-        Debug.Log($"[PaintZone] Incorrect color detected in zone {gameObject.name}");
+        // Trigger the haptic feedback
+        hapticsToUse?.WrongColorHaptic();
     }
 
     /// <summary>
@@ -678,9 +810,19 @@ public class PaintZone : MonoBehaviour
         // Invoke event
         m_OnCompleted?.Invoke();
 
-        Debug.Log($"[PaintZone] Zone {gameObject.name} completed! Coverage: {m_CompletionAmount:P1}");
+        if (m_EnableDebugLogs)
+            Debug.Log($"[PaintZone] Zone {gameObject.name} completed! Coverage: {m_CompletionAmount:P1}");
 
-        // Deactivate this game object after completion to prevent further interactions
+        // Deactivate after a frame to ensure all cleanup completes
+        StartCoroutine(DeactivateAfterCompletion());
+    }
+
+    /// <summary>
+    /// Deactivates the zone GameObject after a short delay to ensure all operations complete.
+    /// </summary>
+    System.Collections.IEnumerator DeactivateAfterCompletion()
+    {
+        yield return null; // Wait one frame
         gameObject.SetActive(false);
     }
 
@@ -702,6 +844,17 @@ public class PaintZone : MonoBehaviour
         m_TrackedLines.Clear();
         m_AllDetectedLines.Clear();
         m_ControllersInZone.Clear();
+        m_ControllerCache.Clear();
+        m_CoverageDirty = false;
+        m_CachedLineData.Clear();
+        m_LastCoverageCalculationTime = 0f;
+        m_LineCountAtLastCalculation = 0;
+
+        if (m_CoverageCalculationCoroutine != null)
+        {
+            StopCoroutine(m_CoverageCalculationCoroutine);
+            m_CoverageCalculationCoroutine = null;
+        }
 
         if (m_MeshRenderer != null)
         {
@@ -714,15 +867,6 @@ public class PaintZone : MonoBehaviour
         }
 
         m_IsFlashing = false;
-    }
-
-    void OnDrawGizmos()
-    {
-        // Always visualize the constraint plane if enabled (even when not selected)
-        if (m_ConstrainToPlane)
-        {
-            DrawConstraintPlaneGizmo();
-        }
     }
 
     void OnDrawGizmosSelected()
@@ -742,6 +886,12 @@ public class PaintZone : MonoBehaviour
             string label = m_Completed ? "COMPLETED" : $"Coverage: {m_CompletionAmount:P1}\nThreshold: {m_CompletionThreshold:P1}\nLines: {m_TrackedLines.Count}";
             UnityEditor.Handles.Label(col.bounds.center + Vector3.up * (col.bounds.size.y * 0.5f + 0.1f), label, style);
             #endif
+        }
+
+        // Visualize the constraint plane if enabled
+        if (m_ConstrainToPlane)
+        {
+            DrawConstraintPlaneGizmo();
         }
     }
 
