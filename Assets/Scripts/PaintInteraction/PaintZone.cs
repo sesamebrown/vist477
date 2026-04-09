@@ -21,6 +21,10 @@ public class PaintZone : MonoBehaviour
     Color m_CorrectColor = Color.red;
 
     [SerializeField]
+    [Tooltip("Color index to play for haptics feedback when controller enters the zone.")]
+    int m_HapticsColorIndex = 0;
+
+    [SerializeField]
     [Tooltip("Color comparison tolerance (0-1). Lower = more strict matching.")]
     [Range(0f, 0.5f)]
     float m_ColorTolerance = 0.15f;
@@ -185,6 +189,9 @@ public class PaintZone : MonoBehaviour
         {
             if (m_EnableDebugLogs)
                 Debug.Log($"[PaintZone] Controller detected entering zone: {other.gameObject.name}");
+            
+            gameObject.transform.parent.transform.parent.GetComponentInChildren<HapticsManager>().PlayColorHaptic(m_HapticsColorIndex);
+
             m_OnControllerEntered?.Invoke();
         }
 
