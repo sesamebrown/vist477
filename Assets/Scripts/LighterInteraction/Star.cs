@@ -27,10 +27,18 @@ public class Star : MonoBehaviour
     
     public void Light()
     {
+        TryLight();
+    }
+
+    public bool TryLight()
+    {
         if (!m_IsLit)
         {
             StartCoroutine(LightTransition());
+            return true;
         }
+
+        return false;
     }
     
     IEnumerator LightTransition()
