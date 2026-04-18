@@ -2603,7 +2603,7 @@ MonoBehaviour:
   activateWhenTouchedBy:
   - {fileID: 640703692}
   - {fileID: 310081166}
-  sceneToLoad: PaintInteractionTest
+  sceneToLoad: RealPaintInteractionScene
 --- !u!1 &1390835598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,7 +2732,7 @@ MonoBehaviour:
   activateWhenTouchedBy:
   - {fileID: 640703692}
   - {fileID: 310081166}
-  sceneToLoad: SwimLocomotionTest
+  sceneToLoad: RealSwimLocomotionScene
 --- !u!1001 &1557356116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3239,7 +3239,7 @@ MonoBehaviour:
   activateWhenTouchedBy:
   - {fileID: 640703692}
   - {fileID: 310081166}
-  sceneToLoad: ChiselScene
+  sceneToLoad: RealChiselScene
 --- !u!1 &2008189002
 GameObject:
   m_ObjectHideFlags: 0
