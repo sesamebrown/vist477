@@ -284,7 +284,11 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     public Color lineColor
     {
         get => m_LineColor;
-        set => m_LineColor = value;
+        set
+        {
+            m_LineColor = value;
+            UpdatePaintPointIndicatorColor();
+        }
     }
 
     [SerializeField]
@@ -333,6 +337,7 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     Vector3 m_LastPaintPosition;
     bool m_PreviousCycleSizePressed;
     bool m_PreviousCycleColorPressed;
+    bool m_PreviousPaintInputActive; // Track previous frame's paint input to detect rising edge
     List<Vector3> m_RecentPositions = new List<Vector3>();
     PaintZone m_ActivePaintZone; // The paint zone this controller is currently inside
     PaintZone m_RaycastDetectedZone; // The paint zone detected via raycast (if raycast mode enabled)
@@ -492,6 +497,9 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         {
             EndPaintStroke();
         }
+        
+        // Reset input state tracking
+        m_PreviousPaintInputActive = false;
 
         // Disable input readers
         m_PaintInput?.DisableDirectActionIfModeUsed();
@@ -538,18 +546,27 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         m_PreviousCycleSizePressed = cycleSizePressed;
 
         // Check for color cycling input (button press)
+        // Only allow color switching if game manager permits it
         bool cycleColorPressed = m_CycleColorInput.ReadIsPerformed();
         if (cycleColorPressed && !m_PreviousCycleColorPressed)
         {
-            CycleToNextColor();
+            if (m_PaintGameManager == null || m_PaintGameManager.allowColorSwitching)
+            {
+                CycleToNextColor();
+            }
+            else
+            {
+                Debug.Log("[XRPaintInteractor] Color switching is disabled by game manager");
+            }
         }
         m_PreviousCycleColorPressed = cycleColorPressed;
 
         // Check paint input state
         bool paintInputActive = m_PaintInput.ReadIsPerformed();
 
-        // Start painting
-        if (paintInputActive && !m_IsPainting)
+        // Start painting - only on rising edge (transition from not pressed to pressed)
+        // This prevents immediate restart if stroke was ended while trigger held
+        if (paintInputActive && !m_PreviousPaintInputActive && !m_IsPainting)
         {
             StartPaintStroke();
         }
@@ -563,6 +580,9 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         {
             EndPaintStroke();
         }
+        
+        // Update previous state for next frame
+        m_PreviousPaintInputActive = paintInputActive;
     }
 
     void StartPaintStroke()
