@@ -46,6 +46,11 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     [Tooltip("Length of the visual indicator line when not pointing at a zone. Gives directional feedback.")]
     float m_RestingLineLength = 0.3f;
 
+    [SerializeField]
+    [Tooltip("Smoothing amount for raycast paint position (0=instant, 1=maximum smoothing). Reduces jitter when painting with controller rotation.")]
+    [Range(0f, 0.95f)]
+    float m_RaycastPaintSmoothing = 0.7f;
+
     /// <summary>
     /// Paint point component that represents where paint will spawn.
     /// This should be positioned by external systems (e.g., controller tracking, hand tracking).
@@ -333,8 +338,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     PaintZone m_RaycastDetectedZone; // The paint zone detected via raycast (if raycast mode enabled)
     Vector3 m_CachedRaycastHitPoint; // Cached hit point from raycast for use during painting
     bool m_HasCachedRaycastHit; // Whether we have a valid cached raycast hit
-    Plane m_CachedConstraintPlane; // Cached plane for projecting controller movement during raycast painting
-    Vector3 m_RaycastStartControllerPosition; // Controller position when stroke started in raycast mode
+    Vector3 m_SmoothedRaycastPosition; // Smoothed raycast paint position to reduce jitter
+    bool m_HasSmoothedPosition; // Whether we have a valid smoothed position
     static int s_GlobalStrokeCounter = 0; // Global counter for all strokes to prevent z-fighting
     
     // For ICurveInteractionDataProvider
@@ -568,24 +573,20 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
             return;
         }
         
-        // If using raycast mode and we found a zone, cache the constraint plane and starting position
+        // If using raycast mode and we found a zone, set it as active for plane constraints
         if (m_AllowRaycastZoneDetection && effectiveZone != null && m_ActivePaintZone == null)
         {
             // Temporarily use the raycast zone for plane constraints during this stroke
             m_ActivePaintZone = effectiveZone;
-            
-            // Cache the constraint plane for smooth painting
-            if (effectiveZone.constrainToPlane)
-            {
-                m_CachedConstraintPlane = effectiveZone.GetConstraintPlane();
-            }
-            
-            // Cache controller starting position for movement tracking
-            m_RaycastStartControllerPosition = m_PaintPoint.transform.position;
         }
 
         m_IsPainting = true;
-        m_LastPaintPosition = GetPaintPosition();
+        
+        // Initialize smoothed position for raycast painting
+        m_SmoothedRaycastPosition = GetPaintPosition();
+        m_HasSmoothedPosition = true;
+        
+        m_LastPaintPosition = m_SmoothedRaycastPosition;
         m_RecentPositions.Clear();
         m_RecentPositions.Add(m_LastPaintPosition);
 
@@ -689,22 +690,44 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
 
     /// <summary>
     /// Gets the position where paint should be applied.
-    /// For raycast mode while painting: projects controller movement onto the cached plane.
-    /// For raycast mode while not painting: uses cached raycast hit point.
-    /// Otherwise: uses physical paint point position.
+    /// For raycast mode: continuously raycasts to follow controller rotation and position with smoothing.
+    /// For physical mode: uses paint point position directly.
     /// </summary>
     Vector3 GetPaintPosition()
     {
-        // If using raycast mode and currently painting, project controller movement onto cached plane
+        // If using raycast mode and currently painting, continuously raycast to follow controller
         if (m_AllowRaycastZoneDetection && m_IsPainting && m_ActivePaintZone != null && m_ActivePaintZone.constrainToPlane)
         {
-            // Calculate controller movement since stroke started
-            Vector3 currentControllerPos = m_PaintPoint.transform.position;
-            Vector3 controllerMovement = currentControllerPos - m_RaycastStartControllerPosition;
+            // Continuously raycast from current controller position/rotation
+            Vector3 rayOrigin = m_PaintPoint.transform.position;
+            Vector3 rayDirection = m_PaintPoint.transform.TransformDirection(m_RaycastDirection).normalized;
+            Plane constraintPlane = m_ActivePaintZone.GetConstraintPlane();
             
-            // Apply movement to initial hit point and project onto plane
-            Vector3 projectedPosition = m_CachedRaycastHitPoint + controllerMovement;
-            return m_CachedConstraintPlane.ClosestPointOnPlane(projectedPosition);
+            Vector3 targetPosition;
+            
+            // Intersect ray with the constraint plane
+            if (constraintPlane.Raycast(new Ray(rayOrigin, rayDirection), out float distance))
+            {
+                targetPosition = rayOrigin + rayDirection * distance;
+            }
+            else
+            {
+                // Fallback: project current controller position onto plane if raycast fails
+                targetPosition = constraintPlane.ClosestPointOnPlane(rayOrigin);
+            }
+            
+            // Apply smoothing to reduce jitter
+            if (m_HasSmoothedPosition && m_RaycastPaintSmoothing > 0f)
+            {
+                m_SmoothedRaycastPosition = Vector3.Lerp(targetPosition, m_SmoothedRaycastPosition, m_RaycastPaintSmoothing);
+            }
+            else
+            {
+                m_SmoothedRaycastPosition = targetPosition;
+                m_HasSmoothedPosition = true;
+            }
+            
+            return m_SmoothedRaycastPosition;
         }
         
         // If using raycast mode and we have a cached hit (but not painting), use that position
@@ -745,6 +768,9 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
             m_ActivePaintZone = null;
             m_RaycastDetectedZone = null;
         }
+        
+        // Clear smoothed position state
+        m_HasSmoothedPosition = false;
         
         // Clear cached raycast hit
         m_HasCachedRaycastHit = false;
@@ -938,8 +964,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
                             Vector3 closestPointOnCollider = zoneCollider.ClosestPoint(planeHitPoint);
                             float distanceToCollider = Vector3.Distance(planeHitPoint, closestPointOnCollider);
                             
-                            // Allow small tolerance for plane/collider alignment
-                            if (distanceToCollider < 0.1f)
+                            // Use tight tolerance for accurate zone boundary detection (1cm)
+                            if (distanceToCollider < 0.01f)
                             {
                                 closestZone = zone;
                                 closestDistance = distance;

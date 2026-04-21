@@ -28510,6 +28510,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 474217171683741906, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
+      propertyPath: m_RaycastPaintSmoothing
+      value: 0.812
+      objectReference: {fileID: 0}
+    - target: {fileID: 474217171683741906, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: m_AllowRaycastZoneDetection
       value: 1
       objectReference: {fileID: 0}
@@ -28535,7 +28539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474217171683741906, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: 'm_LineSizePresets.Array.data[4]'
-      value: 0.1
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 1612787143704416316, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: m_CurveVisualObject
@@ -28702,6 +28706,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6934046486817420075, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
+      propertyPath: m_RaycastPaintSmoothing
+      value: 0.812
+      objectReference: {fileID: 0}
+    - target: {fileID: 6934046486817420075, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: m_AllowRaycastZoneDetection
       value: 1
       objectReference: {fileID: 0}
@@ -28727,7 +28735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934046486817420075, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: 'm_LineSizePresets.Array.data[4]'
-      value: 0.1
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
