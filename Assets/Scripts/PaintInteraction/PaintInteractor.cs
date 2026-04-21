@@ -340,6 +340,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     bool m_HasCachedRaycastHit; // Whether we have a valid cached raycast hit
     Vector3 m_SmoothedRaycastPosition; // Smoothed raycast paint position to reduce jitter
     bool m_HasSmoothedPosition; // Whether we have a valid smoothed position
+    bool m_IsUsingRaycastZone; // Whether current stroke is using a raycast-detected zone (not physical)
+    bool m_RequireTriggerRelease; // Set when stroke is ended due to zone exit - requires trigger release before new stroke
     static int s_GlobalStrokeCounter = 0; // Global counter for all strokes to prevent z-fighting
     
     // For ICurveInteractionDataProvider
@@ -500,11 +502,19 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         if (m_PaintPoint == null)
             return;
 
-        // Update raycast hit for visual feedback (only when not painting to avoid jitter)
-        // During painting, we use cached plane projection instead
-        if (m_AllowRaycastZoneDetection && !m_IsPainting)
+        // Update raycast hit detection (always update to detect when ray leaves zone)
+        if (m_AllowRaycastZoneDetection)
         {
             UpdateRaycastHit();
+            
+            // If painting in raycast mode and the ray left the zone, end the stroke
+            // (Physical zone exits are handled by OnTriggerExit in PaintZone)
+            if (m_IsPainting && m_IsUsingRaycastZone && m_RaycastDetectedZone == null)
+            {
+                Debug.Log("[XRPaintInteractor] Ray left paint zone - ending stroke");
+                EndPaintStroke(requireTriggerRelease: true);
+                return; // Skip rest of update since we just ended painting
+            }
         }
 
         // Check for size cycling input (button press)
@@ -526,8 +536,14 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         // Check paint input state
         bool paintInputActive = m_PaintInput.ReadIsPerformed();
 
+        // Clear trigger release requirement when trigger is released
+        if (!paintInputActive && m_RequireTriggerRelease)
+        {
+            m_RequireTriggerRelease = false;
+        }
+
         // Start painting
-        if (paintInputActive && !m_IsPainting)
+        if (paintInputActive && !m_IsPainting && !m_RequireTriggerRelease)
         {
             StartPaintStroke();
         }
@@ -573,10 +589,18 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
             return;
         }
         
-        // If using raycast mode and we found a zone, set it as active for plane constraints
-        if (m_AllowRaycastZoneDetection && effectiveZone != null && m_ActivePaintZone == null)
+        // Determine if we're using raycast or physical zone detection
+        // Check if the effective zone came from raycast detection (not physical trigger)
+        bool usingRaycast = m_AllowRaycastZoneDetection && 
+                           effectiveZone != null && 
+                           effectiveZone == m_RaycastDetectedZone &&
+                           m_ActivePaintZone == null; // No physical zone active
+        
+        m_IsUsingRaycastZone = usingRaycast;
+        
+        // If using raycast mode, set the zone as active for plane constraints
+        if (usingRaycast)
         {
-            // Temporarily use the raycast zone for plane constraints during this stroke
             m_ActivePaintZone = effectiveZone;
         }
 
@@ -744,12 +768,19 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     /// Ends the current paint stroke. Can be called externally (e.g., when controller exits zone).
     /// Safe to call even if not currently painting.
     /// </summary>
-    public void EndPaintStroke()
+    /// <param name="requireTriggerRelease">If true, requires the trigger to be released before allowing a new stroke to start.</param>
+    public void EndPaintStroke(bool requireTriggerRelease = false)
     {
         if (!m_IsPainting)
             return;
 
         m_IsPainting = false;
+        
+        // Set flag to require trigger release if requested (typically when exiting zones)
+        if (requireTriggerRelease)
+        {
+            m_RequireTriggerRelease = true;
+        }
         
         // Show indicator after painting
         if (m_PaintPoint != null)
@@ -763,11 +794,14 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         }
 
         // Clear raycast-detected zone if we were using it
-        if (m_AllowRaycastZoneDetection && m_RaycastDetectedZone != null && m_ActivePaintZone == m_RaycastDetectedZone)
+        if (m_AllowRaycastZoneDetection && m_IsUsingRaycastZone)
         {
             m_ActivePaintZone = null;
-            m_RaycastDetectedZone = null;
+            // Don't clear m_RaycastDetectedZone - it's managed by UpdateRaycastHit()
         }
+        
+        // Reset raycast mode flag
+        m_IsUsingRaycastZone = false;
         
         // Clear smoothed position state
         m_HasSmoothedPosition = false;
