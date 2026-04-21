@@ -7,6 +7,10 @@ public class HapticsManager : MonoBehaviour
 {
     [Header("Color Haptics")]
     [SerializeField]
+    [Tooltip("Enable haptics for color switching and zone entry. Wrong color haptics always play.")]
+    bool m_EnableColorHaptics = true;
+
+    [SerializeField]
     [Min(1)]
     public int totalNumColors = 7;
 
@@ -99,6 +103,10 @@ public class HapticsManager : MonoBehaviour
     /// <param name="index">Color preset index to map into the configured frequency range.</param>
     public void PlayColorHaptic(int index)
     {
+        // Skip if color haptics are disabled
+        if (!m_EnableColorHaptics)
+            return;
+
         if (!ResolveHapticPlayer())
             return;
 
