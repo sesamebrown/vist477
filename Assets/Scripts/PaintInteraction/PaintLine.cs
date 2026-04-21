@@ -18,6 +18,8 @@ public class PaintLine : MonoBehaviour
     bool m_GenerateCollider = true;
     GameObject m_ColliderContainer;
     XRPaintInteractor m_Creator; // The interactor (controller) that created this line
+    Vector3 m_OffsetDirection; // Direction to offset points for Z-layering
+    float m_OffsetAmount; // Amount to offset points along offset direction
 
     /// <summary>
     /// The LineRenderer component used to visualize this paint line.
@@ -57,7 +59,7 @@ public class PaintLine : MonoBehaviour
     /// <param name="width">Width of the line.</param>
     public void Initialize(Material material, Color color, float width)
     {
-        Initialize(material, color, width, false, 0, null);
+        Initialize(material, color, width, false, 0, null, Vector3.zero, 0f);
     }
 
     /// <summary>
@@ -69,7 +71,7 @@ public class PaintLine : MonoBehaviour
     /// <param name="creator">The XRPaintInteractor that created this line.</param>
     public void Initialize(Material material, Color color, float width, XRPaintInteractor creator)
     {
-        Initialize(material, color, width, false, 0, creator);
+        Initialize(material, color, width, false, 0, creator, Vector3.zero, 0f);
     }
 
     /// <summary>
@@ -81,7 +83,9 @@ public class PaintLine : MonoBehaviour
     /// <param name="useSmoothing">Whether to interpolate between points for smoother curves.</param>
     /// <param name="smoothingSegments">Number of interpolated points between input points.</param>
     /// <param name="creator">The XRPaintInteractor that created this line.</param>
-    public void Initialize(Material material, Color color, float width, bool useSmoothing, int smoothingSegments, XRPaintInteractor creator = null)
+    /// <param name="offsetDirection">Direction to offset points for Z-layering.</param>
+    /// <param name="offsetAmount">Amount to offset points along offset direction.</param>
+    public void Initialize(Material material, Color color, float width, bool useSmoothing, int smoothingSegments, XRPaintInteractor creator = null, Vector3 offsetDirection = default, float offsetAmount = 0f)
     {
         if (m_LineRenderer == null)
             m_LineRenderer = GetComponent<LineRenderer>();
@@ -90,6 +94,8 @@ public class PaintLine : MonoBehaviour
         m_SmoothingSegments = smoothingSegments;
         m_LineColor = color;
         m_Creator = creator;
+        m_OffsetDirection = offsetDirection;
+        m_OffsetAmount = offsetAmount;
 
         Debug.Log($"[PaintLine] Initialized {gameObject.name} with color: {m_LineColor}, width: {width}");
 
@@ -102,14 +108,14 @@ public class PaintLine : MonoBehaviour
         m_LineRenderer.positionCount = 0;
         m_LineRenderer.useWorldSpace = true;
 
-        // Quality settings - keep corner vertices low for flat 2D appearance
-        m_LineRenderer.numCornerVertices = useSmoothing ? 4 : 2;
-        // Set cap vertices to 0 for flat ends that respect the transform rotation
-        // Non-zero cap vertices can cause billboarding behavior that ignores rotation
+        // Quality settings - moderate corner vertices for smooth curves
+        m_LineRenderer.numCornerVertices = useSmoothing ? 5 : 2;
+        // Set cap vertices to 0 for flat ends
         m_LineRenderer.numCapVertices = 0;
         
-        // Use TransformZ alignment so line orientation is controlled by the transform's rotation
-        // This allows the line to orient based on controller rotation rather than camera view
+        // Use TransformZ alignment for 2D paper-like lines
+        // The line's transform rotation (set by PaintInteractor) determines the plane orientation
+        // Lines will be visible when viewed from directions perpendicular to their Z axis
         m_LineRenderer.alignment = LineAlignment.TransformZ;
 
         m_Points.Clear();
@@ -129,7 +135,9 @@ public class PaintLine : MonoBehaviour
             return;
         }
 
-        m_InputPoints.Add(position);
+        // Apply Z-offset for proper layering
+        Vector3 offsetPosition = position + m_OffsetDirection * m_OffsetAmount;
+        m_InputPoints.Add(offsetPosition);
 
         if (m_UseSmoothing)
         {
@@ -137,7 +145,7 @@ public class PaintLine : MonoBehaviour
         }
         else
         {
-            m_Points.Add(position);
+            m_Points.Add(offsetPosition); // Fixed: use offsetPosition, not position
             UpdateLineRenderer();
         }
 

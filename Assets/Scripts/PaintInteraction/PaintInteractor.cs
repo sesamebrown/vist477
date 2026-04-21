@@ -341,6 +341,9 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     Vector3 m_SmoothedRaycastPosition; // Smoothed raycast paint position to reduce jitter
     bool m_HasSmoothedPosition; // Whether we have a valid smoothed position
     bool m_IsUsingRaycastZone; // Whether current stroke is using a raycast-detected zone (not physical)
+    Dictionary<PaintZone, int> m_ZoneStrokeCounts = new Dictionary<PaintZone, int>(); // Track stroke count per zone
+    Vector3 m_CurrentStrokeOffsetDirection; // Offset direction for current stroke
+    float m_CurrentStrokeOffsetAmount; // Offset amount for current stroke
     static int s_GlobalStrokeCounter = 0; // Global counter for all strokes to prevent z-fighting
     
     // For ICurveInteractionDataProvider
@@ -410,6 +413,16 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         {
             m_ActivePaintZone = null;
         }
+    }
+
+    /// <summary>
+    /// Resets the global stroke counter for free draw mode.
+    /// Called when all zones are completed to ensure free draw lines start at Z offset 0.
+    /// </summary>
+    public void ResetFreeDrawStrokeCounter()
+    {
+        s_GlobalStrokeCounter = 0;
+        Debug.Log("[XRPaintInteractor] Reset free draw stroke counter");
     }
 
     /// <summary>
@@ -620,22 +633,45 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         // This determines how the 2D line plane is oriented in 3D space
         lineObject.transform.rotation = m_PaintPoint.transform.rotation * Quaternion.Euler(m_LineOrientationOffset);
         
-        // Apply tiny offset to prevent z-fighting between strokes on the same plane
-        // Use plane normal if in a zone, otherwise use controller forward
-        Vector3 offsetDirection = Vector3.forward;
+        // Calculate per-stroke offset to prevent z-fighting between strokes on the same plane
+        // Use per-zone counter in zone mode, global counter in free draw mode
+        int strokeIndex;
+        if (m_ActivePaintZone != null)
+        {
+            // In zone mode: use per-zone counter
+            if (!m_ZoneStrokeCounts.ContainsKey(m_ActivePaintZone))
+            {
+                m_ZoneStrokeCounts[m_ActivePaintZone] = 0;
+            }
+            strokeIndex = m_ZoneStrokeCounts[m_ActivePaintZone];
+            m_ZoneStrokeCounts[m_ActivePaintZone]++;
+        }
+        else
+        {
+            // In free draw mode: use global counter
+            strokeIndex = s_GlobalStrokeCounter;
+            s_GlobalStrokeCounter++;
+        }
+        
+        // Calculate offset direction (plane normal if in zone, otherwise camera forward)
+        m_CurrentStrokeOffsetDirection = Vector3.forward;
         if (m_ActivePaintZone != null && m_ActivePaintZone.constrainToPlane)
         {
             Plane plane = m_ActivePaintZone.GetConstraintPlane();
-            offsetDirection = plane.normal;
+            m_CurrentStrokeOffsetDirection = plane.normal;
         }
-        float offsetAmount = s_GlobalStrokeCounter * 0.0001f; // 0.1mm per stroke
-        lineObject.transform.position += offsetDirection * offsetAmount;
-        s_GlobalStrokeCounter++;
+        else if (Camera.main != null)
+        {
+            // In free draw mode, offset toward camera to ensure lines appear in front
+            m_CurrentStrokeOffsetDirection = -Camera.main.transform.forward;
+        }
+        
+        m_CurrentStrokeOffsetAmount = strokeIndex * 0.001f; // 1mm per stroke - larger offset for proper 3D depth separation
 
         m_CurrentLine = lineObject.AddComponent<PaintLine>();
-        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments, this);
+        m_CurrentLine.Initialize(m_LineMaterial, m_LineColor, m_LineWidth, m_SmoothLines, m_SmoothingSegments, this, m_CurrentStrokeOffsetDirection, m_CurrentStrokeOffsetAmount);
 
-        // Add initial point (with plane constraint if in a zone)
+        // Add initial point (with plane constraint and offset applied by PaintLine)
         Vector3 constrainedPosition = ApplyPlaneConstraint(m_LastPaintPosition);
         m_CurrentLine.AddPoint(constrainedPosition);
     }
@@ -690,7 +726,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
                 int numIntermediatePoints = Mathf.CeilToInt(distanceMoved / m_MaxPointDistance);
                 
                 // Add interpolated points between last and current position
-                for (int i = 1; i <= numIntermediatePoints; i++)
+                // Stop at numIntermediatePoints - 1 to avoid adding positionToAdd twice
+                for (int i = 1; i < numIntermediatePoints; i++)
                 {
                     float t = (float)i / numIntermediatePoints;
                     Vector3 intermediatePoint = Vector3.Lerp(m_LastPaintPosition, positionToAdd, t);
@@ -802,12 +839,19 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     /// </summary>
     Material CreateDefaultLineMaterial()
     {
-        // Use Sprites/Default shader which works well with LineRenderer
-        Shader shader = Shader.Find("Sprites/Default");
+        // Use Particles/Standard Unlit shader which is designed for LineRenderers and particles
+        // This shader properly handles 3D depth, two-sided rendering, and color blending
+        Shader shader = Shader.Find("Particles/Standard Unlit");
         if (shader == null)
         {
-            Debug.LogWarning("[XRPaintInteractor] Sprites/Default not found, trying Unlit/Transparent");
-            shader = Shader.Find("Unlit/Transparent");
+            Debug.LogWarning("[XRPaintInteractor] Particles/Standard Unlit not found, trying Mobile/Particles/Additive");
+            shader = Shader.Find("Mobile/Particles/Additive");
+        }
+        
+        if (shader == null)
+        {
+            Debug.LogWarning("[XRPaintInteractor] Mobile shader not found, trying Unlit/Color");
+            shader = Shader.Find("Unlit/Color");
         }
         
         if (shader == null)
@@ -822,9 +866,20 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         // Set the material color to white so LineRenderer vertex colors show through properly
         mat.color = Color.white;
         
+        // Disable backface culling so lines are visible from both sides
+        mat.SetInt("_Cull", 0); // 0 = Off (two-sided), 1 = Front, 2 = Back
+        
         // Use opaque rendering with depth writing for correct cross-plane depth sorting
-        // Lines on distant planes will correctly layer based on actual Z-buffer depth
-        mat.SetInt("_ZWrite", 1);
+        mat.SetInt("_ZWrite", 1); // Enable depth writing
+        mat.SetInt("_ZTest", 4);  // ZTest LEqual (4) - standard depth testing
+        
+        // Set blend mode to opaque if the shader supports it
+        if (mat.HasProperty("_SrcBlend"))
+            mat.SetInt("_SrcBlend", 1); // One
+        if (mat.HasProperty("_DstBlend"))
+            mat.SetInt("_DstBlend", 0); // Zero
+        if (mat.HasProperty("_Mode"))
+            mat.SetInt("_Mode", 0); // Opaque mode
         
         // Use Geometry queue for opaque rendering with proper depth testing
         mat.renderQueue = 2450;
@@ -906,7 +961,15 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
 
         // If all zones are completed, allow free painting anywhere
         if (m_PaintGameManager.allZonesCompleted)
+        {
+            // Reset stroke counter on first entry to free draw mode
+            // Check if we haven't already reset (s_GlobalStrokeCounter > 0 means we were in zone mode)
+            if (s_GlobalStrokeCounter > 0)
+            {
+                ResetFreeDrawStrokeCounter();
+            }
             return true;
+        }
 
         // Determine the active zone (either physical or raycast-detected)
         PaintZone effectiveZone = GetEffectiveZone();
