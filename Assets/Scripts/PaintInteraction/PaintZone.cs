@@ -286,7 +286,7 @@ public class PaintZone : MonoBehaviour
                 // End any active paint stroke
                 if (controllerData.interactor.isPainting)
                 {
-                    controllerData.interactor.EndPaintStroke(requireTriggerRelease: true);
+                    controllerData.interactor.EndPaintStroke();
                 }
 
                 // Clear plane constraint
@@ -792,7 +792,7 @@ public class PaintZone : MonoBehaviour
         {
             if (interactor != null && interactor.isPainting)
             {
-                interactor.EndPaintStroke(requireTriggerRelease: true);
+                interactor.EndPaintStroke();
                 if (m_EnableDebugLogs)
                     Debug.Log($"[PaintZone] Ended paint stroke on zone completion for: {interactor.gameObject.name}");
             }

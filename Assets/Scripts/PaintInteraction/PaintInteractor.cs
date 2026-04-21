@@ -341,7 +341,6 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     Vector3 m_SmoothedRaycastPosition; // Smoothed raycast paint position to reduce jitter
     bool m_HasSmoothedPosition; // Whether we have a valid smoothed position
     bool m_IsUsingRaycastZone; // Whether current stroke is using a raycast-detected zone (not physical)
-    bool m_RequireTriggerRelease; // Set when stroke is ended due to zone exit - requires trigger release before new stroke
     static int s_GlobalStrokeCounter = 0; // Global counter for all strokes to prevent z-fighting
     
     // For ICurveInteractionDataProvider
@@ -512,8 +511,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
             if (m_IsPainting && m_IsUsingRaycastZone && m_RaycastDetectedZone == null)
             {
                 Debug.Log("[XRPaintInteractor] Ray left paint zone - ending stroke");
-                EndPaintStroke(requireTriggerRelease: true);
-                return; // Skip rest of update since we just ended painting
+                EndPaintStroke();
+                // Don't return - allow continuing to check for re-entry
             }
         }
 
@@ -536,14 +535,8 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         // Check paint input state
         bool paintInputActive = m_PaintInput.ReadIsPerformed();
 
-        // Clear trigger release requirement when trigger is released
-        if (!paintInputActive && m_RequireTriggerRelease)
-        {
-            m_RequireTriggerRelease = false;
-        }
-
         // Start painting
-        if (paintInputActive && !m_IsPainting && !m_RequireTriggerRelease)
+        if (paintInputActive && !m_IsPainting)
         {
             StartPaintStroke();
         }
@@ -768,19 +761,12 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     /// Ends the current paint stroke. Can be called externally (e.g., when controller exits zone).
     /// Safe to call even if not currently painting.
     /// </summary>
-    /// <param name="requireTriggerRelease">If true, requires the trigger to be released before allowing a new stroke to start.</param>
-    public void EndPaintStroke(bool requireTriggerRelease = false)
+    public void EndPaintStroke()
     {
         if (!m_IsPainting)
             return;
 
         m_IsPainting = false;
-        
-        // Set flag to require trigger release if requested (typically when exiting zones)
-        if (requireTriggerRelease)
-        {
-            m_RequireTriggerRelease = true;
-        }
         
         // Show indicator after painting
         if (m_PaintPoint != null)
