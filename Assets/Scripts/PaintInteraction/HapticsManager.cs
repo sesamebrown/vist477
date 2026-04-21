@@ -9,6 +9,26 @@ public class HapticsManager : MonoBehaviour
     [SerializeField]
     [Tooltip("Enable haptics for color switching and zone entry. Wrong color haptics always play.")]
     bool m_EnableColorHaptics = true;
+    
+    [Header("Start Painting Haptics")]
+    [SerializeField]
+    [Tooltip("Enable haptics when the user starts painting.")]
+    bool m_EnableStartPaintingHaptics = true;
+    
+    [SerializeField]
+    [Tooltip("Intensity of the start painting haptic pulse (0-1).")]
+    [Range(0f, 1f)]
+    float m_StartPaintingIntensity = 0.3f;
+    
+    [SerializeField]
+    [Tooltip("Duration of the start painting haptic pulse in seconds.")]
+    [Min(0f)]
+    float m_StartPaintingDuration = 0.05f;
+    
+    [SerializeField]
+    [Tooltip("Frequency of the start painting haptic pulse (0-1).")]
+    [Range(0f, 1f)]
+    float m_StartPaintingFrequency = 0.2f;
 
     [SerializeField]
     [Min(1)]
@@ -155,6 +175,22 @@ public class HapticsManager : MonoBehaviour
             StopCoroutine(m_WrongColorHapticRoutine);
 
         m_WrongColorHapticRoutine = StartCoroutine(PlayWrongColorHapticRoutine());
+    }
+    
+    /// <summary>
+    /// Plays a simple haptic pulse when the user starts painting.
+    /// </summary>
+    public void StartPaintingHaptic()
+    {
+        // Skip if start painting haptics are disabled
+        if (!m_EnableStartPaintingHaptics)
+            return;
+            
+        if (!ResolveHapticPlayer())
+            return;
+        
+        // Play a simple haptic pulse
+        m_HapticPlayer.SendHapticImpulse(m_StartPaintingIntensity, m_StartPaintingDuration, m_StartPaintingFrequency);
     }
 
     IEnumerator PlayColorHapticRoutine(float frequency, float intensity, float impulsesPerSecond, float totalPlayDuration)

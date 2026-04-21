@@ -24,6 +24,10 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
     [SerializeField]
     [Tooltip("Reference to the paint game manager to check if all zones are completed. If null, painting is always allowed.")]
     PaintGameManager m_PaintGameManager;
+    
+    [SerializeField]
+    [Tooltip("If true, allows free painting anywhere after all zones are completed. If false, painting is disabled when all zones are done.")]
+    bool m_AllowFreeDrawAfterCompletion = true;
 
     [Header("Zone Interaction Mode")]
     [SerializeField]
@@ -632,6 +636,12 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
 
         m_IsPainting = true;
         
+        // Play start painting haptic if available
+        if (m_HapticsManager != null)
+        {
+            m_HapticsManager.StartPaintingHaptic();
+        }
+        
         // Initialize smoothed position for raycast painting
         m_SmoothedRaycastPosition = GetPaintPosition();
         m_HasSmoothedPosition = true;
@@ -979,9 +989,13 @@ public class XRPaintInteractor : MonoBehaviour, ICurveInteractionDataProvider
         if (m_PaintGameManager == null)
             return true;
 
-        // If all zones are completed, allow free painting anywhere
+        // If all zones are completed, check if free draw is enabled
         if (m_PaintGameManager.allZonesCompleted)
         {
+            // If free draw after completion is disabled, don't allow painting
+            if (!m_AllowFreeDrawAfterCompletion)
+                return false;
+            
             // Reset stroke counter on first entry to free draw mode
             // Check if we haven't already reset (s_GlobalStrokeCounter > 0 means we were in zone mode)
             if (s_GlobalStrokeCounter > 0)
