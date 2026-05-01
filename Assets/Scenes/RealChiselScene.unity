@@ -3136,6 +3136,14 @@ PrefabInstance:
       propertyPath: m_LocomotionVignetteProviders.Array.data[2].m_LocomotionProvider
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8219092327943953380, guid: 96994d3fa2ff64d5fabba57471431805, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8219092327943953380, guid: 96994d3fa2ff64d5fabba57471431805, type: 3}
+      propertyPath: breakOnGroundCollision
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8420181007301020899, guid: 96994d3fa2ff64d5fabba57471431805, type: 3}
       propertyPath: 'm_StartingGroupMembers.Array.data[0]'
       value: 

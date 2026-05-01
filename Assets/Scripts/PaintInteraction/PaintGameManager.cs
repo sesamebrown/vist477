@@ -20,7 +20,7 @@ public class PaintGameManager : MonoBehaviour
     /// When true, users can paint freely anywhere.
     /// When false, painting is restricted to zones only.
     /// </summary>
-    public bool allZonesCompleted => m_CurrentZoneIndex > m_PaintZones.Length;
+    public bool allZonesCompleted => m_CurrentZoneIndex >= m_PaintZones.Length;
     
     /// <summary>
     /// Whether players can manually switch colors.
