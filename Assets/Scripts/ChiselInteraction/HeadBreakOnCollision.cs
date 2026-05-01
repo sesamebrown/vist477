@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class HeadBreakOnCollision : MonoBehaviour
 {
+    [SerializeField] bool breakOnGroundCollision = true;
     public GameObject brokenHeadPrefab;
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!breakOnGroundCollision)
+        {
+            return;
+        }
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Wall"))
         {
             Debug.Log("Head collided with ground, breaking!");

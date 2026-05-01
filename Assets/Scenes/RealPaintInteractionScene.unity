@@ -28967,7 +28967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 474217171683741906, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: m_AllowFreeDrawAfterCompletion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 474217171683741906, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: 'm_LineSizePresets.Array.data[0]'
@@ -29187,7 +29187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6934046486817420075, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: m_AllowFreeDrawAfterCompletion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6934046486817420075, guid: cb1ef783e9cadf94fa6e378969b41103, type: 3}
       propertyPath: 'm_LineSizePresets.Array.data[0]'
